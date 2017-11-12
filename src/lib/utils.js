@@ -1,6 +1,6 @@
-/* eslint-disable no-undef,valid-jsdoc */
+/* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
 import request from "./request";
-import validator from "./validator";
+import validator from "../validator/index";
 
 const utils = {
 

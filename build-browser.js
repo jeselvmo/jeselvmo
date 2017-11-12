@@ -13,7 +13,7 @@ rollup({
   ],
 }).then(bundle => (
   bundle.write({
-    dest: 'jesse.js',
+    dest: 'jeselvmo.js',
     format: 'umd',
     moduleName: pkg.name,
     banner: (

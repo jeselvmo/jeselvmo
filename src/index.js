@@ -1,21 +1,10 @@
-import utils from './lib/utils';
-import platform from './lib/platform';
-import request from './lib/request';
-import validator from './lib/validator';
-import localStore from './lib/localStore';
-import sessionStore from './lib/sessionStore';
+import validator from './validator/index';
 
+const version = '0.0.1';
 
-const version = '1.0.0';
-
-const Jesse = {
-    version,
-    utils,
-    platform,
-    request,
-    validator,
-    localStore,
-    sessionStore,
+const jeselvmo = {
+	version,
+	validator,
 };
 
-export default Jesse;
+export default jeselvmo;

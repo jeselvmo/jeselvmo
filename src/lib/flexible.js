@@ -1,4 +1,5 @@
-;(function (win, lib) {
+/* eslint-disable no-var,vars-on-top,radix,wrap-iife,dot-notation,semi,no-multi-assign,prefer-arrow-callback,no-mixed-operators,prefer-template,padded-blocks,max-len,no-unused-vars */
+(function (win, lib) {
 	var doc = win.document;
 	var docEl = doc.documentElement;
 	var metaEl = doc.querySelector('meta[name="viewport"]');
@@ -89,6 +90,7 @@
 	if (doc.readyState === 'complete') {
 		doc.body.style.fontSize = 12 * dpr + 'px';
 	} else {
+		// eslint-disable-next-line no-unused-vars
 		doc.addEventListener('DOMContentLoaded', function (e) {
 			doc.body.style.fontSize = 12 * dpr + 'px';
 		}, false);
