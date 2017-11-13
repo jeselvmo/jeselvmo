@@ -1,6 +1,6 @@
 var assert = require('assert');
 var jeselvmo = require('../index');
-var isPostalCodeLocales = require('../validator/lib/isPostalCode').locales;
+var isPostalCodeLocales = require('../lib/validator/isPostalCode').locales;
 
 describe('Exports', function () {
 	it('should export validators', function () {

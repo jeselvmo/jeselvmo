@@ -1,7 +1,7 @@
 {
 	"name": "jeselvmo",
 	"description": "JavaScript utility library",
-	"version": "0.0.1",
+	"version": "0.0.4",
 	"homepage": "https://github.com/jeselvmo/jeselvmo.git",
 	"files": [
 		"index.js",
@@ -32,8 +32,7 @@
 	},
 	"dependencies": {
 		"axios": "^0.17.0",
-		"jquery": "^3.2.1",
-		"validator": "^9.1.1"
+		"jquery": "^3.2.1"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.24.0",

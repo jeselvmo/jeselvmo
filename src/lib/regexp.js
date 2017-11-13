@@ -1,21 +1,27 @@
-class Regexp {
+/**
+ * 正则表达式的几种用法
+ */
+const regexp = {
 
-	test() {
+	test(str, reg) {
+		return reg.test(str)
+	},
 
-	}
+	search(str, reg) {
+		return str.search(reg)
+	},
 
-	search() {
+	match(str, reg) {
+		return str.match(reg)
+	},
 
-	}
+	split(str, reg) {
+		return str.split(reg)
+	},
 
-	match() {
+	replace(str, reg, rep) {
+		return str.replace(reg, rep)
+	},
+};
 
-	}
-
-	replace() {
-
-	}
-}
-
-const regexp = new Regexp();
 export default regexp
