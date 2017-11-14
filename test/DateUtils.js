@@ -30,14 +30,15 @@ describe('DateUtils', function () {
 	});
 
 	it('should validate set', function () {
-		var date = new Date(2000, 9, 16, 10, 45, 12);
+		var date = new Date(2001, 1, 29, 10, 45, 12);
 		date = DateUtils.set(date, {hour: 0, minute: 0, second: 0});
-		assert.equal(date.getYear(), 2000);
-		assert.equal(date.getMonth(), 9);
-		assert.equal(date.getDate(), 16);
-		assert.equal(date.getHours(), 10);
-		assert.equal(date.getMinutes(), 45);
-		assert.equal(date.getSeconds(), 12);
-		assert.equal(date.getMilliseconds(), 0);
+		assert.equal(date.toISOString(), '2001-03-01T00:00:00.000Z');
+	});
+
+	it('should validate format', function () {
+		let date = DateUtils.set(new Date(), {
+			year: 2017, month: 10, day: 14, hour: 16, minute: 31, second: 56
+		});
+		assert.equal(DateUtils.format(date), '2017-11-14');
 	});
 });

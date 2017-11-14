@@ -57,6 +57,13 @@ let DateUtils = {
 	//
 	lang: {'en': {}},
 
+	// formatters
+	ymd: 'Ymd',
+	ymd_: 'Y-m-d',
+	ymdHis: 'YmdHis',
+	ymdHis_: 'Y-m-d H:i:s',
+
+
 	// *****************************************
 	// *** *** *** formats & parsers *** *** ***
 	// *****************************************
@@ -324,6 +331,44 @@ let DateUtils = {
 		}
 	},
 
+	formats2: {
+		a: 'pm',
+		A: 'PM',
+		c: '2017-11-15T16:31:56.127Z',
+		d: '15',
+		D: 'Wed',
+		e: 'UTC',
+		F: 'November',
+		g: '4',
+		G: '16',
+		h: '04',
+		H: '16',
+		i: '31',
+		j: '15',
+		l: 'Wednesday',
+		L: '0',
+		m: '11',
+		M: 'Nov',
+		n: '11',
+		N: '3',
+		o: '2017',
+		O: '+0000',
+		P: '+00:00',
+		q: '4',
+		r: 'Wed, 15 Nov 2017 16:31:56 +0000',
+		s: '56',
+		S: 'th',
+		t: '30',
+		T: 'UTC',
+		u: '000127',
+		U: '1510763516',
+		w: '3',
+		W: '46',
+		y: '17',
+		Y: '2017',
+		z: '318'
+	},
+
 
 	// **************************************
 	// *** *** *** module methods *** *** ***
@@ -370,7 +415,7 @@ let DateUtils = {
 
 
 	// format a date to string
-	format(d, fmt, lang) {
+	format(d, fmt = DateUtils.ymd_, lang) {
 
 		// has been moved to the Date prototype?
 		if (_toString.call(this) === '[object Date]') {
@@ -379,7 +424,12 @@ let DateUtils = {
 			d = this;
 		}
 		else if (_toString.call(d) !== '[object Date]') {
-			throw new Error('No date passed to format.');
+			// 支持：1510631530404
+			// 支持：Tue Nov 14 2017 11:52:10 GMT+0800 (CST)
+			d = new Date(d);
+			if (_toString.call(d) !== '[object Date]') {
+				throw new Error('No date passed to format.');
+			}
 		}
 
 		for (var r = [], c, l = fmt.length, i = 0; i < l; i++) {
