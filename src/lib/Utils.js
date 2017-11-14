@@ -1,7 +1,7 @@
 /* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
-import validator from "./validator";
+import validator from "./Validator";
 
-const utils = {
+const Utils = {
 
 	// 将 Date 转化为指定格式的String
 	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
@@ -58,4 +58,4 @@ const utils = {
 
 
 };
-export default utils;
+export default Utils;

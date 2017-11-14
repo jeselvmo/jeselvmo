@@ -51,7 +51,7 @@ function browserType() {
 	return null
 }
 
-const browser = {
+const Browser = {
 	name: browserType(),
 
 	isOpera,
@@ -60,6 +60,6 @@ const browser = {
 	isFirefox,
 	isSafari,
 	isChrome,
-}
+};
 
-export default browser
+export default Browser

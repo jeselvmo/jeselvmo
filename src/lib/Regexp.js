@@ -1,7 +1,7 @@
 /**
  * 正则表达式的几种用法
  */
-const regexp = {
+const Regexp = {
 
 	test(str, reg) {
 		return reg.test(str)
@@ -24,4 +24,4 @@ const regexp = {
 	},
 };
 
-export default regexp
+export default Regexp
