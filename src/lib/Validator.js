@@ -701,8 +701,7 @@ function isJSON(str) {
 }
 
 function isEmpty(str) {
-	assertString(str);
-	return str.length === 0;
+	return str === null || str.length === 0;
 }
 
 /* eslint-disable prefer-rest-params */
