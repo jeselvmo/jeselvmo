@@ -1891,10 +1891,12 @@ var DateUtils = {
 	lang: { 'en': {} },
 
 	// formatters
-	ymd: 'Ymd',
-	ymd_: 'Y-m-d',
-	ymdHis: 'YmdHis',
-	ymdHis_: 'Y-m-d H:i:s',
+	YMD: 'Ymd',
+	YMD2: 'Y-m-d',
+	HMS: 'His',
+	HMS2: 'H:i:s',
+	YMDHMS: 'YmdHis',
+	YMDHMS2: 'Y-m-d H:i:s',
 
 	// *****************************************
 	// *** *** *** formats & parsers *** *** ***
