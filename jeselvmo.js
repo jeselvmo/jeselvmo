@@ -740,6 +740,10 @@ function isEmpty(str) {
 	return str === null || str.length === 0;
 }
 
+function isNotEmpty(str) {
+	return !isEmpty(str);
+}
+
 /* eslint-disable prefer-rest-params */
 function isLength(str, options) {
 	assertString(str);
@@ -1542,6 +1546,7 @@ var Validator = {
 	isHash: isHash,
 	isJSON: isJSON,
 	isEmpty: isEmpty,
+	isNotEmpty: isNotEmpty, // new
 	isLength: isLength,
 	isByteLength: isByteLength,
 	isUUID: isUUID,
@@ -1573,6 +1578,7 @@ var Validator = {
 	normalizeEmail: normalizeEmail,
 	toString: toString,
 
+	// new
 	isIdCard: isIdCard,
 	isString: isString,
 	isNumber: isNumber,
