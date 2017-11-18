@@ -4,13 +4,13 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _Validator = require("./Validator");
+var _validator = require("./validator");
 
-var _Validator2 = _interopRequireDefault(_Validator);
+var _validator2 = _interopRequireDefault(_validator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Utils = {
+var utils = {
 
 	// 将 Date 转化为指定格式的String
 	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
@@ -21,7 +21,7 @@ var Utils = {
 	formatDate: function formatDate(date, fmt) {
 		// 默认格式
 		fmt = fmt || 'yyyy-MM-dd';
-		date = _Validator2.default.isDate(date) ? date : new Date(date);
+		date = _validator2.default.isDate(date) ? date : new Date(date);
 
 		var o = {
 			"M+": date.getMonth() + 1, //月份
@@ -61,5 +61,5 @@ var Utils = {
 		};
 	}
 }; /* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
-exports.default = Utils;
+exports.default = utils;
 module.exports = exports["default"];

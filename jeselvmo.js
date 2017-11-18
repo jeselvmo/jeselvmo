@@ -21,12 +21,12 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('axios')) :
-	typeof define === 'function' && define.amd ? define(['axios'], factory) :
-	(global.jeselvmo = factory(global.axios));
-}(this, (function (axios) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jquery')) :
+	typeof define === 'function' && define.amd ? define(['jquery'], factory) :
+	(global.jeselvmo = factory(global.$));
+}(this, (function ($) { 'use strict';
 
-axios = axios && 'default' in axios ? axios['default'] : axios;
+$ = $ && 'default' in $ ? $['default'] : $;
 
 var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
   return typeof obj;
@@ -1505,7 +1505,7 @@ function isURLSearchParams(val) {
 	return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
 }
 
-var Validator = {
+var validator = {
 	version: version,
 	toDate: toDate,
 	toFloat: toFloat,
@@ -1588,7 +1588,7 @@ var Validator = {
 };
 
 /* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
-var Utils = {
+var utils = {
 
 	// 将 Date 转化为指定格式的String
 	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
@@ -1599,7 +1599,7 @@ var Utils = {
 	formatDate: function formatDate(date, fmt) {
 		// 默认格式
 		fmt = fmt || 'yyyy-MM-dd';
-		date = Validator.isDate(date) ? date : new Date(date);
+		date = validator.isDate(date) ? date : new Date(date);
 
 		var o = {
 			"M+": date.getMonth() + 1, //月份
@@ -1781,19 +1781,19 @@ Store.prototype = {
 };
 
 /**
- * localStore
+ * sessionStore
  */
-var localStore = new Store(window.sessionStore);
+var sessionStore = new Store(window.sessionStorage);
 
 /**
  * localStore
  */
-var localStore$1 = new Store(window.localStorage);
+var localStore = new Store(window.localStorage);
 
 /**
  * 正则表达式的几种用法
  */
-var Regexp = {
+var regexp = {
 	test: function test(str, reg) {
 		return reg.test(str);
 	},
@@ -1811,33 +1811,141 @@ var Regexp = {
 	}
 };
 
-var userAgent = navigator.userAgent;
-var isAndroid = userAgent.indexOf('Android') > -1 || userAgent.indexOf('Adr') > -1;
-var isIOS = !!userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+var u = navigator.userAgent; //取得浏览器的userAgent字符串
+var p = navigator.platform; // 取得平台字符串
 
-var Platform = {
+var isOpera = u.indexOf("Opera") > -1; //判断是否Opera浏览器
+var isIE = u.indexOf("compatible") > -1 && u.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+var isEdge = u.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器
+var isFirefox = u.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+var isSafari = u.indexOf("Safari") > -1 && u.indexOf("Chrome") === -1; //判断是否Safari浏览器
+var isChrome = u.indexOf("Chrome") > -1 && u.indexOf("Safari") > -1; //判断Chrome浏览器
 
-	/**
-  * 当前平台
-  */
-	name: isAndroid ? 'android' : isIOS ? 'ios' : null,
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 
-	/**
-  * 是android终端
-  */
+var isIPhone = u.indexOf('iPhone') > -1;
+var isIPad = u.indexOf('iPad') > -1;
+var isIPod = u.indexOf('iPod') > -1;
+var isWindowsPhone = u.indexOf('Windows Phone') > -1;
+var isSymbianOS = u.indexOf('SymbianOS') > -1;
+
+var isWeiXin = u.toLowerCase().indexOf('micromessenger') !== -1; //是否在微信中打开
+var isQQ = u.match(/\sQQ/i) === " qq"; //是否QQ
+
+var IsPC = !(isAndroid || isIPhone || isIPad || isIPod || isSymbianOS || isWindowsPhone);
+
+var isTrident = u.indexOf('Trident') > -1; //IE内核
+var isPresto = u.indexOf('Presto') > -1; //opera内核
+var isWebKit = u.indexOf('AppleWebKit') > -1; //苹果、谷歌内核
+var isGecko = u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1; //火狐内核
+var isMobile = !!u.match(/AppleWebKit.*Mobile.*/); //是否为移动终端
+
+var isWebApp = u.indexOf('Safari') === -1; //是否web应该程序，没有头部与底部
+
+
+var isWin = p === "Win32" || p === "Windows";
+var isMac = p === "Mac68K" || p === "MacPPC" || p === "Macintosh" || p === "MacIntel";
+var isLinux = p.indexOf("Linux") > -1;
+
+var name = function () {
+	if (isAndroid) {
+		return 'android';
+	} else if (isIOS) {
+		return "ios";
+	} else if (isLinux) {
+		return "linux";
+	} else if (isWin) {
+		return "windows";
+	} else if (isMac) {
+		return "mac";
+	}
+	return "unknown";
+}();
+
+var browser = function () {
+	if (isIE) {
+		var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+		reIE.test(u);
+		var fIEVersion = parseFloat(RegExp["$1"]);
+		if (fIEVersion === 7) {
+			return "IE7";
+		} else if (fIEVersion === 8) {
+			return "IE8";
+		} else if (fIEVersion === 9) {
+			return "IE9";
+		} else if (fIEVersion === 10) {
+			return "IE10";
+		} else if (fIEVersion === 11) {
+			return "IE11";
+		}
+		//IE版本过低
+		return "0";
+	}
+
+	if (isFirefox) {
+		return "Firefox";
+	}
+	if (isOpera) {
+		return "Opera";
+	}
+	if (isSafari) {
+		return "Safari";
+	}
+	if (isChrome) {
+		return "Chrome";
+	}
+	if (isEdge) {
+		return "Edge";
+	}
+	//未知浏览器
+	return null;
+}();
+
+var platform = {
+
+	isOpera: isOpera,
+	isIE: isIE,
+	isEdge: isEdge,
+	isFirefox: isFirefox,
+	isSafari: isSafari,
+	isChrome: isChrome,
+
 	isAndroid: isAndroid,
+	isIOS: isIOS,
 
-	/**
-  * 是ios终端
-  */
-	isIOS: isIOS
+	isIPhone: isIPhone,
+	isIPad: isIPad,
+	isIPod: isIPod,
+	isWindowsPhone: isWindowsPhone,
+	isSymbianOS: isSymbianOS,
 
+	IsPC: IsPC,
+
+	isWeiXin: isWeiXin,
+	isQQ: isQQ,
+
+	isWebApp: isWebApp,
+
+	isTrident: isTrident,
+	isPresto: isPresto,
+	isWebKit: isWebKit,
+	isGecko: isGecko,
+	isMobile: isMobile,
+
+	isWin: isWin,
+	isMac: isMac,
+	isLinux: isLinux,
+
+	name: name,
+
+	browser: browser
 };
 
 /* eslint-disable no-var,no-underscore-dangle,no-unused-vars,quote-props,object-property-newline,no-multi-assign,object-curly-spacing,max-len,object-shorthand,no-mixed-operators,prefer-template,space-in-parens,brace-style,vars-on-top,no-redeclare,prefer-arrow-callback,block-scoped-var,import/no-mutable-exports */
 
 /*
- *  Dateutil
+ *  dateutil
  *
  *  https://github.com/borgar/dateutil/blob/master/dateutil.js
  *
@@ -1888,7 +1996,7 @@ var method_map = {
 	'milliseconds': 'Milliseconds'
 };
 
-var DateUtils = {
+var dateutil = {
 	//
 	lang: { 'en': {} },
 
@@ -1915,7 +2023,7 @@ var DateUtils = {
 			size: 1,
 			parse: function parse(str) {
 				var b = str.split(/[T ]/);
-				var date = DateUtils.parsers.date.parse(b[0]);
+				var date = dateutil.parsers.date.parse(b[0]);
 				var m = b[1].replace(/:/g, '').match(/^(\d\d)(\d\d)?(\d\d)?(?:[.,](\d+))?([+\-](?:\d\d){1,2})?/);
 				// TODO: timezone (I have no need for this feature yet)
 				// if ( m[5] ) { var zone = m[5] || '0000'; }
@@ -1941,7 +2049,7 @@ var DateUtils = {
 			size: DAY_SIZE,
 			parse: function parse(str) {
 				var m = /^([+\-]\d{6}|\d{4})\-?(\d\d)\-?(\d\d)$/.exec(str),
-				    d = DateUtils.date(m[1], +m[2] - 1, m[3]);
+				    d = dateutil.date(m[1], +m[2] - 1, m[3]);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -1953,8 +2061,8 @@ var DateUtils = {
 			size: MONTH_SIZE,
 			parse: function parse(str) {
 				var b = str.split(/[\/\-]/);
-				var d = DateUtils.date(b[0], +b[1] - 1, 1);
-				d.size = DateUtils.daysInMonth(d) * DAY_SIZE;
+				var d = dateutil.date(b[0], +b[1] - 1, 1);
+				d.size = dateutil.daysInMonth(d) * DAY_SIZE;
 				return d;
 			}
 		},
@@ -1964,8 +2072,8 @@ var DateUtils = {
 			test: /^[+\-]?\d{4,6}$/,
 			size: YEAR_SIZE,
 			parse: function parse(str) {
-				var d = DateUtils.date(str, 0, 1);
-				d.size = DAY_SIZE * (DateUtils.isLeapYear(d) ? 366 : 365);
+				var d = dateutil.date(str, 0, 1);
+				d.size = DAY_SIZE * (dateutil.isLeapYear(d) ? 366 : 365);
 				return d;
 			}
 		},
@@ -1976,7 +2084,7 @@ var DateUtils = {
 			size: WEEK_SIZE,
 			parse: function parse(str) {
 				var s = str.toLowerCase().replace(/[^w\d]/g, '').split('w');
-				var d = DateUtils.date(s[0], 0, 3); // Jan 3
+				var d = dateutil.date(s[0], 0, 3); // Jan 3
 				d.setUTCDate(3 - d.getUTCDay() + (parseInt(s[1].substr(0, 2), 10) - 1) * 7 + parseInt(s[1].substr(2, 1) || '1', 10));
 				d.size = WEEK_SIZE;
 				return d;
@@ -2004,7 +2112,7 @@ var DateUtils = {
 			size: YEAR_SIZE / 4,
 			parse: function parse(str) {
 				var b = str.split(/\-?[Qq]/),
-				    d = DateUtils.date(b[0], (parseInt(b[1], 10) - 1) * 3);
+				    d = dateutil.date(b[0], (parseInt(b[1], 10) - 1) * 3);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -2023,15 +2131,15 @@ var DateUtils = {
 		},
 		// ISO 8601 date
 		c: function c(d, l) {
-			return DateUtils.isoyear(d) + DateUtils.format(d, '-m-d\\TH:i:s.', l) + DateUtils.pad(d.getUTCMilliseconds(), 3) + 'Z';
+			return dateutil.isoyear(d) + dateutil.format(d, '-m-d\\TH:i:s.', l) + dateutil.pad(d.getUTCMilliseconds(), 3) + 'Z';
 		},
 		// Day of the month, 2 digits with leading zeros
 		d: function d(_d2) {
-			return DateUtils.pad(_d2.getUTCDate());
+			return dateutil.pad(_d2.getUTCDate());
 		},
 		// A textual representation of a day, three letters
 		D: function D(d, l) {
-			return DateUtils._(_d[d.getUTCDay()].substr(0, 3), l);
+			return dateutil._(_d[d.getUTCDay()].substr(0, 3), l);
 		},
 		// Time zone identifier
 		e: function e(d) {
@@ -2039,7 +2147,7 @@ var DateUtils = {
 		},
 		// A full textual representation of a month
 		F: function F(d, l) {
-			return DateUtils._(_m[d.getUTCMonth()], l);
+			return dateutil._(_m[d.getUTCMonth()], l);
 		},
 		// 12-hour format of an hour without leading zeros
 		g: function g(d) {
@@ -2051,15 +2159,15 @@ var DateUtils = {
 		},
 		// 12-hour format of an hour with leading zeros
 		h: function h(d) {
-			return DateUtils.pad(d.getUTCHours() % 12 || 12);
+			return dateutil.pad(d.getUTCHours() % 12 || 12);
 		},
 		// 24-hour format of an hour with leading zeros
 		H: function H(d) {
-			return DateUtils.pad(d.getUTCHours());
+			return dateutil.pad(d.getUTCHours());
 		},
 		// Minutes with leading zeros
 		i: function i(d) {
-			return DateUtils.pad(d.getUTCMinutes());
+			return dateutil.pad(d.getUTCMinutes());
 		},
 		// Day of the month without leading zeros
 		j: function j(d) {
@@ -2067,19 +2175,19 @@ var DateUtils = {
 		},
 		// A full textual representation of the day of the week
 		l: function l(d, _l) {
-			return DateUtils._(_d[d.getUTCDay()], _l);
+			return dateutil._(_d[d.getUTCDay()], _l);
 		},
 		// Whether it's a leap year (0 = yes, 1 = no)
 		L: function L(d) {
-			return DateUtils.isLeapYear(d) * 1;
+			return dateutil.isLeapYear(d) * 1;
 		},
 		// Numeric representation of a month, with leading zeros
 		m: function m(d) {
-			return DateUtils.pad(d.getUTCMonth() + 1);
+			return dateutil.pad(d.getUTCMonth() + 1);
 		},
 		// A short textual representation of a month, three letters
 		M: function M(d, l) {
-			return DateUtils._(_m[d.getUTCMonth()].substr(0, 3), l);
+			return dateutil._(_m[d.getUTCMonth()].substr(0, 3), l);
 		},
 		// Numeric representation of a month, without leading zeros
 		n: function n(d) {
@@ -2091,7 +2199,7 @@ var DateUtils = {
 		},
 		// ISO-8601 year number
 		o: function o(d) {
-			return DateUtils.pad(DateUtils.isocalendar(d)[0], 4);
+			return dateutil.pad(dateutil.isocalendar(d)[0], 4);
 		},
 		// Time zone designator
 		O: function O(d) {
@@ -2107,11 +2215,11 @@ var DateUtils = {
 		},
 		// RFC 2822 formatted date
 		r: function r(d, l) {
-			return DateUtils.format(d, 'D, d M Y H:i:s O', l);
+			return dateutil.format(d, 'D, d M Y H:i:s O', l);
 		},
 		// Seconds, with leading zeros
 		s: function s(d) {
-			return DateUtils.pad(d.getUTCSeconds());
+			return dateutil.pad(d.getUTCSeconds());
 		},
 		// English ordinal suffix for the day of the month, 2 characters
 		S: function S(d) {
@@ -2121,7 +2229,7 @@ var DateUtils = {
 		},
 		// Number of days in the given month
 		t: function t(d) {
-			return DateUtils.daysInMonth(d);
+			return dateutil.daysInMonth(d);
 		},
 		// Time zone abbreviation
 		T: function T(d) {
@@ -2129,7 +2237,7 @@ var DateUtils = {
 		},
 		// Microseconds
 		u: function u(d) {
-			return DateUtils.pad(d.getUTCMilliseconds(), 6);
+			return dateutil.pad(d.getUTCMilliseconds(), 6);
 		},
 		// Seconds since the Unix Epoch
 		U: function U(d) {
@@ -2141,7 +2249,7 @@ var DateUtils = {
 		},
 		// ISO-8601 week number of year, weeks starting on Monday
 		W: function W(d) {
-			return DateUtils.pad(DateUtils.isocalendar(d)[1]);
+			return dateutil.pad(dateutil.isocalendar(d)[1]);
 		},
 		// A short numeric representation of a year, 2 digits
 		y: function y(d) {
@@ -2222,9 +2330,9 @@ var DateUtils = {
 		if (typeof str !== 'string') {
 			throw new Error("dateutil parser can't parse non-strings.");
 		}
-		for (var dtype in DateUtils.parsers) {
-			if (DateUtils.parsers[dtype].test.test(str)) {
-				d = DateUtils.parsers[dtype].parse(str);
+		for (var dtype in dateutil.parsers) {
+			if (dateutil.parsers[dtype].test.test(str)) {
+				d = dateutil.parsers[dtype].parse(str);
 				d.type = dtype;
 				d.size = d.size || 0;
 				break;
@@ -2242,7 +2350,7 @@ var DateUtils = {
 
 	// format a date to string
 	format: function format(d) {
-		var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.ymd_;
+		var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : dateutil.ymd_;
 		var lang = arguments[2];
 
 
@@ -2264,7 +2372,7 @@ var DateUtils = {
 			c = fmt.charAt(i);
 			// format characters
 			if (c !== '\\') {
-				r.push(c in DateUtils.formats ? DateUtils.formats[c](d, lang) : c);
+				r.push(c in dateutil.formats ? dateutil.formats[c](d, lang) : c);
 			}
 			// escaped characters & unreconized characters
 			else {
@@ -2377,8 +2485,7 @@ var DateUtils = {
 /**
  * network request
  */
-
-var Request = {
+var request = {
 	get: function get(url, params) {
 		params = params || {};
 
@@ -2387,15 +2494,20 @@ var Request = {
 		console.log('Params:', params);
 
 		return new Promise(function (resolve, reject) {
-			axios.get(url, {
-				params: params
-			}).then(function (response) {
-				console.log('Respons:', response);
-				console.log('Result:', response.data);
-				resolve(response.data);
-			}).catch(function (error) {
-				console.log('Error:', error);
-				reject(error);
+			$.ajax({
+				type: 'GET',
+				url: url,
+				data: params,
+				cache: false,
+				dataType: 'json',
+				success: function success(result) {
+					console.log('Result:', result);
+					resolve(result);
+				},
+				error: function error(XMLHttpRequest, textStatus, errorThrown) {
+					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
+					reject(XMLHttpRequest);
+				}
 			});
 		});
 	},
@@ -2407,76 +2519,23 @@ var Request = {
 		console.log('Data:', params);
 
 		return new Promise(function (resolve, reject) {
-			axios.post(url, params).then(function (response) {
-				console.log('Respons:', response);
-				console.log('Result:', response.data);
-				resolve(response.data);
-			}).catch(function (error) {
-				console.log('Error:', error);
-				reject(error);
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: params,
+				cache: false,
+				dataType: 'json',
+				success: function success(result) {
+					console.log('Result:', result);
+					resolve(result);
+				},
+				error: function error(XMLHttpRequest, textStatus, errorThrown) {
+					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
+					reject(XMLHttpRequest);
+				}
 			});
 		});
 	}
-};
-
-var userAgent$1 = navigator.userAgent; //取得浏览器的userAgent字符串
-
-var isOpera = userAgent$1.indexOf("Opera") > -1; //判断是否Opera浏览器
-var isIE = userAgent$1.indexOf("compatible") > -1 && userAgent$1.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
-var isEdge = userAgent$1.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器
-var isFirefox = userAgent$1.indexOf("Firefox") > -1; //判断是否Firefox浏览器
-var isSafari = userAgent$1.indexOf("Safari") > -1 && userAgent$1.indexOf("Chrome") === -1; //判断是否Safari浏览器
-var isChrome = userAgent$1.indexOf("Chrome") > -1 && userAgent$1.indexOf("Safari") > -1; //判断Chrome浏览器
-
-//判断当前浏览类型
-function browserType() {
-	if (isIE) {
-		var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
-		reIE.test(userAgent$1);
-		var fIEVersion = parseFloat(RegExp["$1"]);
-		if (fIEVersion === 7) {
-			return "IE7";
-		} else if (fIEVersion === 8) {
-			return "IE8";
-		} else if (fIEVersion === 9) {
-			return "IE9";
-		} else if (fIEVersion === 10) {
-			return "IE10";
-		} else if (fIEVersion === 11) {
-			return "IE11";
-		}
-		//IE版本过低
-		return "0";
-	}
-
-	if (isFirefox) {
-		return "Firefox";
-	}
-	if (isOpera) {
-		return "Opera";
-	}
-	if (isSafari) {
-		return "Safari";
-	}
-	if (isChrome) {
-		return "Chrome";
-	}
-	if (isEdge) {
-		return "Edge";
-	}
-	//未知浏览器
-	return null;
-}
-
-var Browser = {
-	name: browserType(),
-
-	isOpera: isOpera,
-	isIE: isIE,
-	isEdge: isEdge,
-	isFirefox: isFirefox,
-	isSafari: isSafari,
-	isChrome: isChrome
 };
 
 var URLUtils = {
@@ -2556,19 +2615,18 @@ var URLUtils = {
 	}
 };
 
-var Jeselvmo = {
-	Validator: Validator,
-	Platform: Platform,
-	LocalStore: localStore$1,
-	SessionStore: localStore,
-	Request: Request,
-	DateUtils: DateUtils,
-	Regexp: Regexp,
-	Utils: Utils,
-	Browser: Browser,
+var jeselvmo = {
+	validator: validator,
+	platform: platform,
+	localStore: localStore,
+	sessionStore: sessionStore,
+	request: request,
+	dateUtils: dateutil,
+	regexp: regexp,
+	utils: utils,
 	URLUtils: URLUtils
 };
 
-return Jeselvmo;
+return jeselvmo;
 
 })));

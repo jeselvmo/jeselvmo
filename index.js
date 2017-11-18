@@ -4,60 +4,55 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _Validator = require('./lib/Validator');
+var _validator = require('./validator');
 
-var _Validator2 = _interopRequireDefault(_Validator);
+var _validator2 = _interopRequireDefault(_validator);
 
-var _Utils = require('./lib/Utils');
+var _utils = require('./utils');
 
-var _Utils2 = _interopRequireDefault(_Utils);
+var _utils2 = _interopRequireDefault(_utils);
 
-var _SessionStore = require('./lib/SessionStore');
+var _sessionStore = require('./sessionStore');
 
-var _SessionStore2 = _interopRequireDefault(_SessionStore);
+var _sessionStore2 = _interopRequireDefault(_sessionStore);
 
-var _LocalStore = require('./lib/LocalStore');
+var _localStore = require('./localStore');
 
-var _LocalStore2 = _interopRequireDefault(_LocalStore);
+var _localStore2 = _interopRequireDefault(_localStore);
 
-var _Regexp = require('./lib/Regexp');
+var _regexp = require('./regexp');
 
-var _Regexp2 = _interopRequireDefault(_Regexp);
+var _regexp2 = _interopRequireDefault(_regexp);
 
-var _Platform = require('./lib/Platform');
+var _platform = require('./platform');
 
-var _Platform2 = _interopRequireDefault(_Platform);
+var _platform2 = _interopRequireDefault(_platform);
 
-var _DateUtils = require('./lib/DateUtils');
+var _dateutil = require('./dateutil');
 
-var _DateUtils2 = _interopRequireDefault(_DateUtils);
+var _dateutil2 = _interopRequireDefault(_dateutil);
 
-var _Request = require('./lib/Request');
+var _request = require('./request');
 
-var _Request2 = _interopRequireDefault(_Request);
+var _request2 = _interopRequireDefault(_request);
 
-var _Browser = require('./lib/Browser');
-
-var _Browser2 = _interopRequireDefault(_Browser);
-
-var _URLUtils = require('./lib/URLUtils');
+var _URLUtils = require('./URLUtils');
 
 var _URLUtils2 = _interopRequireDefault(_URLUtils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Jeselvmo = {
-	Validator: _Validator2.default,
-	Platform: _Platform2.default,
-	LocalStore: _LocalStore2.default,
-	SessionStore: _SessionStore2.default,
-	Request: _Request2.default,
-	DateUtils: _DateUtils2.default,
-	Regexp: _Regexp2.default,
-	Utils: _Utils2.default,
-	Browser: _Browser2.default,
+var jeselvmo = {
+	validator: _validator2.default,
+	platform: _platform2.default,
+	localStore: _localStore2.default,
+	sessionStore: _sessionStore2.default,
+	request: _request2.default,
+	dateUtils: _dateutil2.default,
+	regexp: _regexp2.default,
+	utils: _utils2.default,
 	URLUtils: _URLUtils2.default
 };
 
-exports.default = Jeselvmo;
+exports.default = jeselvmo;
 module.exports = exports['default'];

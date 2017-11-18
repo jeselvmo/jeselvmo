@@ -1,7 +1,7 @@
 {
 	"name": "jeselvmo",
 	"description": "JavaScript utility library",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"homepage": "https://github.com/jeselvmo/jeselvmo.git",
 	"files": [
 		"index.js",
@@ -50,11 +50,11 @@
 	"scripts": {
 		"lint": "eslint src test",
 		"lint:fix": "eslint --fix src test",
-		"clean:node": "rm -rf index.js lib",
+		"clean:node": "rm -rf *.js",
 		"clean:browser": "rm -rf jeselvmo*.js",
 		"clean": "npm run clean:node && npm run clean:browser",
 		"minify": "uglifyjs jeselvmo.js -o jeselvmo.min.js  --compress --mangle --comments /Copyright/",
-		"build:browser": "babel-node build-browser && npm run minify",
+		"build:browser": "babel-node build/build-browser && npm run minify",
 		"build:node": "babel src -d . --presets es2015 --plugins add-module-exports",
 		"build": "npm run build:browser && npm run build:node",
 		"pretest": "npm run lint && npm run build",

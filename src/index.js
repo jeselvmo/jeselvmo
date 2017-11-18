@@ -1,25 +1,23 @@
-import Validator from './lib/Validator';
-import Utils from './lib/Utils';
-import SessionStore from "./lib/SessionStore";
-import LocalStore from "./lib/LocalStore";
-import Regexp from "./lib/Regexp";
-import Platform from "./lib/Platform";
-import DateUtils from "./lib/DateUtils";
-import Request from "./lib/Request";
-import Browser from "./lib/Browser";
-import URLUtils from "./lib/URLUtils";
+import validator from './validator';
+import utils from './utils';
+import sessionStore from "./sessionStore";
+import localStore from "./localStore";
+import regexp from "./regexp";
+import platform from "./platform";
+import dateUtils from "./dateutil";
+import request from "./request";
+import URLUtils from "./URLUtils";
 
-const Jeselvmo = {
-	Validator,
-	Platform,
-	LocalStore,
-	SessionStore,
-	Request,
-	DateUtils,
-	Regexp,
-	Utils,
-	Browser,
+const jeselvmo = {
+	validator,
+	platform,
+	localStore,
+	sessionStore,
+	request,
+	dateUtils,
+	regexp,
+	utils,
 	URLUtils,
 };
 
-export default Jeselvmo;
+export default jeselvmo;

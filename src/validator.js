@@ -1475,7 +1475,7 @@ function isURLSearchParams(val) {
 	return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
 }
 
-var Validator = {
+var validator = {
 	version: version,
 	toDate: toDate,
 	toFloat: toFloat,
@@ -1557,4 +1557,4 @@ var Validator = {
 	isURLSearchParams: isURLSearchParams,
 };
 
-export default Validator
+export default validator

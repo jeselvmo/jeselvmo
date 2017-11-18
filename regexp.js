@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 /**
  * 正则表达式的几种用法
  */
-var Regexp = {
+var regexp = {
 	test: function test(str, reg) {
 		return reg.test(str);
 	},
@@ -24,5 +24,5 @@ var Regexp = {
 	}
 };
 
-exports.default = Regexp;
+exports.default = regexp;
 module.exports = exports["default"];
