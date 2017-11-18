@@ -53,7 +53,7 @@ var method_map = {
 };
 
 
-let dateutil = {
+let dateUtils = {
 	//
 	lang: {'en': {}},
 
@@ -81,7 +81,7 @@ let dateutil = {
 			size: 1,
 			parse: function (str) {
 				var b = str.split(/[T ]/);
-				var date = dateutil.parsers.date.parse(b[0]);
+				var date = dateUtils.parsers.date.parse(b[0]);
 				var m = b[1].replace(/:/g, '')
 					.match(/^(\d\d)(\d\d)?(\d\d)?(?:[.,](\d+))?([+\-](?:\d\d){1,2})?/);
 				// TODO: timezone (I have no need for this feature yet)
@@ -112,7 +112,7 @@ let dateutil = {
 			size: DAY_SIZE,
 			parse: function (str) {
 				var m = /^([+\-]\d{6}|\d{4})\-?(\d\d)\-?(\d\d)$/.exec(str),
-					d = dateutil.date(m[1], +m[2] - 1, m[3]);
+					d = dateUtils.date(m[1], +m[2] - 1, m[3]);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -124,8 +124,8 @@ let dateutil = {
 			size: MONTH_SIZE,
 			parse: function (str) {
 				var b = str.split(/[\/\-]/);
-				var d = dateutil.date(b[0], +b[1] - 1, 1);
-				d.size = dateutil.daysInMonth(d) * DAY_SIZE;
+				var d = dateUtils.date(b[0], +b[1] - 1, 1);
+				d.size = dateUtils.daysInMonth(d) * DAY_SIZE;
 				return d;
 			}
 		},
@@ -135,8 +135,8 @@ let dateutil = {
 			test: /^[+\-]?\d{4,6}$/,
 			size: YEAR_SIZE,
 			parse: function (str) {
-				var d = dateutil.date(str, 0, 1);
-				d.size = DAY_SIZE * ( dateutil.isLeapYear(d) ? 366 : 365 );
+				var d = dateUtils.date(str, 0, 1);
+				d.size = DAY_SIZE * ( dateUtils.isLeapYear(d) ? 366 : 365 );
 				return d;
 			}
 		},
@@ -147,7 +147,7 @@ let dateutil = {
 			size: WEEK_SIZE,
 			parse: function (str) {
 				var s = str.toLowerCase().replace(/[^w\d]/g, '').split('w');
-				var d = dateutil.date(s[0], 0, 3);  // Jan 3
+				var d = dateUtils.date(s[0], 0, 3);  // Jan 3
 				d.setUTCDate(3 - d.getUTCDay() +
 					( parseInt(s[1].substr(0, 2), 10) - 1 ) * 7 +
 					parseInt(s[1].substr(2, 1) || '1', 10));
@@ -177,7 +177,7 @@ let dateutil = {
 			size: YEAR_SIZE / 4,
 			parse: function (str) {
 				var b = str.split(/\-?[Qq]/),
-					d = dateutil.date(b[0], ( parseInt(b[1], 10) - 1 ) * 3);
+					d = dateUtils.date(b[0], ( parseInt(b[1], 10) - 1 ) * 3);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -196,17 +196,17 @@ let dateutil = {
 		},
 		// ISO 8601 date
 		c: function (d, l) {
-			return dateutil.isoyear(d) +
-				dateutil.format(d, '-m-d\\TH:i:s.', l) +
-				dateutil.pad(d.getUTCMilliseconds(), 3) + 'Z';
+			return dateUtils.isoyear(d) +
+				dateUtils.format(d, '-m-d\\TH:i:s.', l) +
+				dateUtils.pad(d.getUTCMilliseconds(), 3) + 'Z';
 		},
 		// Day of the month, 2 digits with leading zeros
 		d: function (d) {
-			return dateutil.pad(d.getUTCDate());
+			return dateUtils.pad(d.getUTCDate());
 		},
 		// A textual representation of a day, three letters
 		D: function (d, l) {
-			return dateutil._(_d[d.getUTCDay()].substr(0, 3), l);
+			return dateUtils._(_d[d.getUTCDay()].substr(0, 3), l);
 		},
 		// Time zone identifier
 		e: function (d) {
@@ -214,7 +214,7 @@ let dateutil = {
 		},
 		// A full textual representation of a month
 		F: function (d, l) {
-			return dateutil._(_m[d.getUTCMonth()], l);
+			return dateUtils._(_m[d.getUTCMonth()], l);
 		},
 		// 12-hour format of an hour without leading zeros
 		g: function (d) {
@@ -226,15 +226,15 @@ let dateutil = {
 		},
 		// 12-hour format of an hour with leading zeros
 		h: function (d) {
-			return dateutil.pad(d.getUTCHours() % 12 || 12);
+			return dateUtils.pad(d.getUTCHours() % 12 || 12);
 		},
 		// 24-hour format of an hour with leading zeros
 		H: function (d) {
-			return dateutil.pad(d.getUTCHours());
+			return dateUtils.pad(d.getUTCHours());
 		},
 		// Minutes with leading zeros
 		i: function (d) {
-			return dateutil.pad(d.getUTCMinutes());
+			return dateUtils.pad(d.getUTCMinutes());
 		},
 		// Day of the month without leading zeros
 		j: function (d) {
@@ -242,19 +242,19 @@ let dateutil = {
 		},
 		// A full textual representation of the day of the week
 		l: function (d, l) {
-			return dateutil._(_d[d.getUTCDay()], l);
+			return dateUtils._(_d[d.getUTCDay()], l);
 		},
 		// Whether it's a leap year (0 = yes, 1 = no)
 		L: function (d) {
-			return dateutil.isLeapYear(d) * 1;
+			return dateUtils.isLeapYear(d) * 1;
 		},
 		// Numeric representation of a month, with leading zeros
 		m: function (d) {
-			return dateutil.pad(d.getUTCMonth() + 1);
+			return dateUtils.pad(d.getUTCMonth() + 1);
 		},
 		// A short textual representation of a month, three letters
 		M: function (d, l) {
-			return dateutil._(_m[d.getUTCMonth()].substr(0, 3), l);
+			return dateUtils._(_m[d.getUTCMonth()].substr(0, 3), l);
 		},
 		// Numeric representation of a month, without leading zeros
 		n: function (d) {
@@ -266,7 +266,7 @@ let dateutil = {
 		},
 		// ISO-8601 year number
 		o: function (d) {
-			return dateutil.pad(dateutil.isocalendar(d)[0], 4);
+			return dateUtils.pad(dateUtils.isocalendar(d)[0], 4);
 		},
 		// Time zone designator
 		O: function (d) {
@@ -282,11 +282,11 @@ let dateutil = {
 		},
 		// RFC 2822 formatted date
 		r: function (d, l) {
-			return dateutil.format(d, 'D, d M Y H:i:s O', l);
+			return dateUtils.format(d, 'D, d M Y H:i:s O', l);
 		},
 		// Seconds, with leading zeros
 		s: function (d) {
-			return dateutil.pad(d.getUTCSeconds());
+			return dateUtils.pad(d.getUTCSeconds());
 		},
 		// English ordinal suffix for the day of the month, 2 characters
 		S: function (d) {
@@ -297,7 +297,7 @@ let dateutil = {
 		},
 		// Number of days in the given month
 		t: function (d) {
-			return dateutil.daysInMonth(d);
+			return dateUtils.daysInMonth(d);
 		},
 		// Time zone abbreviation
 		T: function (d) {
@@ -305,7 +305,7 @@ let dateutil = {
 		},
 		// Microseconds
 		u: function (d) {
-			return dateutil.pad(d.getUTCMilliseconds(), 6);
+			return dateUtils.pad(d.getUTCMilliseconds(), 6);
 		},
 		// Seconds since the Unix Epoch
 		U: function (d) {
@@ -317,7 +317,7 @@ let dateutil = {
 		},
 		// ISO-8601 week number of year, weeks starting on Monday
 		W: function (d) {
-			return dateutil.pad(dateutil.isocalendar(d)[1]);
+			return dateUtils.pad(dateUtils.isocalendar(d)[1]);
 		},
 		// A short numeric representation of a year, 2 digits
 		y: function (d) {
@@ -398,9 +398,9 @@ let dateutil = {
 		if (typeof str !== 'string') {
 			throw new Error("dateutil parser can't parse non-strings.");
 		}
-		for (var dtype in dateutil.parsers) {
-			if (dateutil.parsers[dtype].test.test(str)) {
-				d = dateutil.parsers[dtype].parse(str);
+		for (var dtype in dateUtils.parsers) {
+			if (dateUtils.parsers[dtype].test.test(str)) {
+				d = dateUtils.parsers[dtype].parse(str);
 				d.type = dtype;
 				d.size = d.size || 0;
 				break;
@@ -417,7 +417,7 @@ let dateutil = {
 
 
 	// format a date to string
-	format(d, fmt = dateutil.ymd_, lang) {
+	format(d, fmt = dateUtils.ymd_, lang) {
 
 		// has been moved to the Date prototype?
 		if (_toString.call(this) === '[object Date]') {
@@ -438,7 +438,7 @@ let dateutil = {
 			c = fmt.charAt(i);
 			// format characters
 			if (c !== '\\') {
-				r.push((c in dateutil.formats) ? dateutil.formats[c](d, lang) : c);
+				r.push((c in dateUtils.formats) ? dateUtils.formats[c](d, lang) : c);
 			}
 			// escaped characters & unreconized characters
 			else {
@@ -549,4 +549,4 @@ let dateutil = {
 
 };
 
-export default dateutil;
+export default dateUtils;

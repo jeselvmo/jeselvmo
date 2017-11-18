@@ -1,4 +1,4 @@
-const URLUtils = {
+const urlUtils = {
 
 	href: location.href,
 	hash: location.hash,
@@ -52,7 +52,7 @@ const URLUtils = {
 	},
 
 	setParams(params, replace = false) {
-		let params2 = URLUtils.getParams();
+		let params2 = urlUtils.getParams();
 
 		if (replace) {
 			params2 = {}
@@ -76,4 +76,4 @@ const URLUtils = {
 	}
 };
 
-export default URLUtils
+export default urlUtils

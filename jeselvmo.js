@@ -1587,59 +1587,6 @@ var validator = {
 	isURLSearchParams: isURLSearchParams
 };
 
-/* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
-var utils = {
-
-	// 将 Date 转化为指定格式的String
-	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
-	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
-	// 例子：
-	// utils.formatDate(new Date(), "yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
-	// utils.formatDate(new Date(), "yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
-	formatDate: function formatDate(date, fmt) {
-		// 默认格式
-		fmt = fmt || 'yyyy-MM-dd';
-		date = validator.isDate(date) ? date : new Date(date);
-
-		var o = {
-			"M+": date.getMonth() + 1, //月份
-			"d+": date.getDate(), //日
-			"h+": date.getHours(), //小时
-			"m+": date.getMinutes(), //分
-			"s+": date.getSeconds(), //秒
-			"q+": Math.floor((date.getMonth() + 3) / 3), //季度
-			"S": date.getMilliseconds() //毫秒
-		};
-		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for (var k in o) {
-			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
-		}return fmt;
-	},
-
-
-	/**
-  * 获得window大小
-  */
-	getWindowSize: function getWindowSize() {
-		var winWidth = 0,
-		    winHeight = 0;
-		// 获取窗口宽度
-		if (window.innerWidth) winWidth = window.innerWidth;else if (document.body && document.body.clientWidth) winWidth = document.body.clientWidth;
-		// 获取窗口高度
-		if (window.innerHeight) winHeight = window.innerHeight;else if (document.body && document.body.clientHeight) winHeight = document.body.clientHeight;
-		// 通过深入 Document 内部对 body 进行检测，获取窗口大小
-		if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
-			winHeight = document.documentElement.clientHeight;
-			winWidth = document.documentElement.clientWidth;
-		}
-
-		return {
-			width: winWidth,
-			height: winHeight
-		};
-	}
-};
-
 /* eslint-disable no-unused-vars,init-declarations,no-undefined,no-shadow,prefer-template,no-var,no-underscore-dangle,vars-on-top,no-proto,object-shorthand,prefer-arrow-callback,guard-for-in,max-len */
 
 /*!
@@ -1942,6 +1889,115 @@ var platform = {
 	browser: browser
 };
 
+/**
+ * network request
+ */
+var request = {
+	get: function get(url, params) {
+		params = params || {};
+
+		console.log('==============================================');
+		console.log('Get:' + url);
+		console.log('Params:', params);
+
+		return new Promise(function (resolve, reject) {
+			$.ajax({
+				type: 'GET',
+				url: url,
+				data: params,
+				cache: false,
+				dataType: 'json',
+				success: function success(result) {
+					console.log('Result:', result);
+					resolve(result);
+				},
+				error: function error(XMLHttpRequest, textStatus, errorThrown) {
+					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
+					reject(XMLHttpRequest);
+				}
+			});
+		});
+	},
+	post: function post(url, params) {
+		params = params || {};
+
+		console.log('==============================================');
+		console.log('Post:', url);
+		console.log('Data:', params);
+
+		return new Promise(function (resolve, reject) {
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: params,
+				cache: false,
+				dataType: 'json',
+				success: function success(result) {
+					console.log('Result:', result);
+					resolve(result);
+				},
+				error: function error(XMLHttpRequest, textStatus, errorThrown) {
+					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
+					reject(XMLHttpRequest);
+				}
+			});
+		});
+	}
+};
+
+/* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
+var utils = {
+
+	// 将 Date 转化为指定格式的String
+	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+	// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+	// 例子：
+	// utils.formatDate(new Date(), "yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+	// utils.formatDate(new Date(), "yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+	formatDate: function formatDate(date, fmt) {
+		// 默认格式
+		fmt = fmt || 'yyyy-MM-dd';
+		date = validator.isDate(date) ? date : new Date(date);
+
+		var o = {
+			"M+": date.getMonth() + 1, //月份
+			"d+": date.getDate(), //日
+			"h+": date.getHours(), //小时
+			"m+": date.getMinutes(), //分
+			"s+": date.getSeconds(), //秒
+			"q+": Math.floor((date.getMonth() + 3) / 3), //季度
+			"S": date.getMilliseconds() //毫秒
+		};
+		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+		for (var k in o) {
+			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+		}return fmt;
+	},
+
+
+	/**
+  * 获得window大小
+  */
+	getWindowSize: function getWindowSize() {
+		var winWidth = 0,
+		    winHeight = 0;
+		// 获取窗口宽度
+		if (window.innerWidth) winWidth = window.innerWidth;else if (document.body && document.body.clientWidth) winWidth = document.body.clientWidth;
+		// 获取窗口高度
+		if (window.innerHeight) winHeight = window.innerHeight;else if (document.body && document.body.clientHeight) winHeight = document.body.clientHeight;
+		// 通过深入 Document 内部对 body 进行检测，获取窗口大小
+		if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
+			winHeight = document.documentElement.clientHeight;
+			winWidth = document.documentElement.clientWidth;
+		}
+
+		return {
+			width: winWidth,
+			height: winHeight
+		};
+	}
+};
+
 /* eslint-disable no-var,no-underscore-dangle,no-unused-vars,quote-props,object-property-newline,no-multi-assign,object-curly-spacing,max-len,object-shorthand,no-mixed-operators,prefer-template,space-in-parens,brace-style,vars-on-top,no-redeclare,prefer-arrow-callback,block-scoped-var,import/no-mutable-exports */
 
 /*
@@ -1996,7 +2052,7 @@ var method_map = {
 	'milliseconds': 'Milliseconds'
 };
 
-var dateutil = {
+var dateUtils = {
 	//
 	lang: { 'en': {} },
 
@@ -2023,7 +2079,7 @@ var dateutil = {
 			size: 1,
 			parse: function parse(str) {
 				var b = str.split(/[T ]/);
-				var date = dateutil.parsers.date.parse(b[0]);
+				var date = dateUtils.parsers.date.parse(b[0]);
 				var m = b[1].replace(/:/g, '').match(/^(\d\d)(\d\d)?(\d\d)?(?:[.,](\d+))?([+\-](?:\d\d){1,2})?/);
 				// TODO: timezone (I have no need for this feature yet)
 				// if ( m[5] ) { var zone = m[5] || '0000'; }
@@ -2049,7 +2105,7 @@ var dateutil = {
 			size: DAY_SIZE,
 			parse: function parse(str) {
 				var m = /^([+\-]\d{6}|\d{4})\-?(\d\d)\-?(\d\d)$/.exec(str),
-				    d = dateutil.date(m[1], +m[2] - 1, m[3]);
+				    d = dateUtils.date(m[1], +m[2] - 1, m[3]);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -2061,8 +2117,8 @@ var dateutil = {
 			size: MONTH_SIZE,
 			parse: function parse(str) {
 				var b = str.split(/[\/\-]/);
-				var d = dateutil.date(b[0], +b[1] - 1, 1);
-				d.size = dateutil.daysInMonth(d) * DAY_SIZE;
+				var d = dateUtils.date(b[0], +b[1] - 1, 1);
+				d.size = dateUtils.daysInMonth(d) * DAY_SIZE;
 				return d;
 			}
 		},
@@ -2072,8 +2128,8 @@ var dateutil = {
 			test: /^[+\-]?\d{4,6}$/,
 			size: YEAR_SIZE,
 			parse: function parse(str) {
-				var d = dateutil.date(str, 0, 1);
-				d.size = DAY_SIZE * (dateutil.isLeapYear(d) ? 366 : 365);
+				var d = dateUtils.date(str, 0, 1);
+				d.size = DAY_SIZE * (dateUtils.isLeapYear(d) ? 366 : 365);
 				return d;
 			}
 		},
@@ -2084,7 +2140,7 @@ var dateutil = {
 			size: WEEK_SIZE,
 			parse: function parse(str) {
 				var s = str.toLowerCase().replace(/[^w\d]/g, '').split('w');
-				var d = dateutil.date(s[0], 0, 3); // Jan 3
+				var d = dateUtils.date(s[0], 0, 3); // Jan 3
 				d.setUTCDate(3 - d.getUTCDay() + (parseInt(s[1].substr(0, 2), 10) - 1) * 7 + parseInt(s[1].substr(2, 1) || '1', 10));
 				d.size = WEEK_SIZE;
 				return d;
@@ -2112,7 +2168,7 @@ var dateutil = {
 			size: YEAR_SIZE / 4,
 			parse: function parse(str) {
 				var b = str.split(/\-?[Qq]/),
-				    d = dateutil.date(b[0], (parseInt(b[1], 10) - 1) * 3);
+				    d = dateUtils.date(b[0], (parseInt(b[1], 10) - 1) * 3);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -2131,15 +2187,15 @@ var dateutil = {
 		},
 		// ISO 8601 date
 		c: function c(d, l) {
-			return dateutil.isoyear(d) + dateutil.format(d, '-m-d\\TH:i:s.', l) + dateutil.pad(d.getUTCMilliseconds(), 3) + 'Z';
+			return dateUtils.isoyear(d) + dateUtils.format(d, '-m-d\\TH:i:s.', l) + dateUtils.pad(d.getUTCMilliseconds(), 3) + 'Z';
 		},
 		// Day of the month, 2 digits with leading zeros
 		d: function d(_d2) {
-			return dateutil.pad(_d2.getUTCDate());
+			return dateUtils.pad(_d2.getUTCDate());
 		},
 		// A textual representation of a day, three letters
 		D: function D(d, l) {
-			return dateutil._(_d[d.getUTCDay()].substr(0, 3), l);
+			return dateUtils._(_d[d.getUTCDay()].substr(0, 3), l);
 		},
 		// Time zone identifier
 		e: function e(d) {
@@ -2147,7 +2203,7 @@ var dateutil = {
 		},
 		// A full textual representation of a month
 		F: function F(d, l) {
-			return dateutil._(_m[d.getUTCMonth()], l);
+			return dateUtils._(_m[d.getUTCMonth()], l);
 		},
 		// 12-hour format of an hour without leading zeros
 		g: function g(d) {
@@ -2159,15 +2215,15 @@ var dateutil = {
 		},
 		// 12-hour format of an hour with leading zeros
 		h: function h(d) {
-			return dateutil.pad(d.getUTCHours() % 12 || 12);
+			return dateUtils.pad(d.getUTCHours() % 12 || 12);
 		},
 		// 24-hour format of an hour with leading zeros
 		H: function H(d) {
-			return dateutil.pad(d.getUTCHours());
+			return dateUtils.pad(d.getUTCHours());
 		},
 		// Minutes with leading zeros
 		i: function i(d) {
-			return dateutil.pad(d.getUTCMinutes());
+			return dateUtils.pad(d.getUTCMinutes());
 		},
 		// Day of the month without leading zeros
 		j: function j(d) {
@@ -2175,19 +2231,19 @@ var dateutil = {
 		},
 		// A full textual representation of the day of the week
 		l: function l(d, _l) {
-			return dateutil._(_d[d.getUTCDay()], _l);
+			return dateUtils._(_d[d.getUTCDay()], _l);
 		},
 		// Whether it's a leap year (0 = yes, 1 = no)
 		L: function L(d) {
-			return dateutil.isLeapYear(d) * 1;
+			return dateUtils.isLeapYear(d) * 1;
 		},
 		// Numeric representation of a month, with leading zeros
 		m: function m(d) {
-			return dateutil.pad(d.getUTCMonth() + 1);
+			return dateUtils.pad(d.getUTCMonth() + 1);
 		},
 		// A short textual representation of a month, three letters
 		M: function M(d, l) {
-			return dateutil._(_m[d.getUTCMonth()].substr(0, 3), l);
+			return dateUtils._(_m[d.getUTCMonth()].substr(0, 3), l);
 		},
 		// Numeric representation of a month, without leading zeros
 		n: function n(d) {
@@ -2199,7 +2255,7 @@ var dateutil = {
 		},
 		// ISO-8601 year number
 		o: function o(d) {
-			return dateutil.pad(dateutil.isocalendar(d)[0], 4);
+			return dateUtils.pad(dateUtils.isocalendar(d)[0], 4);
 		},
 		// Time zone designator
 		O: function O(d) {
@@ -2215,11 +2271,11 @@ var dateutil = {
 		},
 		// RFC 2822 formatted date
 		r: function r(d, l) {
-			return dateutil.format(d, 'D, d M Y H:i:s O', l);
+			return dateUtils.format(d, 'D, d M Y H:i:s O', l);
 		},
 		// Seconds, with leading zeros
 		s: function s(d) {
-			return dateutil.pad(d.getUTCSeconds());
+			return dateUtils.pad(d.getUTCSeconds());
 		},
 		// English ordinal suffix for the day of the month, 2 characters
 		S: function S(d) {
@@ -2229,7 +2285,7 @@ var dateutil = {
 		},
 		// Number of days in the given month
 		t: function t(d) {
-			return dateutil.daysInMonth(d);
+			return dateUtils.daysInMonth(d);
 		},
 		// Time zone abbreviation
 		T: function T(d) {
@@ -2237,7 +2293,7 @@ var dateutil = {
 		},
 		// Microseconds
 		u: function u(d) {
-			return dateutil.pad(d.getUTCMilliseconds(), 6);
+			return dateUtils.pad(d.getUTCMilliseconds(), 6);
 		},
 		// Seconds since the Unix Epoch
 		U: function U(d) {
@@ -2249,7 +2305,7 @@ var dateutil = {
 		},
 		// ISO-8601 week number of year, weeks starting on Monday
 		W: function W(d) {
-			return dateutil.pad(dateutil.isocalendar(d)[1]);
+			return dateUtils.pad(dateUtils.isocalendar(d)[1]);
 		},
 		// A short numeric representation of a year, 2 digits
 		y: function y(d) {
@@ -2330,9 +2386,9 @@ var dateutil = {
 		if (typeof str !== 'string') {
 			throw new Error("dateutil parser can't parse non-strings.");
 		}
-		for (var dtype in dateutil.parsers) {
-			if (dateutil.parsers[dtype].test.test(str)) {
-				d = dateutil.parsers[dtype].parse(str);
+		for (var dtype in dateUtils.parsers) {
+			if (dateUtils.parsers[dtype].test.test(str)) {
+				d = dateUtils.parsers[dtype].parse(str);
 				d.type = dtype;
 				d.size = d.size || 0;
 				break;
@@ -2350,7 +2406,7 @@ var dateutil = {
 
 	// format a date to string
 	format: function format(d) {
-		var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : dateutil.ymd_;
+		var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : dateUtils.ymd_;
 		var lang = arguments[2];
 
 
@@ -2372,7 +2428,7 @@ var dateutil = {
 			c = fmt.charAt(i);
 			// format characters
 			if (c !== '\\') {
-				r.push(c in dateutil.formats ? dateutil.formats[c](d, lang) : c);
+				r.push(c in dateUtils.formats ? dateUtils.formats[c](d, lang) : c);
 			}
 			// escaped characters & unreconized characters
 			else {
@@ -2482,63 +2538,7 @@ var dateutil = {
 	}
 };
 
-/**
- * network request
- */
-var request = {
-	get: function get(url, params) {
-		params = params || {};
-
-		console.log('==============================================');
-		console.log('Get:' + url);
-		console.log('Params:', params);
-
-		return new Promise(function (resolve, reject) {
-			$.ajax({
-				type: 'GET',
-				url: url,
-				data: params,
-				cache: false,
-				dataType: 'json',
-				success: function success(result) {
-					console.log('Result:', result);
-					resolve(result);
-				},
-				error: function error(XMLHttpRequest, textStatus, errorThrown) {
-					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
-					reject(XMLHttpRequest);
-				}
-			});
-		});
-	},
-	post: function post(url, params) {
-		params = params || {};
-
-		console.log('==============================================');
-		console.log('Post:', url);
-		console.log('Data:', params);
-
-		return new Promise(function (resolve, reject) {
-			$.ajax({
-				type: 'POST',
-				url: url,
-				data: params,
-				cache: false,
-				dataType: 'json',
-				success: function success(result) {
-					console.log('Result:', result);
-					resolve(result);
-				},
-				error: function error(XMLHttpRequest, textStatus, errorThrown) {
-					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
-					reject(XMLHttpRequest);
-				}
-			});
-		});
-	}
-};
-
-var URLUtils = {
+var urlUtils = {
 
 	href: location.href,
 	hash: location.hash,
@@ -2590,7 +2590,7 @@ var URLUtils = {
 	setParams: function setParams(params) {
 		var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-		var params2 = URLUtils.getParams();
+		var params2 = urlUtils.getParams();
 
 		if (replace) {
 			params2 = {};
@@ -2621,10 +2621,10 @@ var jeselvmo = {
 	localStore: localStore,
 	sessionStore: sessionStore,
 	request: request,
-	dateUtils: dateutil,
 	regexp: regexp,
 	utils: utils,
-	URLUtils: URLUtils
+	dateUtils: dateUtils,
+	urlUtils: urlUtils
 };
 
 return jeselvmo;

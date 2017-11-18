@@ -1,12 +1,12 @@
-import validator from './validator';
-import utils from './utils';
-import sessionStore from "./sessionStore";
-import localStore from "./localStore";
-import regexp from "./regexp";
-import platform from "./platform";
-import dateUtils from "./dateutil";
-import request from "./request";
-import URLUtils from "./URLUtils";
+import validator from './lib/validator';
+import sessionStore from "./lib/sessionStore";
+import localStore from "./lib/localStore";
+import regexp from "./lib/regexp";
+import platform from "./lib/platform";
+import request from "./lib/request";
+import utils from './lib/utils';
+import dateUtils from "./lib/dateUtils";
+import urlUtils from "./lib/urlUtils";
 
 const jeselvmo = {
 	validator,
@@ -14,10 +14,11 @@ const jeselvmo = {
 	localStore,
 	sessionStore,
 	request,
-	dateUtils,
 	regexp,
 	utils,
-	URLUtils,
+	dateUtils,
+	urlUtils,
 };
+
 
 export default jeselvmo;
