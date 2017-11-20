@@ -30,23 +30,19 @@ const urlUtils = {
 	},
 
 	getParam(name) {
-		let reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i');
-		let r = window.location.search.substr(1).match(reg);
-		if (r !== null) {
-			return unescape(r[2]);
-		}
-		return null;
+		return this.getParams()[name];
 	},
 
 	getParams() {
-		let url = location.search; //获取url中"?"符后的字串
 		let params = {};
-		if (url.indexOf("?") !== -1) {
-			let str = url.substr(1);
-			let strs = str.split("&");
-			for (let i = 0; i < strs.length; i++) {
-				params[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
-			}
+
+		let url = location.href; //获取url中"?"符后的字串
+		let match = url.match(/\w+=\w*/g);
+		if (match) {
+			match.forEach((a) => {
+				let as = a.split('=');
+				params[as[0]] = decodeURIComponent(as[1])
+			});
 		}
 		return params;
 	},

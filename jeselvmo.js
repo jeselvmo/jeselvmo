@@ -1269,7 +1269,7 @@ function escape(str) {
 	return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\//g, '&#x2F;').replace(/\\/g, '&#x5C;').replace(/`/g, '&#96;');
 }
 
-function unescape$1(str) {
+function unescape(str) {
 	assertString(str);
 	return str.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#x2F;/g, '/').replace(/&#x5C;/g, '\\').replace(/&#96;/g, '`');
 }
@@ -1566,7 +1566,7 @@ var validator = {
 	rtrim: rtrim,
 	trim: trim,
 	escape: escape,
-	unescape: unescape$1,
+	unescape: unescape,
 	stripLow: stripLow,
 	whitelist: whitelist,
 	blacklist: blacklist$1,
@@ -2568,22 +2568,18 @@ var urlUtils = {
 		}
 	},
 	getParam: function getParam(name) {
-		var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-		var r = window.location.search.substr(1).match(reg);
-		if (r !== null) {
-			return unescape(r[2]);
-		}
-		return null;
+		return this.getParams()[name];
 	},
 	getParams: function getParams() {
-		var url = location.search; //获取url中"?"符后的字串
 		var params = {};
-		if (url.indexOf("?") !== -1) {
-			var str = url.substr(1);
-			var strs = str.split("&");
-			for (var i = 0; i < strs.length; i++) {
-				params[strs[i].split("=")[0]] = decodeURIComponent(strs[i].split("=")[1]);
-			}
+
+		var url = location.href; //获取url中"?"符后的字串
+		var match = url.match(/\w+=\w*/g);
+		if (match) {
+			match.forEach(function (a) {
+				var as = a.split('=');
+				params[as[0]] = decodeURIComponent(as[1]);
+			});
 		}
 		return params;
 	},
