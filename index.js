@@ -40,6 +40,10 @@ var _urlUtils = require("./lib/urlUtils");
 
 var _urlUtils2 = _interopRequireDefault(_urlUtils);
 
+var _pinyin = require("./lib/pinyin");
+
+var _pinyin2 = _interopRequireDefault(_pinyin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var jeselvmo = {
@@ -51,8 +55,13 @@ var jeselvmo = {
 	regexp: _regexp2.default,
 	utils: _utils2.default,
 	dateUtils: _dateUtils2.default,
-	urlUtils: _urlUtils2.default
+	urlUtils: _urlUtils2.default,
+	pinyin: _pinyin2.default
 };
+
+if (window) {
+	window.J = jeselvmo;
+}
 
 exports.default = jeselvmo;
 module.exports = exports["default"];

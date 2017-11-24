@@ -1,7 +1,7 @@
 {
 	"name": "jeselvmo",
 	"description": "JavaScript utility library",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"homepage": "https://github.com/jeselvmo/jeselvmo.git",
 	"files": [
 		"index.js",
@@ -11,8 +11,7 @@
 		"jeselvmo.js",
 		"jeselvmo.min.js"
 	],
-	"keywords": [
-	],
+	"keywords": [],
 	"author": "海龟大神 <kecoyo@163.com>",
 	"main": "index.js",
 	"bugs": {
@@ -22,9 +21,7 @@
 		"type": "git",
 		"url": "https://github.com/jeselvmo/jeselvmo.git"
 	},
-	"dependencies": {
-		"jquery": "^3.2.1"
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"babel-cli": "^6.24.0",
 		"babel-plugin-add-module-exports": "^0.2.1",

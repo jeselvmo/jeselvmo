@@ -1,8 +1,7 @@
+/* eslint-disable no-undef */
 /**
  * network request
  */
-import $ from 'jquery';
-
 const request = {
 
 	get(url, params) {
