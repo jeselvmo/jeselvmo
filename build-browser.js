@@ -1,4 +1,4 @@
-const pkg = require('./package.json');
+/* eslint-disable prefer-template,import/no-extraneous-dependencies,arrow-parens */
 const fs = require('fs');
 const rollup = require('rollup').rollup;
 const babel = require('rollup-plugin-babel');
@@ -15,7 +15,7 @@ rollup({
 	bundle.write({
 		dest: 'jeselvmo.js',
 		format: 'umd',
-		moduleName: pkg.name,
+		moduleName: 'Jeselvmo',
 		banner: (
 			'/*!\n' +
 			String(fs.readFileSync('./LICENSE')).trim().split('\n').map(l => ` * ${l}`).join('\n') +

@@ -94,7 +94,7 @@ const browser = (() => {
 })();
 
 
-const platform = {
+const Platform = {
 
 	isOpera,
 	isIE,
@@ -134,4 +134,4 @@ const platform = {
 	browser,
 };
 
-export default platform
+export default Platform

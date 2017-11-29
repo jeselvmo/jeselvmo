@@ -1,7 +1,7 @@
 {
 	"name": "jeselvmo",
 	"description": "JavaScript utility library",
-	"version": "0.0.10",
+	"version": "1.0.0",
 	"homepage": "https://github.com/jeselvmo/jeselvmo.git",
 	"files": [
 		"index.js",

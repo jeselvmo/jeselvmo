@@ -2,7 +2,7 @@
 /**
  * network request
  */
-const request = {
+const Request = {
 
 	get(url, params) {
 		params = params || {};
@@ -58,4 +58,4 @@ const request = {
 
 };
 
-export default request;
+export default Request;

@@ -1,14 +1,4 @@
-const urlUtils = {
-
-	href: location.href,
-	hash: location.hash,
-	host: location.host,
-	hostname: location.hostname,
-	origin: location.origin,
-	pathname: location.pathname,
-	port: location.port,
-	protocol: location.protocol,
-	search: location.search,
+const UrlUtils = {
 
 	/**
 	 * 基础URL,无查询参数，无哈希
@@ -48,7 +38,7 @@ const urlUtils = {
 	},
 
 	setParams(params, replace = false) {
-		let params2 = urlUtils.getParams();
+		let params2 = UrlUtils.getParams();
 
 		if (replace) {
 			params2 = {}
@@ -72,4 +62,4 @@ const urlUtils = {
 	}
 };
 
-export default urlUtils
+export default UrlUtils

@@ -4,64 +4,59 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _validator = require("./lib/validator");
+var _Validator = require("./lib/Validator");
 
-var _validator2 = _interopRequireDefault(_validator);
+var _Validator2 = _interopRequireDefault(_Validator);
 
-var _sessionStore = require("./lib/sessionStore");
+var _SessionStore = require("./lib/SessionStore");
 
-var _sessionStore2 = _interopRequireDefault(_sessionStore);
+var _SessionStore2 = _interopRequireDefault(_SessionStore);
 
-var _localStore = require("./lib/localStore");
+var _LocalStore = require("./lib/LocalStore");
 
-var _localStore2 = _interopRequireDefault(_localStore);
+var _LocalStore2 = _interopRequireDefault(_LocalStore);
 
-var _regexp = require("./lib/regexp");
+var _Platform = require("./lib/Platform");
 
-var _regexp2 = _interopRequireDefault(_regexp);
+var _Platform2 = _interopRequireDefault(_Platform);
 
-var _platform = require("./lib/platform");
+var _Request = require("./lib/Request");
 
-var _platform2 = _interopRequireDefault(_platform);
+var _Request2 = _interopRequireDefault(_Request);
 
-var _request = require("./lib/request");
+var _Utils = require("./lib/Utils");
 
-var _request2 = _interopRequireDefault(_request);
+var _Utils2 = _interopRequireDefault(_Utils);
 
-var _utils = require("./lib/utils");
+var _DateUtils = require("./lib/DateUtils");
 
-var _utils2 = _interopRequireDefault(_utils);
+var _DateUtils2 = _interopRequireDefault(_DateUtils);
 
-var _dateUtils = require("./lib/dateUtils");
+var _UrlUtils = require("./lib/UrlUtils");
 
-var _dateUtils2 = _interopRequireDefault(_dateUtils);
+var _UrlUtils2 = _interopRequireDefault(_UrlUtils);
 
-var _urlUtils = require("./lib/urlUtils");
+var _Pinyin = require("./lib/Pinyin");
 
-var _urlUtils2 = _interopRequireDefault(_urlUtils);
-
-var _pinyin = require("./lib/pinyin");
-
-var _pinyin2 = _interopRequireDefault(_pinyin);
+var _Pinyin2 = _interopRequireDefault(_Pinyin);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var jeselvmo = {
-	validator: _validator2.default,
-	platform: _platform2.default,
-	localStore: _localStore2.default,
-	sessionStore: _sessionStore2.default,
-	request: _request2.default,
-	regexp: _regexp2.default,
-	utils: _utils2.default,
-	dateUtils: _dateUtils2.default,
-	urlUtils: _urlUtils2.default,
-	pinyin: _pinyin2.default
+var Jeselvmo = {
+	Validator: _Validator2.default,
+	Platform: _Platform2.default,
+	LocalStore: _LocalStore2.default,
+	SessionStore: _SessionStore2.default,
+	Request: _Request2.default,
+	Utils: _Utils2.default,
+	DateUtils: _DateUtils2.default,
+	UrlUtils: _UrlUtils2.default,
+	Pinyin: _Pinyin2.default
 };
 
 if (window) {
-	window.J = jeselvmo;
+	window.J = Jeselvmo;
 }
 
-exports.default = jeselvmo;
+exports.default = Jeselvmo;
 module.exports = exports["default"];

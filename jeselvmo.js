@@ -23,7 +23,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
-	(global.jeselvmo = factory());
+	(global.Jeselvmo = factory());
 }(this, (function () { 'use strict';
 
 var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
@@ -31,40 +31,6 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
 } : function (obj) {
   return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 };
-
-
-
-
-
-
-
-
-
-
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
 
 /* eslint-disable no-var,vars-on-top,no-void,no-underscore-dangle,prefer-template,object-shorthand,import/no-mutable-exports,object-curly-spacing,max-len,prefer-rest-params,no-shadow,no-undef-init,no-cond-assign,block-scoped-var,no-mixed-operators,block-spacing,prefer-arrow-callback,no-unsafe-finally,max-len */
 function assertString(input) {
@@ -1537,7 +1503,7 @@ function isURLSearchParams(val) {
 	return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
 }
 
-var validator = {
+var Validator = {
 	version: version,
 	toDate: toDate,
 	toFloat: toFloat,
@@ -1762,33 +1728,12 @@ Store.prototype = {
 /**
  * sessionStore
  */
-var sessionStore = new Store(window.sessionStorage);
+var SessionStore = new Store(window.sessionStorage);
 
 /**
  * localStore
  */
-var localStore = new Store(window.localStorage);
-
-/**
- * 正则表达式的几种用法
- */
-var regexp = {
-	test: function test(str, reg) {
-		return reg.test(str);
-	},
-	search: function search(str, reg) {
-		return str.search(reg);
-	},
-	match: function match(str, reg) {
-		return str.match(reg);
-	},
-	split: function split(str, reg) {
-		return str.split(reg);
-	},
-	replace: function replace(str, reg, rep) {
-		return str.replace(reg, rep);
-	}
-};
+var LocalStore = new Store(window.localStorage);
 
 var u = navigator.userAgent; //取得浏览器的userAgent字符串
 var p = navigator.platform; // 取得平台字符串
@@ -1881,7 +1826,7 @@ var browser = function () {
 	return null;
 }();
 
-var platform = {
+var Platform = {
 
 	isOpera: isOpera,
 	isIE: isIE,
@@ -1925,7 +1870,7 @@ var platform = {
 /**
  * network request
  */
-var request = {
+var Request = {
 	get: function get(url, params) {
 		params = params || {};
 
@@ -1979,7 +1924,7 @@ var request = {
 };
 
 /* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
-var utils = {
+var Utils = {
 
 	// 将 Date 转化为指定格式的String
 	// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
@@ -1990,7 +1935,7 @@ var utils = {
 	formatDate: function formatDate(date, fmt) {
 		// 默认格式
 		fmt = fmt || 'yyyy-MM-dd';
-		date = validator.isDate(date) ? date : new Date(date);
+		date = Validator.isDate(date) ? date : new Date(date);
 
 		var o = {
 			"M+": date.getMonth() + 1, //月份
@@ -2031,52 +1976,543 @@ var utils = {
 	}
 };
 
-/* eslint-disable curly */
+/* eslint-disable no-var,no-underscore-dangle,no-unused-vars,quote-props,object-property-newline,no-multi-assign,object-curly-spacing,max-len,object-shorthand,no-mixed-operators,prefer-template,space-in-parens,brace-style,vars-on-top,no-redeclare,prefer-arrow-callback,block-scoped-var,import/no-mutable-exports */
 
-var dateUtils = {
+/*
+ *  dateutil
+ *
+ *  https://github.com/borgar/dateutil/blob/master/dateutil.js
+ *
+ *  - provides formatting, parsing and other utility functions for dates.
+ *
+ * Copyright (c) 2009 Borgar Þorsteinsson
+ * Licensed under the terms of the MIT (LICENSE.txt) software license.
+ *
+ */
 
-	F_DATE: 'yyyyMMdd',
-	F_DATE_2: 'yyyy-MM-dd',
-	F_TIME: 'HHmmss',
-	F_TIME_2: 'HH:mm:ss',
-	F_DATETIME: 'yyyyMMddHHmmss',
-	F_DATETIME_2: 'yyyy-MM-dd HH:mm:ss',
+var SECOND_SIZE = 1000;
+var MINUTE_SIZE = SECOND_SIZE * 60;
+var HOUR_SIZE = MINUTE_SIZE * 60;
+var DAY_SIZE = HOUR_SIZE * 24;
+var WEEK_SIZE = DAY_SIZE * 7;
+var MONTH_SIZE = DAY_SIZE * 30.436875; // average month size
+var YEAR_SIZE = DAY_SIZE * 365.2425; // average year size
 
-	format: function format(date) {
-		var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : dateUtils.F_DATE_2;
+var _toString = Object.prototype.toString;
+// var _m = 'January February March April May June July August September October November December'.split(' ');
+// var _d = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
+
+var method_size = {
+	'FullYear': 6, 'Month': 5, 'Date': 4, 'Hours': 3,
+	'Minutes': 2, 'Seconds': 1, 'Milliseconds': 0
+};
+var method_map = {
+	'yr': 'FullYear',
+	'year': 'FullYear',
+	'years': 'FullYear',
+	'mn': 'Month',
+	'month': 'Month',
+	'months': 'Month',
+	'day': 'Date',
+	'days': 'Date',
+	'date': 'Date',
+	'hr': 'Hours',
+	'hour': 'Hours',
+	'hours': 'Hours',
+	'min': 'Minutes',
+	'minute': 'Minutes',
+	'minutes': 'Minutes',
+	'sec': 'Seconds',
+	'second': 'Seconds',
+	'seconds': 'Seconds',
+	'ms': 'Milliseconds',
+	'millisecond': 'Milliseconds',
+	'milliseconds': 'Milliseconds'
+};
+
+var DateUtils = {
+	//
+	lang: {
+		'en': {
+			longMouths: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+			shortMouths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+			longWeeks: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+			shortWeeks: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+		},
+		'cn': {
+			longMouths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+			shortMouths: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
+			longWeeks: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+			shortWeeks: ['日', '一', '二', '三', '四', '五', '六']
+		}
+	},
+
+	// patterns
+	patterns: {
+		date: 'Y-m-d',
+		date_: 'Ymd',
+		time: 'H:i:s',
+		time_: 'His',
+		datetime: 'Y-m-d H:i:s',
+		datetime_: 'YmdHis',
+		year: 'Y'
+	},
+
+	// *****************************************
+	// *** *** *** formats & parsers *** *** ***
+	// *****************************************
 
 
-		if (typeof date === 'string' || typeof date === 'number') {
-			date = new Date(date);
+	parsers: {
+
+		// year + month + day + time
+		// -- currently doesn't really support fractions on anything other than seconds >> FIXME
+		// -- does not support timezones other than Zulu
+		date_and_time: {
+			test: /^(?:[+\-]\d{6}|\d{4})(?:(?:\-\d\d){1,2}|\d{4})[T ](?:\d\d)(?::?\d\d){0,2}(?:[\.,]\d+)?(?:Z|[+\-]\d\d(:?\d\d)?)?$/,
+			size: 1,
+			parse: function parse(str) {
+				var b = str.split(/[T ]/);
+				var date = DateUtils.parsers.date.parse(b[0]);
+				var m = b[1].replace(/:/g, '').match(/^(\d\d)(\d\d)?(\d\d)?(?:[.,](\d+))?([+\-](?:\d\d){1,2})?/);
+				// TODO: timezone (I have no need for this feature yet)
+				// if ( m[5] ) { var zone = m[5] || '0000'; }
+				var fs = 0,
+				    t = date.getTime() + parseInt(m[1], 10) * HOUR_SIZE + parseInt(m[2] || '0', 10) * MINUTE_SIZE + parseInt(m[3] || '0', 10) * SECOND_SIZE;
+				if (m[3]) {
+					fs = SECOND_SIZE;
+				} else if (m[2]) {
+					fs = MINUTE_SIZE;
+				} else if (m[1]) {
+					fs = HOUR_SIZE;
+				}
+				t += parseFloat('0.' + (m[4] || '0')) * fs;
+				date.setTime(t);
+				date.size = 0;
+				return date;
+			}
+		},
+
+		// year + month + day
+		date: {
+			test: /^(?:[+\-]\d{6}|\d{4})(?:\-\d\d\-\d\d|\-?\d\d\d\d)$/,
+			size: DAY_SIZE,
+			parse: function parse(str) {
+				var m = /^([+\-]\d{6}|\d{4})\-?(\d\d)\-?(\d\d)$/.exec(str),
+				    d = DateUtils.date(m[1], +m[2] - 1, m[3]);
+				d.size = DAY_SIZE;
+				return d;
+			}
+		},
+
+		// year + month
+		year_and_month: {
+			test: /^[+\-]?\d{4,6}[\/\-](?:0[1-9]|1[012])$/,
+			size: MONTH_SIZE,
+			parse: function parse(str) {
+				var b = str.split(/[\/\-]/);
+				var d = DateUtils.date(b[0], +b[1] - 1, 1);
+				d.size = DateUtils.daysInMonth(d) * DAY_SIZE;
+				return d;
+			}
+		},
+
+		// year
+		year: {
+			test: /^[+\-]?\d{4,6}$/,
+			size: YEAR_SIZE,
+			parse: function parse(str) {
+				var d = DateUtils.date(str, 0, 1);
+				d.size = DAY_SIZE * (DateUtils.isLeapYear(d) ? 366 : 365);
+				return d;
+			}
+		},
+
+		// year + iso week + [day]
+		year_and_week: {
+			test: /^[+\-]?\d{4,6}\-?[Ww]\d\d(?:\-?\d)?$/,
+			size: WEEK_SIZE,
+			parse: function parse(str) {
+				var s = str.toLowerCase().replace(/[^w\d]/g, '').split('w');
+				var d = DateUtils.date(s[0], 0, 3); // Jan 3
+				d.setDate(3 - d.getDay() + (parseInt(s[1].substr(0, 2), 10) - 1) * 7 + parseInt(s[1].substr(2, 1) || '1', 10));
+				d.size = WEEK_SIZE;
+				return d;
+			}
+		},
+
+		// year + day-of-year
+		// -- we don't allow the short form yyyyddd because of ambiguity with yyyymmdd
+		// -- 5 letter years would clash with cal-dates: yyyyyddd ~ yyyymmdd
+		year_and_ordinal: {
+			test: /^[+\-]?\d{4,6}\-[0-3]\d\d$/,
+			size: DAY_SIZE,
+			parse: function parse(str) {
+				var d = new Date(0);
+				d.setFullYear(parseInt(str.substr(0, str.length - 4), 10));
+				d.setDate(parseInt(str.substr(str.length - 3), 10));
+				d.size = DAY_SIZE;
+				return d;
+			}
+		},
+
+		// year + quarter
+		year_and_quarter: {
+			test: /^[+\-]?\d{4,6}\-?[Qq][1-4]$/,
+			size: YEAR_SIZE / 4,
+			parse: function parse(str) {
+				var b = str.split(/\-?[Qq]/),
+				    d = DateUtils.date(b[0], (parseInt(b[1], 10) - 1) * 3);
+				d.size = DAY_SIZE;
+				return d;
+			}
 		}
 
-		var o = {
-			"M+": date.getMonth() + 1, //月份
-			"d+": date.getDate(), //日
-			"H+": date.getHours(), //小时
-			"m+": date.getMinutes(), //分
-			"s+": date.getSeconds(), //秒
-			"q+": Math.floor((date.getMonth() + 3) / 3), //季度
-			"S+": date.getMilliseconds() //毫秒
-		};
-		if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for (var k in o) {
-			if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
-		}return fmt;
+	},
+
+	formats: {
+		// Lowercase Ante meridiem and Post meridiem
+		a: function a(d) {
+			return d.getHours() >= 12 ? 'pm' : 'am';
+		},
+		// Uppercase Ante meridiem and Post meridiem
+		A: function A(d) {
+			return d.getHours() >= 12 ? 'PM' : 'AM';
+		},
+		// ISO 8601 date
+		c: function c(d, l) {
+			return DateUtils.isoyear(d) + DateUtils.format(d, '-m-d\\TH:i:s.', l) + DateUtils.pad(d.getMilliseconds(), 3) + 'Z';
+		},
+		// Day of the month, 2 digits with leading zeros
+		d: function d(_d) {
+			return DateUtils.pad(_d.getDate());
+		},
+		// A textual representation of a day, three letters
+		D: function D(d) {
+			var l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
+
+			return l.shortWeeks[d.getDay()];
+		},
+		// Time zone identifier
+		e: function e(d) {
+			return '';
+		},
+		// A full textual representation of a month
+		F: function F(d) {
+			var l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
+
+			return l.longMouths[d.getMonth()];
+		},
+		// 12-hour format of an hour without leading zeros
+		g: function g(d) {
+			return d.getHours() % 12 || 12;
+		},
+		// 24-hour format of an hour without leading zeros
+		G: function G(d) {
+			return d.getHours();
+		},
+		// 12-hour format of an hour with leading zeros
+		h: function h(d) {
+			return DateUtils.pad(d.getHours() % 12 || 12);
+		},
+		// 24-hour format of an hour with leading zeros
+		H: function H(d) {
+			return DateUtils.pad(d.getHours());
+		},
+		// Minutes with leading zeros
+		i: function i(d) {
+			return DateUtils.pad(d.getMinutes());
+		},
+		// Day of the month without leading zeros
+		j: function j(d) {
+			return d.getDate();
+		},
+		// A full textual representation of the day of the week
+		l: function l(d) {
+			var _l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
+
+			return _l.longWeeks[d.getDay()];
+		},
+		// Whether it's a leap year (0 = yes, 1 = no)
+		L: function L(d) {
+			return DateUtils.isLeapYear(d) * 1;
+		},
+		// Numeric representation of a month, with leading zeros
+		m: function m(d) {
+			return DateUtils.pad(d.getMonth() + 1);
+		},
+		// A short textual representation of a month, three letters
+		M: function M(d) {
+			var l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
+
+			return l.shortMouths[d.getMonth()];
+		},
+		// Numeric representation of a month, without leading zeros
+		n: function n(d) {
+			return d.getMonth() + 1;
+		},
+		// ISO-8601 numeric representation of the day of the week
+		N: function N(d) {
+			return d.getDay() || 7;
+		},
+		// ISO-8601 year number
+		o: function o(d) {
+			return DateUtils.pad(DateUtils.isocalendar(d)[0], 4);
+		},
+		// Time zone designator
+		O: function O(d) {
+			return '+0000';
+		},
+		// Time zone difference
+		P: function P(d) {
+			return '+00:00';
+		},
+		// Quarter of the year
+		q: function q(d) {
+			return ~~(d.getMonth() / 3) + 1;
+		},
+		// RFC 2822 formatted date
+		r: function r(d, l) {
+			return DateUtils.format(d, 'D, d M Y H:i:s O', l);
+		},
+		// Seconds, with leading zeros
+		s: function s(d) {
+			return DateUtils.pad(d.getSeconds());
+		},
+		// English ordinal suffix for the day of the month, 2 characters
+		S: function S(d) {
+			var a = d.getDate() % 10,
+			    b = d.getDate() % 100;
+			return a === 1 && b !== 11 && 'st' || a === 2 && b !== 12 && 'nd' || a === 3 && b !== 13 && 'rd' || 'th';
+		},
+		// Number of days in the given month
+		t: function t(d) {
+			return DateUtils.daysInMonth(d);
+		},
+		// Time zone abbreviation
+		T: function T(d) {
+			return '';
+		},
+		// Microseconds
+		u: function u(d) {
+			return d.getMilliseconds();
+		},
+		// Microseconds
+		U: function U(d) {
+			return DateUtils.pad(d.getMilliseconds(), 3);
+		},
+		// Numeric representation of the day of the week
+		w: function w(d) {
+			return d.getDay();
+		},
+		// ISO-8601 week number of year, weeks starting on Monday
+		W: function W(d) {
+			return DateUtils.pad(DateUtils.isocalendar(d)[1]);
+		},
+		// A short numeric representation of a year, 2 digits
+		y: function y(d) {
+			return (d.getFullYear() + '').substr(2);
+		},
+		// A full numeric representation of a year, 4 digits
+		Y: function Y(d) {
+			return d.getFullYear();
+		},
+		// The day of the year (starting from 0)
+		z: function z(d) {
+			return Math.floor((d - new Date(d.getFullYear(), 0, 1)) / DAY_SIZE);
+		}
+	},
+
+	// **************************************
+	// *** *** *** module methods *** *** ***
+	// **************************************
+
+	// translation hook
+	// _(s, lang) {
+	// 	var l = lang && this.lang[lang];
+	// 	return ( l && s in l ) ? l[s] : s;
+	// },
+
+	now: function now() {
+		return typeof Date.now === 'function' ? Date.now() : +new Date();
+	},
+
+
+	// return a Date object for the current date (0 time)
+	today: function today() {
+		return this.set(this.date(), {
+			hour: 0, minute: 0, second: 0, millisecond: 0
+		});
+	},
+
+	// parse a date
+	parse: function parse(str) {
+		var d;
+		if (typeof str !== 'string') {
+			throw new Error("dateutil parser can't parse non-strings.");
+		}
+		for (var dtype in DateUtils.parsers) {
+			if (DateUtils.parsers[dtype].test.test(str)) {
+				d = DateUtils.parsers[dtype].parse(str);
+				d.type = dtype;
+				d.size = d.size || 0;
+				break;
+			}
+		}
+		// default parser supports RFC and a few more, or returns an "invalid date"
+		if (!d) {
+			d = new Date(str);
+			d.size = 0;
+			d.type = 'unknown_date';
+		}
+		return d;
+	},
+
+
+	// format a date to string
+	format: function format(d) {
+		var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.patterns.date;
+		var lang = arguments[2];
+
+
+		// has been moved to the Date prototype?
+		if (_toString.call(this) === '[object Date]') {
+			lang = fmt;
+			fmt = d;
+			d = this;
+		} else if (_toString.call(d) !== '[object Date]') {
+			// 支持：1510631530404
+			// 支持：Tue Nov 14 2017 11:52:10 GMT+0800 (CST)
+			d = new Date(d);
+			if (_toString.call(d) !== '[object Date]') {
+				throw new Error('No date passed to format.');
+			}
+		}
+
+		for (var r = [], c, l = fmt.length, i = 0; i < l; i++) {
+			c = fmt.charAt(i);
+			// format characters
+			if (c !== '\\') {
+				r.push(c in DateUtils.formats ? DateUtils.formats[c](d, lang) : c);
+			}
+			// escaped characters & unreconized characters
+			else {
+					c = i < fmt.length ? fmt.charAt(++i) : c;
+					r.push(c);
+				}
+		}
+		return r.join('');
+	},
+
+
+	// format a date to string
+	formatAll: function formatAll(d, l) {
+
+		for (var k in this.formats) {
+			console.log(k + ':' + this.format(d, k, l));
+		}
+	},
+	date: function date(y, m, d, h, n, s, ms) {
+		if (!arguments.length) {
+			return new Date(this.now());
+		}
+		y = parseInt(y || 0, 10);
+		if (arguments.length === 1) {
+			return new Date(y);
+		}
+		var ts = Date.UTC(y, parseInt(m || 0, 10), parseInt(d || 1, 10), parseInt(h || 0, 10), parseInt(n || 0, 10), parseInt(s || 0, 10), parseInt(ms || 0, 10));
+		var d = new Date(ts);
+		if (y < 100 && y >= 0) {
+			// JS date ranges 0-99 are interpreted by Date. as 1900-1999
+			d.setFullYear(y);
+		}
+		return d;
+	},
+
+
+	// zero pad a string n to l places
+	pad: function pad(n, l) {
+		var s = this.pad.z;
+		if (!s) {
+			// This mess is here because JSlint breaks on new Array(999)
+			var a = [];
+			a[999] = '';
+			s = this.pad.z = a.join('0');
+		}
+		s += n;
+		return s.substring(s.length - (l || 2));
+	},
+
+
+	// is a given year a leap year
+	isLeapYear: function isLeapYear(y) {
+		if (_toString.call(y) === '[object Date]') {
+			y = y.getFullYear();
+		}
+		return y % 4 === 0 && y % 100 !== 0 || y % 400 === 0;
+	},
+
+
+	// return the number of days in a date's month
+	daysInMonth: function daysInMonth(dt) {
+		var m = dt.getMonth();
+		if (m === 1) {
+			return this.isLeapYear(dt) ? 29 : 28;
+		}
+		return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][m];
+	},
+
+
+	// return a 3-tuple, (ISO year, ISO week number, ISO weekday).
+	isocalendar: function isocalendar(dt) {
+		var d = dt.getDay();
+		var t = new Date(dt.valueOf());
+		t.setDate(t.getDate() - (d + 6) % 7 + 3);
+		var iso_year = t.getFullYear();
+		var w = Math.floor((t.getTime() - this.date(iso_year, 0, 1, -6)) / 86400000);
+		return [iso_year, 1 + Math.floor(w / 7), d || 7];
+	},
+	isoyear: function isoyear(dt) {
+		var y = dt.getFullYear();
+		if (y >= 0 && y <= 9999) {
+			return this.pad(Math.abs(y), 4);
+		}
+		return (y < 0 ? '-' : '+') + this.pad(Math.abs(y), 6);
+	},
+
+
+	// Allow setting multiple properties at once using object notation:
+	// `mydate.set({ hour: 8, minute: 12, second: 0 });`
+	set: function set$$1(dt, values) {
+		if ((typeof values === 'undefined' ? 'undefined' : _typeof$1(values)) === 'object') {
+			var s = [],
+			    n,
+			    i;
+			// step 1: collect a list of values to modify
+			for (var key in values) {
+				if (key in method_map) {
+					n = method_map[key];
+					s.push([values[key], n, method_size[n]]);
+				}
+			}
+			// step 2: order values by size
+			s = s.sort(function (a, b) {
+				return a[2] - b[2];
+			});
+			// step 3: little endian value zeroing
+			for (i = 0; i < s.length; i++) {
+				dt['set' + s[i][1]](s[i][1] === 'Date' ? 1 : 0);
+			}
+			// step 4: big endian value setting
+			for (i = s.length; i--;) {
+				dt['set' + s[i][1]](s[i][0]);
+			}
+		}
+		return dt;
 	}
 };
 
-var urlUtils = {
-
-	href: location.href,
-	hash: location.hash,
-	host: location.host,
-	hostname: location.hostname,
-	origin: location.origin,
-	pathname: location.pathname,
-	port: location.port,
-	protocol: location.protocol,
-	search: location.search,
+var UrlUtils = {
 
 	/**
   * 基础URL,无查询参数，无哈希
@@ -2114,7 +2550,7 @@ var urlUtils = {
 	setParams: function setParams(params) {
 		var replace = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-		var params2 = urlUtils.getParams();
+		var params2 = UrlUtils.getParams();
 
 		if (replace) {
 			params2 = {};
@@ -3845,243 +4281,9 @@ function initials(pinyin) {
 	return "";
 }
 
-var Pinyin = function () {
-	function Pinyin(dict) {
-		classCallCheck(this, Pinyin);
-
-		this._dict = dict;
-	}
-
-	// @param {String} hans 要转为拼音的目标字符串（汉字）。
-	// @param {Object} options, 可选，用于指定拼音风格，是否启用多音字。
-	// @return {Array} 返回的拼音列表。
-
-
-	createClass(Pinyin, [{
-		key: 'convert',
-		value: function convert(hans, options) {
-
-			if (typeof hans !== "string") {
-				return [];
-			}
-
-			options = assign({}, DEFAULT_OPTIONS, options);
-
-			var pys = [];
-			var nohans = "";
-
-			for (var i = 0, firstCharCode, words, l = hans.length; i < l; i++) {
-
-				words = hans[i];
-				firstCharCode = words.charCodeAt(0);
-
-				if (this._dict[firstCharCode]) {
-
-					// ends of non-chinese words.
-					if (nohans.length > 0) {
-						pys.push([nohans]);
-						nohans = ""; // reset non-chinese words.
-					}
-
-					pys.push(this.single_pinyin(words, options));
-				} else {
-					nohans += words;
-				}
-			}
-
-			// 清理最后的非中文字符串。
-			if (nohans.length > 0) {
-				pys.push([nohans]);
-				nohans = ""; // reset non-chinese words.
-			}
-			return pys;
-		}
-
-		// 词语注音
-		// @param {String} phrases, 指定的词组。
-		// @param {Object} options, 选项。
-		// @return {Array}
-
-	}, {
-		key: 'phrases_pinyin',
-		value: function phrases_pinyin(phrases, options) {
-			if (typeof phrases !== "string") {
-				return [];
-			}
-
-			options = assign({}, DEFAULT_OPTIONS, options);
-
-			var py = [];
-			if (phrasesDict.hasOwnProperty(phrases)) {
-				//! copy pinyin result.
-				phrasesDict[phrases].forEach(function (item, idx) {
-					py[idx] = [];
-					if (options.heteronym) {
-						item.forEach(function (py_item, py_index) {
-							py[idx][py_index] = Pinyin.toFixed(py_item, options.style);
-						});
-					} else {
-						py[idx][0] = Pinyin.toFixed(item[0], options.style);
-					}
-				});
-			} else {
-				for (var i = 0, l = phrases.length; i < l; i++) {
-					py = py.concat(this.convert(phrases[i], options));
-				}
-			}
-			return py;
-		}
-
-		// 单字拼音转换。
-		// @param {String} han, 单个汉字
-		// @return {Array} 返回拼音列表，多音字会有多个拼音项。
-
-	}, {
-		key: 'single_pinyin',
-		value: function single_pinyin(han, options) {
-
-			if (typeof han !== "string") {
-				return [];
-			}
-			if (han.length !== 1) {
-				return this.single_pinyin(han.charAt(0), options);
-			}
-
-			var hanCode = han.charCodeAt(0);
-
-			if (!this._dict[hanCode]) {
-				return [han];
-			}
-
-			var pys = this._dict[hanCode].split(",");
-			if (!options.heteronym) {
-				return [Pinyin.toFixed(pys[0], options.style)];
-			}
-
-			// 临时存储已存在的拼音，避免多音字拼音转换为非注音风格出现重复。
-			var py_cached = {};
-			var pinyins = [];
-			for (var i = 0, py, l = pys.length; i < l; i++) {
-				py = Pinyin.toFixed(pys[i], options.style);
-				if (py_cached.hasOwnProperty(py)) {
-					continue;
-				}
-				py_cached[py] = py;
-
-				pinyins.push(py);
-			}
-			return pinyins;
-		}
-
-		/**
-   * 格式化拼音风格。
-   *
-   * @param {String} pinyin TONE 风格的拼音。
-   * @param {ENUM} style 目标转换的拼音风格。
-   * @return {String} 转换后的拼音。
-   */
-
-	}, {
-		key: 'compare',
-
-
-		/**
-   * 比较两个汉字转成拼音后的排序顺序，可以用作默认的拼音排序算法。
-   *
-   * @param {String} hanA 汉字字符串 A。
-   * @return {String} hanB 汉字字符串 B。
-   * @return {Number} 返回 -1，0，或 1。
-   */
-		value: function compare(hanA, hanB) {
-			var pinyinA = this.convert(hanA, DEFAULT_OPTIONS);
-			var pinyinB = this.convert(hanB, DEFAULT_OPTIONS);
-			return String(pinyinA).localeCompare(pinyinB);
-		}
-	}], [{
-		key: 'toFixed',
-		value: function toFixed(pinyin, style) {
-			var tone = ""; // 声调。
-			var first_letter = void 0;
-			var py = void 0;
-			switch (style) {
-				case PINYIN_STYLE.INITIALS:
-					return initials(pinyin);
-
-				case PINYIN_STYLE.FIRST_LETTER:
-					first_letter = pinyin.charAt(0);
-					if (PHONETIC_SYMBOL.hasOwnProperty(first_letter)) {
-						first_letter = PHONETIC_SYMBOL[first_letter].charAt(0);
-					}
-					return first_letter;
-
-				case PINYIN_STYLE.NORMAL:
-					return pinyin.replace(RE_PHONETIC_SYMBOL, function ($0, $1_phonetic) {
-						return PHONETIC_SYMBOL[$1_phonetic].replace(RE_TONE2, "$1");
-					});
-
-				case PINYIN_STYLE.TO3NE:
-					return pinyin.replace(RE_PHONETIC_SYMBOL, function ($0, $1_phonetic) {
-						return PHONETIC_SYMBOL[$1_phonetic];
-					});
-
-				case PINYIN_STYLE.TONE2:
-					py = pinyin.replace(RE_PHONETIC_SYMBOL, function ($0, $1) {
-						// 声调数值。
-						tone = PHONETIC_SYMBOL[$1].replace(RE_TONE2, "$2");
-
-						return PHONETIC_SYMBOL[$1].replace(RE_TONE2, "$1");
-					});
-					return py + tone;
-
-				case PINYIN_STYLE.TONE:
-				default:
-					return pinyin;
-			}
-		}
-	}, {
-		key: 'STYLE_NORMAL',
-		get: function get$$1() {
-			return PINYIN_STYLE.NORMAL;
-		}
-	}, {
-		key: 'STYLE_TONE',
-		get: function get$$1() {
-			return PINYIN_STYLE.TONE;
-		}
-	}, {
-		key: 'STYLE_TONE2',
-		get: function get$$1() {
-			return PINYIN_STYLE.TONE2;
-		}
-	}, {
-		key: 'STYLE_TO3NE',
-		get: function get$$1() {
-			return PINYIN_STYLE.TO3NE;
-		}
-	}, {
-		key: 'STYLE_INITIALS',
-		get: function get$$1() {
-			return PINYIN_STYLE.INITIALS;
-		}
-	}, {
-		key: 'STYLE_FIRST_LETTER',
-		get: function get$$1() {
-			return PINYIN_STYLE.FIRST_LETTER;
-		}
-	}, {
-		key: 'DEFAULT_OPTIONS',
-		get: function get$$1() {
-			return DEFAULT_OPTIONS;
-		}
-	}]);
-	return Pinyin;
-}();
-
 // 解压拼音库。
 // @param {Object} dict_combo, 压缩的拼音库。
 // @param {Object} 解压的拼音库。
-
-
 function buildPinyinCache(dict_combo) {
 	var hans = '';
 	var uncomboed = {};
@@ -4101,27 +4303,231 @@ function buildPinyinCache(dict_combo) {
 	return uncomboed;
 }
 
-var pinyin = new Pinyin(buildPinyinCache(pinyinDict));
+var Pinyin = {
 
-pinyin.version = 'v2.8.3';
+	_dict: buildPinyinCache(pinyinDict),
 
-var jeselvmo = {
-	validator: validator,
-	platform: platform,
-	localStore: localStore,
-	sessionStore: sessionStore,
-	request: request,
-	regexp: regexp,
-	utils: utils,
-	dateUtils: dateUtils,
-	urlUtils: urlUtils,
-	pinyin: pinyin
+	// @param {String} hans 要转为拼音的目标字符串（汉字）。
+	// @param {Object} options, 可选，用于指定拼音风格，是否启用多音字。
+	// @return {Array} 返回的拼音列表。
+	convert: function convert(hans, options) {
+
+		if (typeof hans !== "string") {
+			return [];
+		}
+
+		options = assign({}, DEFAULT_OPTIONS, options);
+
+		var pys = [];
+		var nohans = "";
+
+		for (var i = 0, firstCharCode, words, l = hans.length; i < l; i++) {
+
+			words = hans[i];
+			firstCharCode = words.charCodeAt(0);
+
+			if (Pinyin._dict[firstCharCode]) {
+
+				// ends of non-chinese words.
+				if (nohans.length > 0) {
+					pys.push([nohans]);
+					nohans = ""; // reset non-chinese words.
+				}
+
+				pys.push(Pinyin.single_pinyin(words, options));
+			} else {
+				nohans += words;
+			}
+		}
+
+		// 清理最后的非中文字符串。
+		if (nohans.length > 0) {
+			pys.push([nohans]);
+			nohans = ""; // reset non-chinese words.
+		}
+		return pys;
+	},
+
+
+	// 词语注音
+	// @param {String} phrases, 指定的词组。
+	// @param {Object} options, 选项。
+	// @return {Array}
+	phrases_pinyin: function phrases_pinyin(phrases, options) {
+		if (typeof phrases !== "string") {
+			return [];
+		}
+
+		options = assign({}, DEFAULT_OPTIONS, options);
+
+		var py = [];
+		if (phrasesDict.hasOwnProperty(phrases)) {
+			//! copy pinyin result.
+			phrasesDict[phrases].forEach(function (item, idx) {
+				py[idx] = [];
+				if (options.heteronym) {
+					item.forEach(function (py_item, py_index) {
+						py[idx][py_index] = Pinyin.toFixed(py_item, options.style);
+					});
+				} else {
+					py[idx][0] = Pinyin.toFixed(item[0], options.style);
+				}
+			});
+		} else {
+			for (var i = 0, l = phrases.length; i < l; i++) {
+				py = py.concat(Pinyin.convert(phrases[i], options));
+			}
+		}
+		return py;
+	},
+
+
+	// 单字拼音转换。
+	// @param {String} han, 单个汉字
+	// @return {Array} 返回拼音列表，多音字会有多个拼音项。
+	single_pinyin: function single_pinyin(han, options) {
+
+		if (typeof han !== "string") {
+			return [];
+		}
+		if (han.length !== 1) {
+			return Pinyin.single_pinyin(han.charAt(0), options);
+		}
+
+		var hanCode = han.charCodeAt(0);
+
+		if (!Pinyin._dict[hanCode]) {
+			return [han];
+		}
+
+		var pys = Pinyin._dict[hanCode].split(",");
+		if (!options.heteronym) {
+			return [Pinyin.toFixed(pys[0], options.style)];
+		}
+
+		// 临时存储已存在的拼音，避免多音字拼音转换为非注音风格出现重复。
+		var py_cached = {};
+		var pinyins = [];
+		for (var i = 0, py, l = pys.length; i < l; i++) {
+			py = Pinyin.toFixed(pys[i], options.style);
+			if (py_cached.hasOwnProperty(py)) {
+				continue;
+			}
+			py_cached[py] = py;
+
+			pinyins.push(py);
+		}
+		return pinyins;
+	},
+
+
+	/**
+  * 格式化拼音风格。
+  *
+  * @param {String} pinyin TONE 风格的拼音。
+  * @param {ENUM} style 目标转换的拼音风格。
+  * @return {String} 转换后的拼音。
+  */
+	toFixed: function toFixed(pinyin, style) {
+		var tone = ""; // 声调。
+		var first_letter = void 0;
+		var py = void 0;
+		switch (style) {
+			case PINYIN_STYLE.INITIALS:
+				return initials(pinyin);
+
+			case PINYIN_STYLE.FIRST_LETTER:
+				first_letter = pinyin.charAt(0);
+				if (PHONETIC_SYMBOL.hasOwnProperty(first_letter)) {
+					first_letter = PHONETIC_SYMBOL[first_letter].charAt(0);
+				}
+				return first_letter;
+
+			case PINYIN_STYLE.NORMAL:
+				return pinyin.replace(RE_PHONETIC_SYMBOL, function ($0, $1_phonetic) {
+					return PHONETIC_SYMBOL[$1_phonetic].replace(RE_TONE2, "$1");
+				});
+
+			case PINYIN_STYLE.TO3NE:
+				return pinyin.replace(RE_PHONETIC_SYMBOL, function ($0, $1_phonetic) {
+					return PHONETIC_SYMBOL[$1_phonetic];
+				});
+
+			case PINYIN_STYLE.TONE2:
+				py = pinyin.replace(RE_PHONETIC_SYMBOL, function ($0, $1) {
+					// 声调数值。
+					tone = PHONETIC_SYMBOL[$1].replace(RE_TONE2, "$2");
+
+					return PHONETIC_SYMBOL[$1].replace(RE_TONE2, "$1");
+				});
+				return py + tone;
+
+			case PINYIN_STYLE.TONE:
+			default:
+				return pinyin;
+		}
+	},
+
+
+	/**
+  * 比较两个汉字转成拼音后的排序顺序，可以用作默认的拼音排序算法。
+  *
+  * @param {String} hanA 汉字字符串 A。
+  * @return {String} hanB 汉字字符串 B。
+  * @return {Number} 返回 -1，0，或 1。
+  */
+	compare: function compare(hanA, hanB) {
+		var pinyinA = Pinyin.convert(hanA, DEFAULT_OPTIONS);
+		var pinyinB = Pinyin.convert(hanB, DEFAULT_OPTIONS);
+		return String(pinyinA).localeCompare(pinyinB);
+	},
+
+
+	get STYLE_NORMAL() {
+		return PINYIN_STYLE.NORMAL;
+	},
+
+	get STYLE_TONE() {
+		return PINYIN_STYLE.TONE;
+	},
+
+	get STYLE_TONE2() {
+		return PINYIN_STYLE.TONE2;
+	},
+
+	get STYLE_TO3NE() {
+		return PINYIN_STYLE.TO3NE;
+	},
+
+	get STYLE_INITIALS() {
+		return PINYIN_STYLE.INITIALS;
+	},
+
+	get STYLE_FIRST_LETTER() {
+		return PINYIN_STYLE.FIRST_LETTER;
+	},
+
+	get DEFAULT_OPTIONS() {
+		return DEFAULT_OPTIONS;
+	}
+};
+
+var Jeselvmo = {
+	Validator: Validator,
+	Platform: Platform,
+	LocalStore: LocalStore,
+	SessionStore: SessionStore,
+	Request: Request,
+	Utils: Utils,
+	DateUtils: DateUtils,
+	UrlUtils: UrlUtils,
+	Pinyin: Pinyin
 };
 
 if (window) {
-	window.J = jeselvmo;
+	window.J = Jeselvmo;
 }
 
-return jeselvmo;
+return Jeselvmo;
 
 })));

@@ -1,11 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 /* eslint-disable no-var,no-underscore-dangle,no-unused-vars,quote-props,object-property-newline,no-multi-assign,object-curly-spacing,max-len,object-shorthand,no-mixed-operators,prefer-template,space-in-parens,brace-style,vars-on-top,no-redeclare,prefer-arrow-callback,block-scoped-var,import/no-mutable-exports */
 
 /*
@@ -26,7 +18,7 @@ var HOUR_SIZE = MINUTE_SIZE * 60;
 var DAY_SIZE = HOUR_SIZE * 24;
 var WEEK_SIZE = DAY_SIZE * 7;
 var MONTH_SIZE = DAY_SIZE * 30.436875; // average month size
-var YEAR_SIZE = DAY_SIZE * 365.2425; // average year size
+var YEAR_SIZE = DAY_SIZE * 365.2425;  // average year size
 
 var _toString = Object.prototype.toString;
 // var _m = 'January February March April May June July August September October November December'.split(' ');
@@ -60,7 +52,8 @@ var method_map = {
 	'milliseconds': 'Milliseconds'
 };
 
-var DateUtils = {
+
+let DateUtils = {
 	//
 	lang: {
 		'en': {
@@ -85,8 +78,9 @@ var DateUtils = {
 		time_: 'His',
 		datetime: 'Y-m-d H:i:s',
 		datetime_: 'YmdHis',
-		year: 'Y'
+		year: 'Y',
 	},
+
 
 	// *****************************************
 	// *** *** *** formats & parsers *** *** ***
@@ -101,22 +95,27 @@ var DateUtils = {
 		date_and_time: {
 			test: /^(?:[+\-]\d{6}|\d{4})(?:(?:\-\d\d){1,2}|\d{4})[T ](?:\d\d)(?::?\d\d){0,2}(?:[\.,]\d+)?(?:Z|[+\-]\d\d(:?\d\d)?)?$/,
 			size: 1,
-			parse: function parse(str) {
+			parse: function (str) {
 				var b = str.split(/[T ]/);
 				var date = DateUtils.parsers.date.parse(b[0]);
-				var m = b[1].replace(/:/g, '').match(/^(\d\d)(\d\d)?(\d\d)?(?:[.,](\d+))?([+\-](?:\d\d){1,2})?/);
+				var m = b[1].replace(/:/g, '')
+					.match(/^(\d\d)(\d\d)?(\d\d)?(?:[.,](\d+))?([+\-](?:\d\d){1,2})?/);
 				// TODO: timezone (I have no need for this feature yet)
 				// if ( m[5] ) { var zone = m[5] || '0000'; }
-				var fs = 0,
-				    t = date.getTime() + parseInt(m[1], 10) * HOUR_SIZE + parseInt(m[2] || '0', 10) * MINUTE_SIZE + parseInt(m[3] || '0', 10) * SECOND_SIZE;
+				var fs = 0, t = date.getTime() +
+					parseInt(m[1], 10) * HOUR_SIZE +
+					parseInt(m[2] || '0', 10) * MINUTE_SIZE +
+					parseInt(m[3] || '0', 10) * SECOND_SIZE;
 				if (m[3]) {
 					fs = SECOND_SIZE;
-				} else if (m[2]) {
+				}
+				else if (m[2]) {
 					fs = MINUTE_SIZE;
-				} else if (m[1]) {
+				}
+				else if (m[1]) {
 					fs = HOUR_SIZE;
 				}
-				t += parseFloat('0.' + (m[4] || '0')) * fs;
+				t += parseFloat('0.' + ( m[4] || '0' )) * fs;
 				date.setTime(t);
 				date.size = 0;
 				return date;
@@ -127,9 +126,9 @@ var DateUtils = {
 		date: {
 			test: /^(?:[+\-]\d{6}|\d{4})(?:\-\d\d\-\d\d|\-?\d\d\d\d)$/,
 			size: DAY_SIZE,
-			parse: function parse(str) {
+			parse: function (str) {
 				var m = /^([+\-]\d{6}|\d{4})\-?(\d\d)\-?(\d\d)$/.exec(str),
-				    d = DateUtils.date(m[1], +m[2] - 1, m[3]);
+					d = DateUtils.date(m[1], +m[2] - 1, m[3]);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -139,7 +138,7 @@ var DateUtils = {
 		year_and_month: {
 			test: /^[+\-]?\d{4,6}[\/\-](?:0[1-9]|1[012])$/,
 			size: MONTH_SIZE,
-			parse: function parse(str) {
+			parse: function (str) {
 				var b = str.split(/[\/\-]/);
 				var d = DateUtils.date(b[0], +b[1] - 1, 1);
 				d.size = DateUtils.daysInMonth(d) * DAY_SIZE;
@@ -151,9 +150,9 @@ var DateUtils = {
 		year: {
 			test: /^[+\-]?\d{4,6}$/,
 			size: YEAR_SIZE,
-			parse: function parse(str) {
+			parse: function (str) {
 				var d = DateUtils.date(str, 0, 1);
-				d.size = DAY_SIZE * (DateUtils.isLeapYear(d) ? 366 : 365);
+				d.size = DAY_SIZE * ( DateUtils.isLeapYear(d) ? 366 : 365 );
 				return d;
 			}
 		},
@@ -162,10 +161,12 @@ var DateUtils = {
 		year_and_week: {
 			test: /^[+\-]?\d{4,6}\-?[Ww]\d\d(?:\-?\d)?$/,
 			size: WEEK_SIZE,
-			parse: function parse(str) {
+			parse: function (str) {
 				var s = str.toLowerCase().replace(/[^w\d]/g, '').split('w');
-				var d = DateUtils.date(s[0], 0, 3); // Jan 3
-				d.setDate(3 - d.getDay() + (parseInt(s[1].substr(0, 2), 10) - 1) * 7 + parseInt(s[1].substr(2, 1) || '1', 10));
+				var d = DateUtils.date(s[0], 0, 3);  // Jan 3
+				d.setDate(3 - d.getDay() +
+					( parseInt(s[1].substr(0, 2), 10) - 1 ) * 7 +
+					parseInt(s[1].substr(2, 1) || '1', 10));
 				d.size = WEEK_SIZE;
 				return d;
 			}
@@ -177,7 +178,7 @@ var DateUtils = {
 		year_and_ordinal: {
 			test: /^[+\-]?\d{4,6}\-[0-3]\d\d$/,
 			size: DAY_SIZE,
-			parse: function parse(str) {
+			parse: function (str) {
 				var d = new Date(0);
 				d.setFullYear(parseInt(str.substr(0, str.length - 4), 10));
 				d.setDate(parseInt(str.substr(str.length - 3), 10));
@@ -190,9 +191,9 @@ var DateUtils = {
 		year_and_quarter: {
 			test: /^[+\-]?\d{4,6}\-?[Qq][1-4]$/,
 			size: YEAR_SIZE / 4,
-			parse: function parse(str) {
+			parse: function (str) {
 				var b = str.split(/\-?[Qq]/),
-				    d = DateUtils.date(b[0], (parseInt(b[1], 10) - 1) * 3);
+					d = DateUtils.date(b[0], ( parseInt(b[1], 10) - 1 ) * 3);
 				d.size = DAY_SIZE;
 				return d;
 			}
@@ -202,156 +203,152 @@ var DateUtils = {
 
 	formats: {
 		// Lowercase Ante meridiem and Post meridiem
-		a: function a(d) {
+		a: function (d) {
 			return d.getHours() >= 12 ? 'pm' : 'am';
 		},
 		// Uppercase Ante meridiem and Post meridiem
-		A: function A(d) {
+		A: function (d) {
 			return d.getHours() >= 12 ? 'PM' : 'AM';
 		},
 		// ISO 8601 date
-		c: function c(d, l) {
-			return DateUtils.isoyear(d) + DateUtils.format(d, '-m-d\\TH:i:s.', l) + DateUtils.pad(d.getMilliseconds(), 3) + 'Z';
+		c: function (d, l) {
+			return DateUtils.isoyear(d) +
+				DateUtils.format(d, '-m-d\\TH:i:s.', l) +
+				DateUtils.pad(d.getMilliseconds(), 3) + 'Z';
 		},
 		// Day of the month, 2 digits with leading zeros
-		d: function d(_d) {
-			return DateUtils.pad(_d.getDate());
+		d: function (d) {
+			return DateUtils.pad(d.getDate());
 		},
 		// A textual representation of a day, three letters
-		D: function D(d) {
-			var l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
-
+		D: function (d, l = DateUtils.lang.en) {
 			return l.shortWeeks[d.getDay()];
 		},
 		// Time zone identifier
-		e: function e(d) {
+		e: function (d) {
 			return '';
 		},
 		// A full textual representation of a month
-		F: function F(d) {
-			var l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
-
+		F: function (d, l = DateUtils.lang.en) {
 			return l.longMouths[d.getMonth()];
 		},
 		// 12-hour format of an hour without leading zeros
-		g: function g(d) {
+		g: function (d) {
 			return d.getHours() % 12 || 12;
 		},
 		// 24-hour format of an hour without leading zeros
-		G: function G(d) {
+		G: function (d) {
 			return d.getHours();
 		},
 		// 12-hour format of an hour with leading zeros
-		h: function h(d) {
+		h: function (d) {
 			return DateUtils.pad(d.getHours() % 12 || 12);
 		},
 		// 24-hour format of an hour with leading zeros
-		H: function H(d) {
+		H: function (d) {
 			return DateUtils.pad(d.getHours());
 		},
 		// Minutes with leading zeros
-		i: function i(d) {
+		i: function (d) {
 			return DateUtils.pad(d.getMinutes());
 		},
 		// Day of the month without leading zeros
-		j: function j(d) {
+		j: function (d) {
 			return d.getDate();
 		},
 		// A full textual representation of the day of the week
-		l: function l(d) {
-			var _l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
-
-			return _l.longWeeks[d.getDay()];
+		l: function (d, l = DateUtils.lang.en) {
+			return l.longWeeks[d.getDay()];
 		},
 		// Whether it's a leap year (0 = yes, 1 = no)
-		L: function L(d) {
+		L: function (d) {
 			return DateUtils.isLeapYear(d) * 1;
 		},
 		// Numeric representation of a month, with leading zeros
-		m: function m(d) {
+		m: function (d) {
 			return DateUtils.pad(d.getMonth() + 1);
 		},
 		// A short textual representation of a month, three letters
-		M: function M(d) {
-			var l = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.lang.en;
-
+		M: function (d, l = DateUtils.lang.en) {
 			return l.shortMouths[d.getMonth()];
 		},
 		// Numeric representation of a month, without leading zeros
-		n: function n(d) {
+		n: function (d) {
 			return d.getMonth() + 1;
 		},
 		// ISO-8601 numeric representation of the day of the week
-		N: function N(d) {
+		N: function (d) {
 			return d.getDay() || 7;
 		},
 		// ISO-8601 year number
-		o: function o(d) {
+		o: function (d) {
 			return DateUtils.pad(DateUtils.isocalendar(d)[0], 4);
 		},
 		// Time zone designator
-		O: function O(d) {
+		O: function (d) {
 			return '+0000';
 		},
 		// Time zone difference
-		P: function P(d) {
+		P: function (d) {
 			return '+00:00';
 		},
 		// Quarter of the year
-		q: function q(d) {
-			return ~~(d.getMonth() / 3) + 1;
+		q: function (d) {
+			return ~~( d.getMonth() / 3 ) + 1;
 		},
 		// RFC 2822 formatted date
-		r: function r(d, l) {
+		r: function (d, l) {
 			return DateUtils.format(d, 'D, d M Y H:i:s O', l);
 		},
 		// Seconds, with leading zeros
-		s: function s(d) {
+		s: function (d) {
 			return DateUtils.pad(d.getSeconds());
 		},
 		// English ordinal suffix for the day of the month, 2 characters
-		S: function S(d) {
-			var a = d.getDate() % 10,
-			    b = d.getDate() % 100;
-			return a === 1 && b !== 11 && 'st' || a === 2 && b !== 12 && 'nd' || a === 3 && b !== 13 && 'rd' || 'th';
+		S: function (d) {
+			var a = d.getDate() % 10, b = d.getDate() % 100;
+			return (a === 1) && (b !== 11) && 'st' ||
+				(a === 2) && (b !== 12) && 'nd' ||
+				(a === 3) && (b !== 13) && 'rd' || 'th';
 		},
 		// Number of days in the given month
-		t: function t(d) {
+		t: function (d) {
 			return DateUtils.daysInMonth(d);
 		},
 		// Time zone abbreviation
-		T: function T(d) {
+		T: function (d) {
 			return '';
 		},
 		// Microseconds
-		u: function u(d) {
+		u: function (d) {
 			return d.getMilliseconds();
 		},
 		// Microseconds
-		U: function U(d) {
+		U: function (d) {
 			return DateUtils.pad(d.getMilliseconds(), 3);
 		},
 		// Numeric representation of the day of the week
-		w: function w(d) {
+		w: function (d) {
 			return d.getDay();
 		},
 		// ISO-8601 week number of year, weeks starting on Monday
-		W: function W(d) {
+		W: function (d) {
 			return DateUtils.pad(DateUtils.isocalendar(d)[1]);
 		},
 		// A short numeric representation of a year, 2 digits
-		y: function y(d) {
+		y: function (d) {
 			return (d.getFullYear() + '').substr(2);
 		},
 		// A full numeric representation of a year, 4 digits
-		Y: function Y(d) {
+		Y: function (d) {
 			return d.getFullYear();
 		},
 		// The day of the year (starting from 0)
-		z: function z(d) {
-			return Math.floor((d - new Date(d.getFullYear(), 0, 1)) / DAY_SIZE);
+		z: function (d) {
+			return Math.floor(( d - (new Date(d.getFullYear(), 0, 1))) / DAY_SIZE);
 		}
 	},
+
 
 	// **************************************
 	// *** *** *** module methods *** *** ***
@@ -363,20 +360,18 @@ var DateUtils = {
 	// 	return ( l && s in l ) ? l[s] : s;
 	// },
 
-	now: function now() {
-		return typeof Date.now === 'function' ? Date.now() : +new Date();
+	now() {
+		return ( typeof Date.now === 'function' ) ? Date.now() : +new Date();
 	},
 
-
 	// return a Date object for the current date (0 time)
-	today: function today() {
+	today() {
 		return this.set(this.date(), {
 			hour: 0, minute: 0, second: 0, millisecond: 0
 		});
 	},
-
 	// parse a date
-	parse: function parse(str) {
+	parse(str) {
 		var d;
 		if (typeof str !== 'string') {
 			throw new Error("dateutil parser can't parse non-strings.");
@@ -400,17 +395,15 @@ var DateUtils = {
 
 
 	// format a date to string
-	format: function format(d) {
-		var fmt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DateUtils.patterns.date;
-		var lang = arguments[2];
-
+	format(d, fmt = DateUtils.patterns.date, lang) {
 
 		// has been moved to the Date prototype?
 		if (_toString.call(this) === '[object Date]') {
 			lang = fmt;
 			fmt = d;
 			d = this;
-		} else if (_toString.call(d) !== '[object Date]') {
+		}
+		else if (_toString.call(d) !== '[object Date]') {
 			// 支持：1510631530404
 			// 支持：Tue Nov 14 2017 11:52:10 GMT+0800 (CST)
 			d = new Date(d);
@@ -423,26 +416,27 @@ var DateUtils = {
 			c = fmt.charAt(i);
 			// format characters
 			if (c !== '\\') {
-				r.push(c in DateUtils.formats ? DateUtils.formats[c](d, lang) : c);
+				r.push((c in DateUtils.formats) ? DateUtils.formats[c](d, lang) : c);
 			}
 			// escaped characters & unreconized characters
 			else {
-					c = i < fmt.length ? fmt.charAt(++i) : c;
-					r.push(c);
-				}
+				c = i < fmt.length ? fmt.charAt(++i) : c;
+				r.push(c);
+			}
 		}
 		return r.join('');
 	},
 
-
 	// format a date to string
-	formatAll: function formatAll(d, l) {
+	formatAll(d, l) {
 
-		for (var k in this.formats) {
-			console.log(k + ':' + this.format(d, k, l));
+		for (let k in this.formats) {
+			console.log(k + ':' + this.format(d, k, l))
 		}
+
 	},
-	date: function date(y, m, d, h, n, s, ms) {
+
+	date(y, m, d, h, n, s, ms) {
 		if (!arguments.length) {
 			return new Date(this.now());
 		}
@@ -450,10 +444,11 @@ var DateUtils = {
 		if (arguments.length === 1) {
 			return new Date(y);
 		}
-		var ts = Date.UTC(y, parseInt(m || 0, 10), parseInt(d || 1, 10), parseInt(h || 0, 10), parseInt(n || 0, 10), parseInt(s || 0, 10), parseInt(ms || 0, 10));
+		var ts = Date.UTC(y, parseInt(m || 0, 10), parseInt(d || 1, 10),
+			parseInt(h || 0, 10), parseInt(n || 0, 10), parseInt(s || 0, 10),
+			parseInt(ms || 0, 10));
 		var d = new Date(ts);
-		if (y < 100 && y >= 0) {
-			// JS date ranges 0-99 are interpreted by Date. as 1900-1999
+		if (y < 100 && y >= 0) { // JS date ranges 0-99 are interpreted by Date. as 1900-1999
 			d.setFullYear(y);
 		}
 		return d;
@@ -461,30 +456,28 @@ var DateUtils = {
 
 
 	// zero pad a string n to l places
-	pad: function pad(n, l) {
+	pad(n, l) {
 		var s = this.pad.z;
-		if (!s) {
-			// This mess is here because JSlint breaks on new Array(999)
+		if (!s) { // This mess is here because JSlint breaks on new Array(999)
 			var a = [];
 			a[999] = '';
 			s = this.pad.z = a.join('0');
 		}
 		s += n;
-		return s.substring(s.length - (l || 2));
+		return s.substring(s.length - ( l || 2 ));
 	},
 
-
 	// is a given year a leap year
-	isLeapYear: function isLeapYear(y) {
+	isLeapYear(y) {
 		if (_toString.call(y) === '[object Date]') {
 			y = y.getFullYear();
 		}
-		return y % 4 === 0 && y % 100 !== 0 || y % 400 === 0;
+		return (( y % 4 === 0 ) && ( y % 100 !== 0 )) || ( y % 400 === 0 );
 	},
 
 
 	// return the number of days in a date's month
-	daysInMonth: function daysInMonth(dt) {
+	daysInMonth(dt) {
 		var m = dt.getMonth();
 		if (m === 1) {
 			return this.isLeapYear(dt) ? 29 : 28;
@@ -494,30 +487,30 @@ var DateUtils = {
 
 
 	// return a 3-tuple, (ISO year, ISO week number, ISO weekday).
-	isocalendar: function isocalendar(dt) {
+	isocalendar(dt) {
 		var d = dt.getDay();
 		var t = new Date(dt.valueOf());
-		t.setDate(t.getDate() - (d + 6) % 7 + 3);
+		t.setDate(t.getDate() - ((d + 6) % 7) + 3);
 		var iso_year = t.getFullYear();
 		var w = Math.floor((t.getTime() - this.date(iso_year, 0, 1, -6)) / 86400000);
 		return [iso_year, 1 + Math.floor(w / 7), d || 7];
 	},
-	isoyear: function isoyear(dt) {
+
+
+	isoyear(dt) {
 		var y = dt.getFullYear();
 		if (y >= 0 && y <= 9999) {
 			return this.pad(Math.abs(y), 4);
 		}
-		return (y < 0 ? '-' : '+') + this.pad(Math.abs(y), 6);
+		return ( (y < 0) ? '-' : '+' ) + this.pad(Math.abs(y), 6);
 	},
 
 
 	// Allow setting multiple properties at once using object notation:
 	// `mydate.set({ hour: 8, minute: 12, second: 0 });`
-	set: function set(dt, values) {
-		if ((typeof values === 'undefined' ? 'undefined' : _typeof(values)) === 'object') {
-			var s = [],
-			    n,
-			    i;
+	set(dt, values) {
+		if (typeof values === 'object') {
+			var s = [], n, i;
 			// step 1: collect a list of values to modify
 			for (var key in values) {
 				if (key in method_map) {
@@ -539,8 +532,8 @@ var DateUtils = {
 			}
 		}
 		return dt;
-	}
+	},
+
 };
 
-exports.default = DateUtils;
-module.exports = exports['default'];
+export default DateUtils;

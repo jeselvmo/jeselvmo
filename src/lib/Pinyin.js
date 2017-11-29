@@ -68,10 +68,33 @@ function initials(pinyin) {
 	return "";
 }
 
-class Pinyin {
-	constructor(dict) {
-		this._dict = dict;
+
+// 解压拼音库。
+// @param {Object} dict_combo, 压缩的拼音库。
+// @param {Object} 解压的拼音库。
+function buildPinyinCache(dict_combo) {
+	let hans = '';
+	let uncomboed = {};
+
+	for (let py in dict_combo) {
+		hans = dict_combo[py];
+		for (let i = 0, han, l = hans.length; i < l; i++) {
+			han = hans.charCodeAt(i);
+			if (!uncomboed.hasOwnProperty(han)) {
+				uncomboed[han] = py;
+			} else {
+				uncomboed[han] += "," + py;
+			}
+		}
 	}
+
+	return uncomboed;
+}
+
+
+const Pinyin = {
+
+	_dict: buildPinyinCache(pinyinDict),
 
 	// @param {String} hans 要转为拼音的目标字符串（汉字）。
 	// @param {Object} options, 可选，用于指定拼音风格，是否启用多音字。
@@ -92,7 +115,7 @@ class Pinyin {
 			words = hans[i];
 			firstCharCode = words.charCodeAt(0);
 
-			if (this._dict[firstCharCode]) {
+			if (Pinyin._dict[firstCharCode]) {
 
 				// ends of non-chinese words.
 				if (nohans.length > 0) {
@@ -100,7 +123,7 @@ class Pinyin {
 					nohans = ""; // reset non-chinese words.
 				}
 
-				pys.push(this.single_pinyin(words, options));
+				pys.push(Pinyin.single_pinyin(words, options));
 
 			} else {
 				nohans += words;
@@ -113,7 +136,7 @@ class Pinyin {
 			nohans = ""; // reset non-chinese words.
 		}
 		return pys;
-	}
+	},
 
 	// 词语注音
 	// @param {String} phrases, 指定的词组。
@@ -141,11 +164,11 @@ class Pinyin {
 			});
 		} else {
 			for (let i = 0, l = phrases.length; i < l; i++) {
-				py = py.concat(this.convert(phrases[i], options));
+				py = py.concat(Pinyin.convert(phrases[i], options));
 			}
 		}
 		return py;
-	}
+	},
 
 	// 单字拼音转换。
 	// @param {String} han, 单个汉字
@@ -156,16 +179,16 @@ class Pinyin {
 			return [];
 		}
 		if (han.length !== 1) {
-			return this.single_pinyin(han.charAt(0), options);
+			return Pinyin.single_pinyin(han.charAt(0), options);
 		}
 
 		let hanCode = han.charCodeAt(0);
 
-		if (!this._dict[hanCode]) {
+		if (!Pinyin._dict[hanCode]) {
 			return [han];
 		}
 
-		let pys = this._dict[hanCode].split(",");
+		let pys = Pinyin._dict[hanCode].split(",");
 		if (!options.heteronym) {
 			return [Pinyin.toFixed(pys[0], options.style)];
 		}
@@ -183,7 +206,7 @@ class Pinyin {
 			pinyins.push(py);
 		}
 		return pinyins;
-	}
+	},
 
 	/**
 	 * 格式化拼音风格。
@@ -192,7 +215,7 @@ class Pinyin {
 	 * @param {ENUM} style 目标转换的拼音风格。
 	 * @return {String} 转换后的拼音。
 	 */
-	static toFixed(pinyin, style) {
+	toFixed(pinyin, style) {
 		let tone = ""; // 声调。
 		let first_letter;
 		let py;
@@ -230,7 +253,7 @@ class Pinyin {
 			default:
 				return pinyin;
 		}
-	}
+	},
 
 	/**
 	 * 比较两个汉字转成拼音后的排序顺序，可以用作默认的拼音排序算法。
@@ -240,65 +263,38 @@ class Pinyin {
 	 * @return {Number} 返回 -1，0，或 1。
 	 */
 	compare(hanA, hanB) {
-		const pinyinA = this.convert(hanA, DEFAULT_OPTIONS);
-		const pinyinB = this.convert(hanB, DEFAULT_OPTIONS);
+		const pinyinA = Pinyin.convert(hanA, DEFAULT_OPTIONS);
+		const pinyinB = Pinyin.convert(hanB, DEFAULT_OPTIONS);
 		return String(pinyinA).localeCompare(pinyinB);
-	}
+	},
 
-	static get STYLE_NORMAL() {
+	get STYLE_NORMAL() {
 		return PINYIN_STYLE.NORMAL;
-	}
+	},
 
-	static get STYLE_TONE() {
+	get STYLE_TONE() {
 		return PINYIN_STYLE.TONE;
-	}
+	},
 
-	static get STYLE_TONE2() {
+	get STYLE_TONE2() {
 		return PINYIN_STYLE.TONE2;
-	}
+	},
 
-	static get STYLE_TO3NE() {
+	get STYLE_TO3NE() {
 		return PINYIN_STYLE.TO3NE;
-	}
+	},
 
-	static get STYLE_INITIALS() {
+	get STYLE_INITIALS() {
 		return PINYIN_STYLE.INITIALS;
-	}
+	},
 
-	static get STYLE_FIRST_LETTER() {
+	get STYLE_FIRST_LETTER() {
 		return PINYIN_STYLE.FIRST_LETTER;
-	}
+	},
 
-	static get DEFAULT_OPTIONS() {
+	get DEFAULT_OPTIONS() {
 		return DEFAULT_OPTIONS;
-	}
-}
+	},
+};
 
-
-// 解压拼音库。
-// @param {Object} dict_combo, 压缩的拼音库。
-// @param {Object} 解压的拼音库。
-function buildPinyinCache(dict_combo) {
-	let hans = '';
-	let uncomboed = {};
-
-	for (let py in dict_combo) {
-		hans = dict_combo[py];
-		for (let i = 0, han, l = hans.length; i < l; i++) {
-			han = hans.charCodeAt(i);
-			if (!uncomboed.hasOwnProperty(han)) {
-				uncomboed[han] = py;
-			} else {
-				uncomboed[han] += "," + py;
-			}
-		}
-	}
-
-	return uncomboed;
-}
-
-const pinyin = new Pinyin(buildPinyinCache(pinyinDict));
-
-pinyin.version = 'v2.8.3';
-
-export default pinyin
+export default Pinyin;
