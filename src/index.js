@@ -1,27 +1,15 @@
-import Validator from './lib/Validator';
-import SessionStore from "./lib/SessionStore";
-import LocalStore from "./lib/LocalStore";
-import Platform from "./lib/Platform";
-import Request from "./lib/Request";
-import Utils from './lib/Utils';
-import DateUtils from "./lib/DateUtils";
-import UrlUtils from "./lib/UrlUtils";
-import Pinyin from "./lib/Pinyin";
+import validator from './utils/validator';
+import platform from "./utils/platform";
+import request from "./utils/request";
+import utils from './utils/utils';
+import dateUtils from "./utils/dateUtils";
+import urlUtils from "./utils/urlUtils";
+import pinyin from "./utils/pinyin";
 
-const Jeselvmo = {
-	Validator,
-	Platform,
-	LocalStore,
-	SessionStore,
-	Request,
-	Utils,
-	DateUtils,
-	UrlUtils,
-	Pinyin
-};
+import sessionStore from "./store/sessionStore";
+import localStore from "./store/localStore";
 
-if (window) {
-	window.J = Jeselvmo;
+export {
+    validator, platform, request, utils, dateUtils, urlUtils, pinyin,
+    localStore, sessionStore
 }
-
-export default Jeselvmo;

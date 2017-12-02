@@ -1,6 +1,11 @@
 .DS_Store
 .idea
+.git
 node_modules
+npm-debug.log
+dist
+lib
+.nyc_output
 coverage
+es
 package-lock.json
-yarn.lock
