@@ -1,6 +1,6 @@
 import pinyinDict from '../data/pinyinDict';
 import phrasesDict from '../data/phrasesDict';
-import assign from '../lib/object-assign';
+import assign from '../base/object-assign';
 
 // XXX: Symbol when web support.
 const PINYIN_STYLE = {
