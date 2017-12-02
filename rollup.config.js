@@ -19,8 +19,7 @@ const config = {
     plugins: [
         nodeResolve(),
         babel({
-            exclude: '**/node_modules/**',
-            presets: [['es2015', {modules: false}], 'stage-0']
+            exclude: '**/node_modules/**'
         }),
         replace({
             'process.env.NODE_ENV': JSON.stringify(env)
