@@ -10,6 +10,40 @@ var _typeof$1 = typeof Symbol === "function" && typeof Symbol.iterator === "symb
   return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 };
 
+
+
+
+
+
+
+
+
+
+
+var classCallCheck = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
 /* eslint-disable no-var,vars-on-top,no-void,no-underscore-dangle,prefer-template,object-shorthand,import/no-mutable-exports,object-curly-spacing,max-len,prefer-rest-params,no-shadow,no-undef-init,no-cond-assign,block-scoped-var,no-mixed-operators,block-spacing,prefer-arrow-callback,no-unsafe-finally,max-len */
 function assertString(input) {
 	var isString = typeof input === 'string' || input instanceof String;
@@ -1698,58 +1732,78 @@ var platform = {
 /**
  * network request
  */
-var request = {
-	get: function get(url, params) {
-		params = params || {};
+var Request = function () {
+    function Request() {
+        classCallCheck(this, Request);
+        this._params = {};
+    }
 
-		console.log('==============================================');
-		console.log('Get:' + url);
-		console.log('Params:', params);
+    createClass(Request, [{
+        key: 'addParam',
+        value: function addParam(name, value) {
+            this._params[name] = value;
+        }
+    }, {
+        key: 'get',
+        value: function get$$1(url, params) {
 
-		return new Promise(function (resolve, reject) {
-			$.ajax({
-				type: 'GET',
-				url: url,
-				data: params,
-				cache: false,
-				dataType: 'json',
-				success: function success(result) {
-					console.log('Result:', result);
-					resolve(result);
-				},
-				error: function error(XMLHttpRequest, textStatus, errorThrown) {
-					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
-					reject(XMLHttpRequest);
-				}
-			});
-		});
-	},
-	post: function post(url, params) {
-		params = params || {};
+            params = Object.assign(params || {}, this._params);
 
-		console.log('==============================================');
-		console.log('Post:', url);
-		console.log('Data:', params);
+            console.log('==============================================');
+            console.log('Get:' + url);
+            console.log('Params:', params);
 
-		return new Promise(function (resolve, reject) {
-			$.ajax({
-				type: 'POST',
-				url: url,
-				data: params,
-				cache: false,
-				dataType: 'json',
-				success: function success(result) {
-					console.log('Result:', result);
-					resolve(result);
-				},
-				error: function error(XMLHttpRequest, textStatus, errorThrown) {
-					console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
-					reject(XMLHttpRequest);
-				}
-			});
-		});
-	}
-};
+            return new Promise(function (resolve, reject) {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: params,
+                    cache: false,
+                    dataType: 'json',
+                    success: function success(result) {
+                        console.log('Result:', result);
+                        resolve(result);
+                    },
+                    error: function error(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
+                        reject(XMLHttpRequest);
+                    }
+                });
+            });
+        }
+    }, {
+        key: 'post',
+        value: function post(url, params) {
+
+            params = Object.assign(params || {}, this._params);
+
+            console.log('==============================================');
+            console.log('Post:', url);
+            console.log('Data:', params);
+
+            return new Promise(function (resolve, reject) {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: params,
+                    cache: false,
+                    dataType: 'json',
+                    success: function success(result) {
+                        console.log('Result:', result);
+                        resolve(result);
+                    },
+                    error: function error(XMLHttpRequest, textStatus, errorThrown) {
+                        console.log('Error:', XMLHttpRequest, textStatus, errorThrown);
+                        reject(XMLHttpRequest);
+                    }
+                });
+            });
+        }
+    }]);
+    return Request;
+}();
+
+var request = new Request();
 
 /*
 object-assign
