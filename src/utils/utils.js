@@ -1,6 +1,4 @@
 /* eslint-disable no-undef,valid-jsdoc,spaced-comment,quote-props,comma-dangle,curly,prefer-template,eqeqeq,max-len */
-import assign from "../base/object-assign";
-
 const utils = {
 
     /**
@@ -28,9 +26,7 @@ const utils = {
             width: winWidth,
             height: winHeight
         }
-    },
-
-    assign
+    }
 
 };
 export default utils;
