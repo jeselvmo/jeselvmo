@@ -63,9 +63,9 @@ const regexp = {
     /**
      * 匹配查找
      *
-     * @param str
-     * @param reg
-     * @returns {Array}
+     * @param {string} str 文本
+     * @param {RegExp} reg 正则表达式
+     * @returns {Array} results
      */
     exec(str, reg) {
         let array = [], result;
