@@ -1,5 +1,7 @@
+import regexp from '../utils/regexp';
 import pinyinDict from '../data/pinyin-dict';
 import phrasesDict from '../data/phrases-dict';
+
 
 // XXX: Symbol when web support.
 const PINYIN_STYLE = {
@@ -19,7 +21,7 @@ const DEFAULT_OPTIONS = {
 // 声母表。
 const INITIALS = "b,p,m,f,d,t,n,l,g,k,h,j,q,x,r,zh,ch,sh,z,c,s".split(",");
 // 韵母表。
-//const FINALS = "ang,eng,ing,ong,an,en,in,un,er,ai,ei,ui,ao,ou,iu,ie,ve,a,o,e,i,u,v".split(",");
+const FINALS = "ang,eng,ing,ong,an,en,in,un,er,ai,ei,ui,ao,ou,iu,ie,ve,a,o,e,i,u,v".split(",");
 // 带音标字符。
 const PHONETIC_SYMBOL = {
     "ā": "a1",
@@ -67,33 +69,25 @@ function initials(pinyin) {
     return "";
 }
 
-
-// 解压拼音库。
-// @param {Object} dict_combo, 压缩的拼音库。
-// @param {Object} 解压的拼音库。
-function buildPinyinCache(dict_combo) {
-    let hans = '';
-    let uncomboed = {};
-
-    for (let py in dict_combo) {
-        hans = dict_combo[py];
-        for (let i = 0, han, l = hans.length; i < l; i++) {
-            han = hans.charCodeAt(i);
-            if (!uncomboed.hasOwnProperty(han)) {
-                uncomboed[han] = py;
-            } else {
-                uncomboed[han] += "," + py;
-            }
-        }
+/**
+ * 分词正则
+ */
+const segmentRegexp = (() => {
+    let strs = [];
+    for (let key in phrasesDict) {
+        strs.push(key);
     }
-
-    return uncomboed;
-}
+    return new RegExp('(' + strs.join('|') + ')', 'g')
+})();
 
 
 const pinyin = {
 
-    _dict: buildPinyinCache(pinyinDict),
+    // 新增短语词典
+    addPhrasesDict(dict) {
+        Object.assign(phrasesDict, dict);
+    },
+
 
     // @param {String} hans 要转为拼音的目标字符串（汉字）。
     // @param {Object} options, 可选，用于指定拼音风格，是否启用多音字。
@@ -106,15 +100,20 @@ const pinyin = {
 
         options = Object.assign({}, DEFAULT_OPTIONS, options);
 
+        // 走分词拼音
+        if (options.segment) {
+            return pinyin.segment_pinyin(hans, options);
+        }
+
         let pys = [];
         let nohans = "";
 
-        for (let i = 0, firstCharCode, words, l = hans.length; i < l; i++) {
+        for (let i = 0, words, l = hans.length; i < l; i++) {
 
             words = hans[i];
-            firstCharCode = words.charCodeAt(0);
 
-            if (pinyin._dict[firstCharCode]) {
+            let result = pinyin.single_pinyin(words, options);
+            if (result[0] !== words) {
 
                 // ends of non-chinese words.
                 if (nohans.length > 0) {
@@ -122,7 +121,7 @@ const pinyin = {
                     nohans = ""; // reset non-chinese words.
                 }
 
-                pys.push(pinyin.single_pinyin(words, options));
+                pys.push(result);
 
             } else {
                 nohans += words;
@@ -139,39 +138,47 @@ const pinyin = {
         return pys;
     },
 
-
-
-    // 词语注音
-    // @param {String} phrases, 指定的词组。
-    // @param {Object} options, 选项。
-    // @return {Array}
-    phrases_pinyin(phrases, options) {
-        if (typeof phrases !== "string") {
+    segment_pinyin(hans, options) {
+        if (typeof hans !== "string") {
             return [];
         }
 
-        options = assign({}, DEFAULT_OPTIONS, options);
+        options = Object.assign({}, DEFAULT_OPTIONS, options);
 
-        let py = [];
-        if (phrasesDict.hasOwnProperty(phrases)) {
-            //! copy pinyin result.
-            phrasesDict[phrases].forEach(function (item, idx) {
-                py[idx] = [];
-                if (options.heteronym) {
-                    item.forEach(function (py_item, py_index) {
-                        py[idx][py_index] = pinyin.toFixed(py_item, options.style);
-                    });
-                } else {
-                    py[idx][0] = pinyin.toFixed(item[0], options.style);
+        //分词
+        hans = regexp.replace(hans, segmentRegexp, '{$1}');
+
+        let pys = [];
+        let phrases = "";
+
+        for (let i = 0, words, l = hans.length; i < l; i++) {
+
+            words = hans[i];
+
+            if (words === '{' || words === '}' || phrases.length > 0) {
+                phrases += words;
+
+                if (words === '}') {
+                    phrases = phrases.substring(1, phrases.length - 1);
+                    pys = pys.concat(pinyin.phrases_pinyin(phrases, options));
+                    phrases = "";
                 }
-            });
-        } else {
-            for (let i = 0, l = phrases.length; i < l; i++) {
-                py = py.concat(pinyin.convert(phrases[i], options));
+            } else {
+                pys.push(pinyin.single_pinyin(words, options))
             }
         }
-        return py;
+
+        // 清理最后的非中文字符串。
+        if (phrases.length > 0) {
+            pys.push([phrases]);
+            phrases = ""; // reset non-chinese words.
+        }
+
+
+        return pys
+
     },
+
 
     // 单字拼音转换。
     // @param {String} han, 单个汉字
@@ -185,31 +192,46 @@ const pinyin = {
             return pinyin.single_pinyin(han.charAt(0), options);
         }
 
-        let hanCode = han.charCodeAt(0);
+        let reg = new RegExp(`([^:;]*):[^:;]*${han}[^:;]*;`, 'g')
+        let results = regexp.exec(pinyinDict, reg);
 
-        if (!pinyin._dict[hanCode]) {
+        if (results.length === 0) {
             return [han];
         }
 
-        let pys = pinyin._dict[hanCode].split(",");
         if (!options.heteronym) {
-            return [pinyin.toFixed(pys[0], options.style)];
+            return [pinyin.toFixed(results[0][1], options.style)]
         }
 
-        // 临时存储已存在的拼音，避免多音字拼音转换为非注音风格出现重复。
-        let py_cached = {};
-        let pinyins = [];
-        for (let i = 0, py, l = pys.length; i < l; i++) {
-            py = pinyin.toFixed(pys[i], options.style);
-            if (py_cached.hasOwnProperty(py)) {
-                continue;
-            }
-            py_cached[py] = py;
-
-            pinyins.push(py);
-        }
-        return pinyins;
+        return results.map((result) => pinyin.toFixed(result[1], options.style));
     },
+
+    // 词语注音
+    // @param {String} phrases, 指定的词组。
+    // @param {Object} options, 选项。
+    // @return {Array}
+    phrases_pinyin(phrases, options) {
+        if (typeof phrases !== "string") {
+            return [];
+        }
+
+        options = Object.assign({}, DEFAULT_OPTIONS, options);
+
+        let py = [];
+        //! copy pinyin result.
+        phrasesDict[phrases].forEach(function (item, idx) {
+            py[idx] = [];
+            if (options.heteronym) {
+                item.forEach(function (py_item, py_index) {
+                    py[idx][py_index] = pinyin.toFixed(py_item, options.style);
+                });
+            } else {
+                py[idx][0] = pinyin.toFixed(item[0], options.style);
+            }
+        });
+        return py;
+    },
+
 
     /**
      * 格式化拼音风格。
@@ -258,18 +280,6 @@ const pinyin = {
         }
     },
 
-    /**
-     * 比较两个汉字转成拼音后的排序顺序，可以用作默认的拼音排序算法。
-     *
-     * @param {String} hanA 汉字字符串 A。
-     * @return {String} hanB 汉字字符串 B。
-     * @return {Number} 返回 -1，0，或 1。
-     */
-    compare(hanA, hanB) {
-        const pinyinA = pinyin.convert(hanA, DEFAULT_OPTIONS);
-        const pinyinB = pinyin.convert(hanB, DEFAULT_OPTIONS);
-        return String(pinyinA).localeCompare(pinyinB);
-    },
 
     get STYLE_NORMAL() {
         return PINYIN_STYLE.NORMAL;
