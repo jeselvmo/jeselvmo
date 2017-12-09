@@ -14,7 +14,7 @@
  */
 let numberUtils = {
 
-	format(mask, value) {
+	format(value, mask) {
 		if (!mask || isNaN(+value)) {
 			return value; // return as it is.
 		}

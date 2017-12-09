@@ -6,11 +6,12 @@ import dateUtils from "./utils/dateUtils";
 import urlUtils from "./utils/urlUtils";
 import pinyin from "./utils/pinyin";
 import regexp from './utils/regexp';
+import numberUtils from './utils/numberUtils';
 
 import sessionStore from "./store/sessionStore";
 import localStore from "./store/localStore";
 
 export {
-    validator, platform, request, utils, dateUtils, urlUtils, pinyin, regexp,
+    validator, platform, request, utils, dateUtils, urlUtils, pinyin, regexp, numberUtils,
     localStore, sessionStore
 }
