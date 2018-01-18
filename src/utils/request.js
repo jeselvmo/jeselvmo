@@ -4,15 +4,7 @@
  */
 class Request {
 
-    _params = {};
-
-    addParam(name, value) {
-        this._params[name] = value;
-    }
-
     get(url, params) {
-
-        params = Object.assign(params || {}, this._params);
 
         console.log('==============================================');
         console.log(`Get:${url}`);
@@ -38,8 +30,6 @@ class Request {
     }
 
     post(url, params) {
-
-        params = Object.assign(params || {}, this._params);
 
         console.log('==============================================');
         console.log('Post:', url);
