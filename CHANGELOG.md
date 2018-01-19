@@ -1,3 +1,8 @@
+1.0.7
+
+- 修改手机号调度工具eruda链接，改为https
+- 修复validator中isEmpty和isBlank
+
 1.0.5
 
 - 完善汉字拼音字典
