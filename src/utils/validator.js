@@ -1435,6 +1435,14 @@ function isIdCard(code) {
     return pass;
 }
 
+function isUndefined(val) {
+    return typeof val === 'undefined';
+}
+
+function isNull(val) {
+    return !val && typeof(val) != 'undefined' && val != 0
+}
+
 function isString(val) {
     return typeof val === 'string' || val instanceof String;
 }
@@ -1447,7 +1455,6 @@ function isArray(val) {
             typeof val.splice !== 'undefined' &&
             typeof val.propertyIsEnumerable !== 'undefined' &&
             !val.propertyIsEnumerable('splice'))
-
 }
 
 function isNumber(val) {
@@ -1458,12 +1465,12 @@ function isDate(val) {
     return typeof val === 'object' && val instanceof Date
 }
 
-function isUndefined(val) {
-    return typeof val === 'undefined';
-}
-
 function isObject(val) {
     return val !== null && typeof val === 'object';
+}
+
+function isJson(val) {
+    return typeof(val) == "object" && Object.prototype.toString.call(val).toLowerCase() == "[object object]" && !val.length
 }
 
 function isFunction(val) {
@@ -1552,16 +1559,18 @@ let validator = {
     // update
 
     // new
-    isIdCard: isIdCard,
-    isString: isString,
-    isNumber: isNumber,
-    isDate: isDate,
-    isArray: isArray,
-    isObject: isObject,
-    isUndefined: isUndefined,
-    isFunction: isFunction,
-    isFormData: isFormData,
-    isURLSearchParams: isURLSearchParams,
+    isUndefined,
+    isNull,
+    isIdCard,
+    isString,
+    isNumber,
+    isDate,
+    isArray,
+    isObject,
+    isJson,
+    isFunction,
+    isFormData,
+    isURLSearchParams,
 };
 
 export default validator

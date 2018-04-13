@@ -2,7 +2,9 @@ import expect from 'expect'
 import pinyin from '../../src/utils/pinyin'
 
 pinyin.addPhrasesDict({
-    "阿家阿翁": [["ā"], ["gū"], ["ā"], ["wēng"]]
+    "阿家阿翁": [["ā"], ["gū"], ["ā"], ["wēng"]],
+    "无为县": [["wú"], ["wéi"], ["xiàn"]],
+    "汶上县": [['wèn'], ['shàng'], ['xiàn']]
 });
 
 describe('pinyin', () => {
@@ -190,6 +192,19 @@ describe('pinyin', () => {
                     segment: true,
                 })[3][0]
             ).toBe('yīng')
+
+        })
+    })
+
+    describe('beefly', () => {
+
+        it('城市区域多音字', () => {
+
+            expect(
+                pinyin.convert('无为县', {
+                    segment: true,
+                })[0][0]
+            ).toBe('wú')
 
         })
     })

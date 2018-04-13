@@ -78,7 +78,7 @@ const segmentRegexp = (() => {
         strs.push(key);
     }
     return new RegExp('(' + strs.join('|') + ')', 'g')
-})();
+});
 
 
 const pinyin = {
@@ -146,7 +146,7 @@ const pinyin = {
         options = Object.assign({}, DEFAULT_OPTIONS, options);
 
         //分词
-        hans = regexp.replace(hans, segmentRegexp, '{$1}');
+        hans = regexp.replace(hans, segmentRegexp(), '{$1}');
 
         let pys = [];
         let phrases = "";

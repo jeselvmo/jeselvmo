@@ -1,3 +1,8 @@
+1.0.8
+
+- 修改validator判断isUndefined、isNull、isJson等
+- 修复request.post支持FormData参数
+
 1.0.7
 
 - 修改手机号调度工具eruda链接，改为https

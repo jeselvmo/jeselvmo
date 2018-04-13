@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import validator from "./validator";
+
 /**
  * network request
  */
@@ -35,6 +37,14 @@ class Request {
         console.log('Post:', url);
         console.log('Data:', params);
 
+        let ajaxOptions = {};
+        if (validator.isFormData(params)) {
+            ajaxOptions = {
+                processData: false,
+                contentType: false,
+            }
+        }
+
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: 'POST',
@@ -42,6 +52,7 @@ class Request {
                 data: params,
                 cache: false,
                 dataType: 'json',
+                ...ajaxOptions,
                 success: (result) => {
                     console.log('Result:', result);
                     resolve(result);

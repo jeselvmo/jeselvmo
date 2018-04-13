@@ -71,4 +71,19 @@ describe('validator', () => {
 
     })
 
+    describe('isJson', () => {
+
+        it('({}) = true', () => {
+            expect(
+                validator.isJson({})
+            ).toBe(true)
+        });
+        it('([]) = false', () => {
+            expect(
+                validator.isJson([])
+            ).toBe(false)
+        });
+
+    })
+
 });
