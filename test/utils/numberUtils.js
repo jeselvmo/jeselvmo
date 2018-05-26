@@ -1,5 +1,5 @@
 import expect from 'expect'
-import numberUtils from '../../src/utils/numberUtils'
+import numberUtils from '../../src/numberUtils'
 
 describe('numberUtils', () => {
     describe('format', () => {

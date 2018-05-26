@@ -1,17 +1,15 @@
-import validator from './utils/validator';
-import platform from "./utils/platform";
-import request from "./utils/request";
-import utils from './utils/utils';
-import dateUtils from "./utils/dateUtils";
-import urlUtils from "./utils/urlUtils";
-import pinyin from "./utils/pinyin";
-import regexp from './utils/regexp';
-import numberUtils from './utils/numberUtils';
-
-import sessionStore from "./store/sessionStore";
-import localStore from "./store/localStore";
+import validator from './validator';
+import platform from "./platform";
+import request from "./request";
+import utils from './utils';
+import dateUtils from "./dateUtils";
+import urlUtils from "./urlUtils";
+import regexp from './regexp';
+import numberUtils from './numberUtils';
+import sessionStore from "./sessionStore";
+import localStore from "./localStore";
 
 export {
-    validator, platform, request, utils, dateUtils, urlUtils, pinyin, regexp, numberUtils,
+    validator, platform, request, utils, dateUtils, urlUtils, regexp, numberUtils,
     localStore, sessionStore
 }

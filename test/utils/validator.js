@@ -1,5 +1,5 @@
 import expect from 'expect'
-import validator from '../../src/utils/validator'
+import validator from '../../src/validator'
 
 describe('validator', () => {
 

@@ -1,5 +1,5 @@
 import expect from 'expect'
-import regexp from '../../src/utils/regexp'
+import regexp from '../../src/regexp'
 
 describe('regexp', () => {
     describe('test', () => {
