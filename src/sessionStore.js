@@ -1,7 +1,7 @@
 /**
  * sessionStore
  */
-import Store from './Store';
+import SessionStore from "./base/SessionStore";
 
-const sessionStore = new Store(window.sessionStorage);
+const sessionStore = new SessionStore();
 export default sessionStore

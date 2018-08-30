@@ -1,7 +1,7 @@
 /**
  * localStore
  */
-import Store from './Store';
+import LocalStore from "./base/LocalStore";
 
-const localStore = new Store(window.localStorage);
+const localStore = new LocalStore();
 export default localStore
