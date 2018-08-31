@@ -1,65 +1,127 @@
-const urlUtils = {
+/* eslint-disable valid-jsdoc */
+class UrlUtils {
 
-	/**
-	 * 基础URL,无查询参数，无哈希
-	 */
-	baseUrl: location.origin + location.pathname,
+    /**
+     *
+     * @desc   对象序列化
+     * @param  {Object} obj
+     * @return {String}
+     */
+    toQueryString(obj) {
+        if (!obj) return '';
+        var pairs = [];
 
-	reload() {
-		location.reload()
-	},
+        for (var key in obj) {
+            var value = obj[key];
 
-	repair() {
-		// 解决app端
-		let url = location.href,
-			urls = url.split('?');
-		if (urls.length === 3) {
-			url = `${urls[0]}?${urls[1]}&${urls[2]}`;
-			location.href = url;
-		}
-	},
+            if (value instanceof Array) {
+                for (var i = 0; i < value.length; ++i) {
+                    pairs.push(encodeURIComponent(key + '[' + i + ']') + '=' + encodeURIComponent(value[i]));
+                }
+                continue;
+            }
 
-	getParam(name) {
-		return this.getParams()[name];
-	},
+            pairs.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+        }
 
-	getParams() {
-		let params = {};
+        return pairs.join('&');
+    }
 
-		let url = location.href; //获取url中"?"符后的字串
-		let match = url.match(/\w+=\w*/g);
-		if (match) {
-			match.forEach((a) => {
-				let as = a.split('=');
-				params[as[0]] = decodeURIComponent(as[1])
-			});
-		}
-		return params;
-	},
+    /**
+     *
+     * @desc   url参数转对象
+     * @param  {String} url  default: window.location.href
+     * @return {Object}
+     */
+    parseQueryString(url) {
+        let ele = null;
+        if (url) {
+            ele = document.createElement('a');
+            ele.href = url;
+        } else {
+            ele = window.location;
+        }
 
-	setParams(params, replace = false) {
-		let params2 = urlUtils.getParams();
+        var search = ele.search.replace('?', '');
+        if (search === '') return {};
+        search = search.split('&');
+        var query = {};
+        for (var i = 0; i < search.length; i++) {
+            var pair = search[i].split('=');
+            query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+        }
+        return query;
+    }
 
-		if (replace) {
-			params2 = {}
-		}
-		Object.keys(params).forEach((key) => {
-			params2[key] = params[key];
-		});
+    getQueryString() {
+        if (arguments.length === 0) {
+            return this.parseQueryString();
+        } else if (arguments.length === 1) {
+            return this.parseQueryString()[arguments[0]];
+        } else if (arguments.length === 2) {
+            return this.parseQueryString(arguments[0])[arguments[1]];
+        }
+        return null
+    }
 
-		location.href = this.baseUrl + '?' + this.toQueryString(params2);
-	},
+    toUrl(urlObj) {
+        let url = '';
 
-	/**
-	 * json转QueryString
-	 */
-	toQueryString(params) {
-		let paramsArray = [];
-		Object.keys(params).forEach((key) => {
-			paramsArray.push(key + '=' + encodeURIComponent(params[key]))
-		});
-		return paramsArray.join('&');
-	}
-};
+        if (urlObj.baseurl) {
+            url += urlObj.baseurl;
+        } else if (urlObj.origin && urlObj.pathname) {
+            url += urlObj.origin + urlObj.pathname
+        }
 
-export default urlUtils
+        if (urlObj.params && Object.keys(urlObj.params).length > 0) {
+            url += '?' + this.toQueryString(urlObj.params);
+        } else if (urlObj.query) {
+            url += '?' + urlObj.query;
+        } else if (urlObj.search) {
+            url += urlObj.search;
+        }
+
+        if (urlObj.hash) {
+            url += '#' + urlObj.hash;
+        }
+
+        return url;
+    }
+
+    /**
+     *@param {string} url 完整的URL地址
+     *@returns {object} 自定义的对象
+     */
+    parseUrl(url) {
+        let ele = null;
+        if (url) {
+            ele = document.createElement('a');
+            ele.href = url;
+        } else {
+            ele = window.location;
+        }
+        let baseurl = ele.origin + ele.pathname;
+        let params = this.parseQueryString(ele.href);
+        return {
+            href: ele.href,
+            protocol: ele.protocol.replace(':', ''),
+            host: ele.host,
+            hostname: ele.hostname,
+            port: ele.port,
+            origin: ele.origin,
+            pathname: ele.pathname,
+            search: ele.search,
+            hash: ele.hash.replace('#', ''),
+            query: ele.search.replace('?', ''),
+            params,
+            baseurl,
+            file: (ele.pathname.match(/\/([^\/?#]+)$/i) || [, ''])[1],
+            relative: (ele.href.match(/tps?:\/\/[^\/]+(.+)/) || [, ''])[1],
+            segments: ele.pathname.replace(/^\//, '').split('/')
+        };
+    }
+}
+
+const urlUtils = new UrlUtils();
+
+export default urlUtils;

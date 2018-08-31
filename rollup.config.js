@@ -12,7 +12,8 @@ const config = {
         'jquery'
     ],
     globals: {
-        'jquery': 'jQuery'
+        'jquery': 'jQuery',
+        'axios': 'axios'
     },
     format: 'umd',
     moduleName: 'Jeselvmo',
