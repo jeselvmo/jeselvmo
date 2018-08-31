@@ -53,17 +53,6 @@ class UrlUtils {
         return query;
     }
 
-    getQueryString() {
-        if (arguments.length === 0) {
-            return this.parseQueryString();
-        } else if (arguments.length === 1) {
-            return this.parseQueryString()[arguments[0]];
-        } else if (arguments.length === 2) {
-            return this.parseQueryString(arguments[0])[arguments[1]];
-        }
-        return null
-    }
-
     toUrl(urlObj) {
         let url = '';
 
@@ -120,6 +109,18 @@ class UrlUtils {
             segments: ele.pathname.replace(/^\//, '').split('/')
         };
     }
+
+    getQueryString() {
+        if (arguments.length === 0) {
+            return this.parseQueryString();
+        } else if (arguments.length === 1) {
+            return this.parseQueryString()[arguments[0]];
+        } else if (arguments.length === 2) {
+            return this.parseQueryString(arguments[0])[arguments[1]];
+        }
+        return null
+    }
+
 }
 
 const urlUtils = new UrlUtils();

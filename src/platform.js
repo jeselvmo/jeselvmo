@@ -1,137 +1,180 @@
-const u = navigator.userAgent; //取得浏览器的userAgent字符串
-const p = navigator.platform; // 取得平台字符串
+/* eslint-disable valid-jsdoc */
 
-const isOpera = u.indexOf("Opera") > -1; //判断是否Opera浏览器
-const isIE = u.indexOf("compatible") > -1 && u.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
-const isEdge = u.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !isIE; //判断是否IE的Edge浏览器
-const isFirefox = u.indexOf("Firefox") > -1; //判断是否Firefox浏览器
-const isSafari = u.indexOf("Safari") > -1 && u.indexOf("Chrome") === -1; //判断是否Safari浏览器
-const isChrome = u.indexOf("Chrome") > -1 && u.indexOf("Safari") > -1; //判断Chrome浏览器
+class Platform {
 
-const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
-const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    /**
+     * 取得浏览器的userAgent字符串
+     * @returns {string}
+     */
+    userAgent = navigator.userAgent;
 
-const isIPhone = u.indexOf('iPhone') > -1;
-const isIPad = u.indexOf('iPad') > -1;
-const isIPod = u.indexOf('iPod') > -1;
-const isWindowsPhone = u.indexOf('Windows Phone') > -1;
-const isSymbianOS = u.indexOf('SymbianOS') > -1;
+    platform = navigator.platform;
 
-const isWeiXin = u.toLowerCase().indexOf('micromessenger') !== -1;	//是否在微信中打开
-const isQQ = u.match(/\sQQ/i) === " qq"; //是否QQ
-
-const IsPC = !(isAndroid || isIPhone || isIPad || isIPod || isSymbianOS || isWindowsPhone);
-
-const isTrident = u.indexOf('Trident') > -1; //IE内核
-const isPresto = u.indexOf('Presto') > -1; //opera内核
-const isWebKit = u.indexOf('AppleWebKit') > -1; //苹果、谷歌内核
-const isGecko = u.indexOf('Gecko') > -1 && u.indexOf('KHTML') === -1;//火狐内核
-const isMobile = !!u.match(/AppleWebKit.*Mobile.*/); //是否为移动终端
-
-const isWebApp = u.indexOf('Safari') === -1; //是否web应该程序，没有头部与底部
+    get name() {
+        if (this.isAndroid()) {
+            return 'android'
+        } else if (this.isIOS()) {
+            return "ios";
+        } else if (this.isLinux()) {
+            return "linux";
+        } else if (this.isWin()) {
+            return "windows";
+        } else if (this.isMac()) {
+            return "mac";
+        }
+        return "unknown";
+    }
 
 
-const isWin = (p === "Win32") || (p === "Windows");
-const isMac = (p === "Mac68K") || (p === "MacPPC") || (p === "Macintosh") || (p === "MacIntel");
-const isLinux = p.indexOf("Linux") > -1;
+    get browser() {
+        if (this.isIE()) {
+            let reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+            reIE.test(this.userAgent);
+            let fIEVersion = parseFloat(RegExp["$1"]);
+            if (fIEVersion === 7) {
+                return "IE7";
+            }
+            else if (fIEVersion === 8) {
+                return "IE8";
+            }
+            else if (fIEVersion === 9) {
+                return "IE9";
+            }
+            else if (fIEVersion === 10) {
+                return "IE10";
+            }
+            else if (fIEVersion === 11) {
+                return "IE11";
+            }
+            //IE版本过低
+            return "0"
+        }
 
-const name = (() => {
-	if (isAndroid) {
-		return 'android'
-	} else if (isIOS) {
-		return "ios";
-	} else if (isLinux) {
-		return "linux";
-	} else if (isWin) {
-		return "windows";
-	} else if (isMac) {
-		return "mac";
-	}
-	return "unknown";
-})();
+        if (this.isFirefox()) {
+            return "Firefox";
+        }
+        if (this.isOpera()) {
+            return "Opera";
+        }
+        if (this.isSafari()) {
+            return "Safari";
+        }
+        if (this.isChrome()) {
+            return "Chrome";
+        }
+        if (this.isEdge()) {
+            return "Edge";
+        }
+        //未知浏览器
+        return null
+    }
 
-const browser = (() => {
-	if (isIE) {
-		let reIE = new RegExp("MSIE (\\d+\\.\\d+);");
-		reIE.test(u);
-		let fIEVersion = parseFloat(RegExp["$1"]);
-		if (fIEVersion === 7) {
-			return "IE7";
-		}
-		else if (fIEVersion === 8) {
-			return "IE8";
-		}
-		else if (fIEVersion === 9) {
-			return "IE9";
-		}
-		else if (fIEVersion === 10) {
-			return "IE10";
-		}
-		else if (fIEVersion === 11) {
-			return "IE11";
-		}
-		//IE版本过低
-		return "0"
-	}
+    /**
+     * 判断是否Opera浏览器
+     */
+    isOpera() {
+        return this.userAgent.indexOf("Opera") > -1;
+    }
 
-	if (isFirefox) {
-		return "Firefox";
-	}
-	if (isOpera) {
-		return "Opera";
-	}
-	if (isSafari) {
-		return "Safari";
-	}
-	if (isChrome) {
-		return "Chrome";
-	}
-	if (isEdge) {
-		return "Edge";
-	}
-	//未知浏览器
-	return null
-})();
+    isIE() {
+        return this.userAgent.indexOf("compatible") > -1 && this.userAgent.indexOf("MSIE") > -1 && !this.isOpera(); //判断是否IE浏览器
+    }
+
+    isEdge() {//判断是否IE的Edge浏览器
+        return this.userAgent.indexOf("Windows NT 6.1; Trident/7.0;") > -1 && !this.isIE();
+    }
+
+    isFirefox() {//判断是否Firefox浏览器
+        return this.userAgent.indexOf("Firefox") > -1;
+    }
+
+    isSafari() {//判断是否Safari浏览器
+        return this.userAgent.indexOf("Safari") > -1 && this.userAgent.indexOf("Chrome") === -1;
+    }
+
+    isChrome() {//判断Chrome浏览器
+        return this.userAgent.indexOf("Chrome") > -1 && this.userAgent.indexOf("Safari") > -1;
+    }
+
+    isAndroid() {
+        return this.userAgent.indexOf('Android') > -1 || this.userAgent.indexOf('Adr') > -1;
+    }
+
+    isIOS() {
+        return !!this.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    }
+
+    isIPhone() {
+        return this.userAgent.indexOf('iPhone') > -1;
+    }
+
+    isIPad() {
+        return this.userAgent.indexOf('iPad') > -1;
+    }
+
+    isIPod() {
+        return this.userAgent.indexOf('iPod') > -1;
+    }
+
+    isWindowsPhone() {
+        return this.userAgent.indexOf('Windows Phone') > -1;
+    }
+
+    isSymbianOS() {
+        return this.userAgent.indexOf('SymbianOS') > -1;
+    }
+
+    isWeiXin() {//是否在微信中打开
+        return this.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+    }
+
+    isQQ() {//是否QQ
+        return this.userAgent.match(/\sQQ/i) === " qq";
+    }
+
+    IsPC() {
+        return !(this.isAndroid() || this.isIPhone() || this.isIPad() || this.isIPod() || this.isSymbianOS() || this.isWindowsPhone());
+    }
+
+    isTrident() {//IE内核
+        return this.userAgent.indexOf('Trident') > -1;
+    }
+
+    isPresto() {//opera内核
+        return this.userAgent.indexOf('Presto') > -1;
+    }
+
+    isWebKit() {//苹果、谷歌内核
+        return this.userAgent.indexOf('AppleWebKit') > -1;
+    }
+
+    isGecko() {//火狐内核
+        return this.userAgent.indexOf('Gecko') > -1 && this.userAgent.indexOf('KHTML') === -1;
+    }
+
+    isMobile() {// 是否为移动终端
+        return !!this.userAgent.match(/AppleWebKit.*Mobile.*/);
+    }
+
+    isWebApp() {// 是否web应该程序，没有头部与底部
+        return this.userAgent.indexOf('Safari') === -1;
+    }
 
 
-const platform = {
+    isWin() {
+        return (this.platform === "Win32") || (this.platform === "Windows");
+    }
 
-	isOpera,
-	isIE,
-	isEdge,
-	isFirefox,
-	isSafari,
-	isChrome,
+    isMac() {
+        return (this.platform === "Mac68K") || (this.platform === "MacPPC") || (this.platform === "Macintosh") || (this.platform === "MacIntel");
+    }
 
-	isAndroid,
-	isIOS,
+    isLinux() {
+        return this.platform.indexOf("Linux") > -1;
+    }
 
-	isIPhone,
-	isIPad,
-	isIPod,
-	isWindowsPhone,
-	isSymbianOS,
+}
 
-	IsPC,
-
-	isWeiXin,
-	isQQ,
-
-	isWebApp,
-
-	isTrident,
-	isPresto,
-	isWebKit,
-	isGecko,
-	isMobile,
-
-	isWin,
-	isMac,
-	isLinux,
-
-	name,
-
-	browser,
-};
+const platform = new Platform();
 
 export default platform
