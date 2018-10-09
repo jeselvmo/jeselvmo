@@ -1,6 +1,6 @@
 {
   "name": "jeselvmo",
-  "version": "1.0.8-beta",
+  "version": "1.0.8-beta.1",
   "description": "JavaScript utility library",
   "main": "./lib/index.js",
   "module": "es/index.js",
