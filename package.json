@@ -1,20 +1,17 @@
 {
   "name": "jeselvmo",
-  "version": "1.0.8-beta.1",
+  "version": "1.1.0-beta.1",
   "description": "JavaScript utility library",
   "main": "./lib/index.js",
   "module": "es/index.js",
   "jsnext:main": "es/index.js",
   "scripts": {
-    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
-    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "clean": "rimraf lib dist",
+    "build": "babel src --out-dir lib",
     "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/jeselvmo.js",
     "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/jeselvmo.min.js",
-    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "clean": "rimraf lib dist es coverage",
     "lint": "eslint src test",
-    "prepare": "npm run clean && npm run build",
-    "test": "cross-env BABEL_ENV=commonjs NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js",
+    "test": "cross-env NODE_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js",
     "test:watch": "npm test -- --watch",
     "test:cov": "cross-env NODE_ENV=test nyc npm test",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
@@ -63,9 +60,6 @@
     "rollup-plugin-replace": "^1.2.1",
     "rollup-plugin-uglify": "^2.0.1"
   },
-  "dependencies": {
-    "axios": "^0.18.0"
-  },
   "browserify": {
     "transform": [
       "loose-envify"
@@ -74,5 +68,8 @@
   "nyc": {
     "sourceMap": false,
     "instrument": false
+  },
+  "dependencies": {
+    "util": "^0.11.0"
   }
 }
