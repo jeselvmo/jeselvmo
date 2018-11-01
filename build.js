@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 
-var dirs = fs.readdirSync('../src');
+var dirs = fs.readdirSync('./src');
 
 var lines = [];
 var exports = [];
@@ -15,8 +15,8 @@ for (var dir of dirs) {
 }
 
 lines.push('');
-lines.push('export {');
+lines.push('export default {');
 lines.push('\t' + exports.join(',\n\t'));
 lines.push('};');
 
-fs.writeFileSync('../src/index.js', lines.join('\n'));
+fs.writeFileSync('./src/index.js', lines.join('\n'));

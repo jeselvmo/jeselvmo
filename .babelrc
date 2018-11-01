@@ -1,9 +1,34 @@
 {
-  "presets": [
-    "env",
-    "stage-0"
-  ],
-  "plugins": [
-    "transform-es2015-modules-commonjs"
-  ]
+    "presets": [
+        [
+            "env",
+            {
+                "modules": false
+            }
+        ],
+        "stage-0"
+    ],
+    "plugins": [
+    ],
+    "env": {
+        "test": {
+            "plugins": [
+                "istanbul"
+            ]
+        },
+        "commonjs": {
+            "plugins": [
+                "transform-es2015-modules-commonjs",
+                "add-module-exports"
+            ]
+        },
+        "es": {
+            "plugins": []
+        },
+        "rollup": {
+            "plugins": [
+                "external-helpers"
+            ]
+        }
+    }
 }

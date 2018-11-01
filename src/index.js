@@ -108,7 +108,7 @@ import typeOf from "./typeOf";
 import unescape from "./unescape";
 import windowResize from "./windowResize";
 
-export {
+export default {
 	addClass,
 	arrayEquals,
 	arrayToHash,
