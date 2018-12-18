@@ -6,11 +6,11 @@
  * @return {Number}
  */
 function getDayOfWeek(date = new Date()) {
-    var dow = date.getDay();
-    if (dow === 0) {
-        dow = 7;
-    }
-    return dow;
+  var dow = date.getDay();
+  if (dow === 0) {
+    dow = 7;
+  }
+  return dow;
 }
 
 export default getDayOfWeek;

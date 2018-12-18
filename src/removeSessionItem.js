@@ -1,7 +1,7 @@
-import removeStorageItem from "./removeStorageItem";
+import removeStorageItem from './removeStorageItem';
 
 function removeSessionItem(key) {
-    removeStorageItem(window.sessionStorage, key);
+  removeStorageItem(window.sessionStorage, key);
 }
 
 export default removeSessionItem;

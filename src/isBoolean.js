@@ -1,5 +1,5 @@
 function isBoolean(arg) {
-    return typeof arg === 'boolean';
+  return typeof arg === 'boolean';
 }
 
 export default isBoolean;

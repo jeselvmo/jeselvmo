@@ -14,7 +14,7 @@ import throttle from './throttle';
  * @return {Function} 新的防抖函数。
  */
 function debounce(delay, atBegin, callback) {
-    return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
+  return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false);
 }
 
 export default debounce;

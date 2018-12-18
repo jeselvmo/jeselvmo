@@ -5,10 +5,10 @@
  * @returns {Boolean}
  */
 function isLeapYear(year) {
-    if (0 === year % 4 && (year % 100 !== 0 || year % 400 === 0)) {
-        return true
-    }
-    return false;
+  if (0 === year % 4 && (year % 100 !== 0 || year % 400 === 0)) {
+    return true;
+  }
+  return false;
 }
 
 export default isLeapYear;

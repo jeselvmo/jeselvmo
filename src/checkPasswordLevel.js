@@ -4,27 +4,27 @@
  * @return {Number}     返回的强度等级（最高为4级）
  */
 function checkPasswordLevel(str) {
-    if (typeof str === 'string') {
-        var level = 0;
-        if (str.length < 5) {
-            return level;
-        }
-        if (/[0-9]/.test(str)) {
-            level++;
-        }
-        if (/[a-z]/.test(str)) {
-            level++;
-        }
-        if (/[A-Z]/.test(str)) {
-            level++;
-        }
-        if (/[\.|-|_]/.test(str)) {
-            level++;
-        }
-        return level;
-    } else {
-        throw 'Incorrect Parameter Type！';
+  if (typeof str === 'string') {
+    var level = 0;
+    if (str.length < 5) {
+      return level;
     }
+    if (/[0-9]/.test(str)) {
+      level++;
+    }
+    if (/[a-z]/.test(str)) {
+      level++;
+    }
+    if (/[A-Z]/.test(str)) {
+      level++;
+    }
+    if (/[\.|-|_]/.test(str)) {
+      level++;
+    }
+    return level;
+  } else {
+    throw 'Incorrect Parameter Type！';
+  }
 }
 
 export default checkPasswordLevel;

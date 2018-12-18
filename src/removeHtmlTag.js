@@ -4,7 +4,7 @@
  * @return {*}
  */
 function removeHtmlTag(tab) {
-    return tab.replace(/<[^<>]+?>/g, '');
+  return tab.replace(/<[^<>]+?>/g, '');
 }
 
 export default removeHtmlTag;

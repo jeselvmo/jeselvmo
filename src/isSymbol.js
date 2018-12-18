@@ -1,5 +1,5 @@
 function isSymbol(arg) {
-    return typeof arg === 'symbol';
+  return typeof arg === 'symbol';
 }
 
 export default isSymbol;

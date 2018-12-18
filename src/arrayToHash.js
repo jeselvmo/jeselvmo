@@ -1,11 +1,11 @@
 function arrayToHash(array) {
-    var hash = {};
+  var hash = {};
 
-    array.forEach(function (val, idx) {
-        hash[val] = true;
-    });
+  array.forEach(function(val, idx) {
+    hash[val] = true;
+  });
 
-    return hash;
+  return hash;
 }
 
 export default arrayToHash;

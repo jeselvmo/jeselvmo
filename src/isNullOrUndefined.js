@@ -1,5 +1,5 @@
 function isNullOrUndefined(arg) {
-    return arg == null;
+  return arg == null;
 }
 
 export default isNullOrUndefined;

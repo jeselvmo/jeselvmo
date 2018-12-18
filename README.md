@@ -22,7 +22,7 @@ Install the library with `npm install jeselvmo`
 ```javascript
 var Jeselvmo = require('jeselvmo');
 
-Jeselvmo.validator.isEmail('foo@bar.com'); //=> true
+Jeselvmo.isEmail('foo@bar.com'); //=> true
 ```
 
 #### ES6
@@ -34,7 +34,7 @@ import Jeselvmo from 'jeselvmo';
 Or, import only a subset of the library:
 
 ```javascript
-import validator from 'jeselvmo/lib/validator';
+import isEmail from 'jeselvmo/lib/isEmail';
 ```
 
 ### Client-side usage
@@ -44,7 +44,7 @@ The library can be loaded either as a standalone script, or through an [AMD][amd
 ```html
 <script type="text/javascript" src="jeselvmo.min.js"></script>
 <script type="text/javascript">
-  Jeselvmo.validator.isEmail('foo@bar.com'); //=> true
+  Jeselvmo.isEmail('foo@bar.com'); //=> true
 </script>
 ```
 

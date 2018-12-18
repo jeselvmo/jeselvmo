@@ -1,5 +1,5 @@
 function clearStorage(storage) {
-    storage.clear();
+  storage.clear();
 }
 
 export default clearStorage;

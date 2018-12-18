@@ -6,20 +6,18 @@
  * @param {Function} upCb 当软键盘弹起的回调
  */
 function windowResize(downCb, upCb) {
-    let clientHeight = window.innerHeight;
-    downCb = typeof downCb === 'function' ? downCb : function () {
-    };
-    upCb = typeof upCb === 'function' ? upCb : function () {
-    };
-    window.addEventListener('resize', () => {
-        let height = window.innerHeight;
-        if (height === clientHeight) {
-            downCb();
-        }
-        if (height < clientHeight) {
-            upCb();
-        }
-    });
+  let clientHeight = window.innerHeight;
+  downCb = typeof downCb === 'function' ? downCb : function() {};
+  upCb = typeof upCb === 'function' ? upCb : function() {};
+  window.addEventListener('resize', () => {
+    let height = window.innerHeight;
+    if (height === clientHeight) {
+      downCb();
+    }
+    if (height < clientHeight) {
+      upCb();
+    }
+  });
 }
 
 export default windowResize;

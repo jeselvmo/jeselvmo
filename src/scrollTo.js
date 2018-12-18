@@ -5,24 +5,24 @@
  * @param {Number} duration
  */
 function scrollTo(to, duration) {
-    if (duration < 0) {
-        this.setScrollTop(to);
-        return
+  if (duration < 0) {
+    this.setScrollTop(to);
+    return;
+  }
+  var diff = to - this.getScrollTop();
+  if (diff === 0) return;
+  var step = (diff / duration) * 10;
+  requestAnimationFrame(() => {
+    if (Math.abs(step) > Math.abs(diff)) {
+      this.setScrollTop(this.getScrollTop() + diff);
+      return;
     }
-    var diff = to - this.getScrollTop();
-    if (diff === 0) return;
-    var step = diff / duration * 10;
-    requestAnimationFrame(() => {
-        if (Math.abs(step) > Math.abs(diff)) {
-            this.setScrollTop(this.getScrollTop() + diff);
-            return;
-        }
-        this.setScrollTop(this.getScrollTop() + step);
-        if (diff > 0 && this.getScrollTop() >= to || diff < 0 && this.getScrollTop() <= to) {
-            return;
-        }
-        this.scrollTo(to, duration - 16);
-    });
+    this.setScrollTop(this.getScrollTop() + step);
+    if ((diff > 0 && this.getScrollTop() >= to) || (diff < 0 && this.getScrollTop() <= to)) {
+      return;
+    }
+    this.scrollTo(to, duration - 16);
+  });
 }
 
 export default scrollTo;

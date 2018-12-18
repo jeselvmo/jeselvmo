@@ -6,9 +6,9 @@
  * @returns {void}
  */
 function addClass(ele, cls) {
-    if (!this.hasClass(ele, cls)) {
-        ele.className += ' ' + cls;
-    }
+  if (!this.hasClass(ele, cls)) {
+    ele.className += ' ' + cls;
+  }
 }
 
 export default addClass;

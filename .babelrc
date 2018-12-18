@@ -1,34 +1,33 @@
 {
-    "presets": [
-        [
-            "env",
-            {
-                "modules": false
-            }
-        ],
-        "stage-0"
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
     ],
-    "plugins": [
-    ],
-    "env": {
-        "test": {
-            "plugins": [
-                "istanbul"
-            ]
-        },
-        "commonjs": {
-            "plugins": [
-                "transform-es2015-modules-commonjs",
-                "add-module-exports"
-            ]
-        },
-        "es": {
-            "plugins": []
-        },
-        "rollup": {
-            "plugins": [
-                "external-helpers"
-            ]
-        }
+    "stage-0"
+  ],
+  "plugins": [],
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    },
+    "commonjs": {
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "add-module-exports"
+      ]
+    },
+    "es": {
+      "plugins": []
+    },
+    "rollup": {
+      "plugins": [
+        "external-helpers"
+      ]
     }
+  }
 }

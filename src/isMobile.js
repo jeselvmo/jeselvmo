@@ -3,7 +3,7 @@
  * @return {boolean}
  */
 function isMobile() {
-    return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
+  return !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/);
 }
 
 export default isMobile;

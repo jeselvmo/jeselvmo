@@ -6,7 +6,7 @@
  * @return {Boolean}
  */
 function hasClass(ele, cls) {
-    return (new RegExp('(\\s|^)' + cls + '(\\s|$)')).test(ele.className);
+  return new RegExp('(\\s|^)' + cls + '(\\s|$)').test(ele.className);
 }
 
 export default hasClass;

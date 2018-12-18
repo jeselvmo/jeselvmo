@@ -1,5 +1,5 @@
 function removeStorageItem(storage, key) {
-    storage.removeItem(key);
+  storage.removeItem(key);
 }
 
 export default removeStorageItem;
