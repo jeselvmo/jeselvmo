@@ -10,7 +10,6 @@ const config = {
   entry: 'src/index.js',
   external: ['jquery'],
   globals: {
-    jquery: 'jQuery',
     axios: 'axios'
   },
   format: 'umd',

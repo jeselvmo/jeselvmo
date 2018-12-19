@@ -1,5 +1,7 @@
-function isArray(ar) {
-  return Array.isArray(ar);
+var toString = {}.toString;
+
+function isArray(arr) {
+  return toString.call(arr) == '[object Array]';
 }
 
-export default isArray;
+export default Array.isArray || isArray;

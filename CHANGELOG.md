@@ -1,3 +1,11 @@
+1.1.0
+
+- 增加loadUI: 载入UI资源（js, css）
+- 增加delay: 延迟执行
+- 增加clamp: 夹紧，范围限定
+- 增加convertRangeValue: 求两个数组相对位置的数值
+- 增加 isPromise: 判断是Promise对象
+
 1.0.8
 
 - 修改validator判断isUndefined、isNull、isJson等

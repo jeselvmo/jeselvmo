@@ -1,6 +1,6 @@
 {
   "name": "jeselvmo",
-  "version": "1.1.0-beta.4",
+  "version": "1.1.0-beta.6",
   "description": "JavaScript utility library",
   "main": "./lib/index.js",
   "module": "es/index.js",
@@ -38,6 +38,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.1.1",
+    "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-2017": "0.0.0",
     "babel-preset-env": "^1.6.1",
@@ -60,10 +61,6 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.2.1",
     "rollup-plugin-uglify": "^2.0.1"
-  },
-  "dependencies": {
-    "axios": "^0.18.0",
-    "babel-plugin-add-module-exports": "^1.0.0"
   },
   "browserify": {
     "transform": [
