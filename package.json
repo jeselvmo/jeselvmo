@@ -15,7 +15,6 @@
     "build:browser": "rollup -c && npm run minify",
     "build:node": "babel src -d .",
     "build": "npm run build:browser && npm run build:node",
-    "--pretest": "npm run lint && npm run build",
     "test": "mocha --require @babel/register --reporter dot"
   },
   "files": [
