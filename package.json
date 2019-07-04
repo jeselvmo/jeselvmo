@@ -1,69 +1,63 @@
 {
-  "name": "validator",
-  "description": "String validation and sanitization",
-  "version": "11.0.0",
-  "homepage": "https://github.com/chriso/validator.js",
+  "name": "jeselvmo",
+  "version": "2.0.0",
+  "description": "JavaScript utility library",
+  "homepage": "https://github.com/jeselvmo/jeselvmo.js",
+  "author": "kecoyo <kecoyo@163.com>",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src test",
+    "lint:fix": "eslint --fix src test",
+    "clean:node": "rm -rf index.js lib",
+    "clean:browser": "rm -rf jeselvmo*",
+    "clean": "npm run clean:node && npm run clean:browser",
+    "minify": "uglifyjs jeselvmo.js -o jeselvmo.min.js  --compress --mangle --comments /Copyright/",
+    "build:browser": "rollup -c && npm run minify",
+    "build:node": "babel src -d .",
+    "build": "npm run build:browser && npm run build:node",
+    "--pretest": "npm run lint && npm run build",
+    "test": "mocha --require @babel/register --reporter dot"
+  },
   "files": [
     "index.js",
     "lib",
     "README.md",
     "LICENCE",
-    "validator.js",
-    "validator.min.js"
+    "jeselvmo.js",
+    "jeselvmo.min.js"
   ],
   "keywords": [
-    "validator",
-    "validation",
-    "validate",
-    "sanitization",
-    "sanitize",
-    "sanitisation",
-    "sanitise",
-    "assert"
+    "jeselvmo",
+    "validate"
   ],
-  "author": "Chris O'Hara <cohara87@gmail.com>",
   "contributors": [
     {
-      "name": "Anthony Nandaa",
-      "url": "https://github.com/profnandaa"
+      "name": "jeselvmo",
+      "url": "https://github.com/jeselvmo"
     }
   ],
-  "main": "index.js",
   "bugs": {
-    "url": "https://github.com/chriso/validator.js/issues"
+    "url": "https://github.com/jeselvmo/jeselvmo/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chriso/validator.js.git"
+    "url": "https://github.com/jeselvmo/jeselvmo.git"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "babel-eslint": "^10.0.1",
-    "babel-plugin-add-module-exports": "^1.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "mocha": "^5.1.1",
-    "nyc": "^14.1.0",
-    "rollup": "^0.43.0",
-    "rollup-plugin-babel": "^4.0.1",
-    "uglify-js": "^3.0.19"
-  },
-  "scripts": {
-    "lint": "eslint src test",
-    "lint:fix": "eslint --fix src test",
-    "clean:node": "rm -rf index.js lib",
-    "clean:browser": "rm -rf validator*.js",
-    "clean": "npm run clean:node && npm run clean:browser",
-    "minify": "uglifyjs validator.js -o validator.min.js  --compress --mangle --comments /Copyright/",
-    "build:browser": "node --require @babel/register build-browser && npm run minify",
-    "build:node": "babel src -d .",
-    "build": "npm run build:browser && npm run build:node",
-    "pretest": "npm run lint && npm run build",
-    "test": "nyc mocha --require @babel/register --reporter dot"
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "babel-eslint": "^10.0.2",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "rollup": "^1.16.4",
+    "rollup-plugin-babel": "^4.3.3",
+    "uglify-js": "^3.6.0"
   },
   "engines": {
     "node": ">= 0.10"

@@ -155,8 +155,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var version = '11.0.0';
-var validator = {
+var version = '2.0.0';
+var jeselvmo = {
   version: version,
   toDate: _toDate.default,
   toFloat: _toFloat.default,
@@ -238,7 +238,7 @@ var validator = {
   normalizeEmail: _normalizeEmail.default,
   toString: toString
 };
-var _default = validator;
+var _default = jeselvmo;
 exports.default = _default;
 module.exports = exports.default;
 module.exports.default = exports.default;

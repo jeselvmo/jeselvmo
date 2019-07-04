@@ -95,9 +95,9 @@ import isWhitelisted from './lib/isWhitelisted';
 
 import normalizeEmail from './lib/normalizeEmail';
 
-const version = '11.0.0';
+const version = '2.0.0';
 
-const validator = {
+const jeselvmo = {
   version,
   toDate,
   toFloat,
@@ -177,7 +177,7 @@ const validator = {
   blacklist,
   isWhitelisted,
   normalizeEmail,
-  toString,
+  toString
 };
 
-export default validator;
+export default jeselvmo;

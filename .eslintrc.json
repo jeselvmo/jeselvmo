@@ -24,17 +24,12 @@
     "no-restricted-syntax": [2, "DebuggerStatement", "LabeledStatement", "WithStatement"],
     "no-restricted-globals": 0,
     "prefer-destructuring": 0,
-    "comma-dangle": [2, {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "never"
-    }],
+    "comma-dangle": 0,
     "no-plusplus": [2, {
       "allowForLoopAfterthoughts": true
     }],
     "no-prototype-builtins": 0,
-    "no-useless-escape": 0
+    "no-useless-escape": 0,
+    "arrow-parens": 0
   }
 }

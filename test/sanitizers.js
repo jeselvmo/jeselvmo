@@ -1,14 +1,14 @@
 import { format } from 'util';
-import validator from '../src/index';
+import jeselvmo from '../src/index';
 
 function test(options) {
   let args = options.args || [];
 
   args.unshift(null);
 
-  Object.keys(options.expect).forEach((input) => {
+  Object.keys(options.expect).forEach(input => {
     args[0] = input;
-    let result = validator[options.sanitizer](...args);
+    let result = jeselvmo[options.sanitizer](...args);
     let expected = options.expect[input];
     if (isNaN(result) && !result.length && isNaN(expected)) {
       return;
@@ -17,7 +17,10 @@ function test(options) {
     if (result !== expected) {
       let warning = format(
         'validator.%s(%s) returned "%s" but should have returned "%s"',
-        options.sanitizer, args.join(', '), result, expected
+        options.sanitizer,
+        args.join(', '),
+        result,
+        expected
       );
 
       throw new Error(warning);
@@ -35,8 +38,8 @@ describe('Sanitizers', () => {
         1: true,
         true: true,
         foobar: true,
-        '   ': true,
-      },
+        '   ': true
+      }
     });
     test({
       sanitizer: 'toBoolean',
@@ -47,8 +50,8 @@ describe('Sanitizers', () => {
         1: true,
         true: true,
         foobar: false,
-        '   ': false,
-      },
+        '   ': false
+      }
     });
   });
 
@@ -57,24 +60,24 @@ describe('Sanitizers', () => {
       sanitizer: 'trim',
       expect: {
         '  \r\n\tfoo  \r\n\t   ': 'foo',
-        '      \r': '',
-      },
+        '      \r': ''
+      }
     });
 
     test({
       sanitizer: 'ltrim',
       expect: {
         '  \r\n\tfoo  \r\n\t   ': 'foo  \r\n\t   ',
-        '   \t  \n': '',
-      },
+        '   \t  \n': ''
+      }
     });
 
     test({
       sanitizer: 'rtrim',
       expect: {
         '  \r\n\tfoo  \r\n\t   ': '  \r\n\tfoo',
-        ' \r\n  \t': '',
-      },
+        ' \r\n  \t': ''
+      }
     });
   });
 
@@ -82,32 +85,31 @@ describe('Sanitizers', () => {
     test({
       sanitizer: 'trim',
       args: ['01'],
-      expect: { '010100201000': '2' },
+      expect: { '010100201000': '2' }
     });
 
     test({
       sanitizer: 'ltrim',
       args: ['01'],
-      expect: { '010100201000': '201000' },
+      expect: { '010100201000': '201000' }
     });
 
     test({
       sanitizer: 'ltrim',
       args: ['\\S'],
-      expect: { '\\S01010020100001': '01010020100001' },
+      expect: { '\\S01010020100001': '01010020100001' }
     });
-
 
     test({
       sanitizer: 'rtrim',
       args: ['01'],
-      expect: { '010100201000': '0101002' },
+      expect: { '010100201000': '0101002' }
     });
 
     test({
       sanitizer: 'rtrim',
       args: ['\\S'],
-      expect: { '01010020100001\\S': '01010020100001' },
+      expect: { '01010020100001\\S': '01010020100001' }
     });
   });
 
@@ -118,14 +120,14 @@ describe('Sanitizers', () => {
         3: 3,
         ' 3 ': 3,
         2.4: 2,
-        foo: NaN,
-      },
+        foo: NaN
+      }
     });
 
     test({
       sanitizer: 'toInt',
       args: [16],
-      expect: { ff: 255 },
+      expect: { ff: 255 }
     });
   });
 
@@ -137,8 +139,8 @@ describe('Sanitizers', () => {
         '2.': 2.0,
         '-2.5': -2.5,
         '.5': 0.5,
-        foo: NaN,
-      },
+        foo: NaN
+      }
     });
   });
 
@@ -146,18 +148,14 @@ describe('Sanitizers', () => {
     test({
       sanitizer: 'escape',
       expect: {
-        '<script> alert("xss&fun"); </script>':
-            '&lt;script&gt; alert(&quot;xss&amp;fun&quot;); &lt;&#x2F;script&gt;',
+        '<script> alert("xss&fun"); </script>': '&lt;script&gt; alert(&quot;xss&amp;fun&quot;); &lt;&#x2F;script&gt;',
 
-        "<script> alert('xss&fun'); </script>":
-            '&lt;script&gt; alert(&#x27;xss&amp;fun&#x27;); &lt;&#x2F;script&gt;',
+        "<script> alert('xss&fun'); </script>": '&lt;script&gt; alert(&#x27;xss&amp;fun&#x27;); &lt;&#x2F;script&gt;',
 
-        'Backtick: `':
-            'Backtick: &#96;',
+        'Backtick: `': 'Backtick: &#96;',
 
-        'Backslash: \\':
-            'Backslash: &#x5C;',
-      },
+        'Backslash: \\': 'Backslash: &#x5C;'
+      }
     });
   });
 
@@ -165,15 +163,12 @@ describe('Sanitizers', () => {
     test({
       sanitizer: 'unescape',
       expect: {
-        '&lt;script&gt; alert(&quot;xss&amp;fun&quot;); &lt;&#x2F;script&gt;':
-             '<script> alert("xss&fun"); </script>',
+        '&lt;script&gt; alert(&quot;xss&amp;fun&quot;); &lt;&#x2F;script&gt;': '<script> alert("xss&fun"); </script>',
 
-        '&lt;script&gt; alert(&#x27;xss&amp;fun&#x27;); &lt;&#x2F;script&gt;':
-            "<script> alert('xss&fun'); </script>",
+        '&lt;script&gt; alert(&#x27;xss&amp;fun&#x27;); &lt;&#x2F;script&gt;': "<script> alert('xss&fun'); </script>",
 
-        'Backtick: &#96;':
-            'Backtick: `',
-      },
+        'Backtick: &#96;': 'Backtick: `'
+      }
     });
   });
 
@@ -185,8 +180,8 @@ describe('Sanitizers', () => {
         'foo\x00': 'foo',
         '\x7Ffoo\x02': 'foo',
         '\x01\x09': '',
-        'foo\x0A\x0D': 'foo',
-      },
+        'foo\x0A\x0D': 'foo'
+      }
     });
     // Unicode safety
     test({
@@ -195,8 +190,8 @@ describe('Sanitizers', () => {
         perché: 'perch\u00e9',
         '\u20ac': '\u20ac',
         '\u2206\x0A': '\u2206',
-        '\ud83d\ude04': '\ud83d\ude04',
-      },
+        '\ud83d\ude04': '\ud83d\ude04'
+      }
     });
     // Preserve newlines
     test({
@@ -204,8 +199,8 @@ describe('Sanitizers', () => {
       args: [true], // keep_new_lines
       expect: {
         'foo\x0A\x0D': 'foo\x0A\x0D',
-        '\x03foo\x0A\x0D': 'foo\x0A\x0D',
-      },
+        '\x03foo\x0A\x0D': 'foo\x0A\x0D'
+      }
     });
   });
 
@@ -217,8 +212,8 @@ describe('Sanitizers', () => {
         abcdef: 'abc',
         aaaaaaaaaabbbbbbbbbb: 'aaaaaaaaaabbbbbbbbbb',
         a1b2c3: 'abc',
-        '   ': '',
-      },
+        '   ': ''
+      }
     });
   });
 
@@ -230,8 +225,8 @@ describe('Sanitizers', () => {
         abcdef: 'def',
         aaaaaaaaaabbbbbbbbbb: '',
         a1b2c3: '123',
-        '   ': '   ',
-      },
+        '   ': '   '
+      }
     });
   });
 
@@ -262,8 +257,8 @@ describe('Sanitizers', () => {
         '@gmail.com': false,
         '@icloud.com': false,
         '@outlook.com': false,
-        '@yahoo.com': false,
-      },
+        '@yahoo.com': false
+      }
     });
 
     // Testing all_lowercase switch, should apply to domains not known to be case-insensitive
@@ -285,21 +280,23 @@ describe('Sanitizers', () => {
         'SOME.name@yahoo.ca': 'some.name@yahoo.ca',
         'SOME.name@outlook.ie': 'some.name@outlook.ie',
         'SOME.name@me.com': 'some.name@me.com',
-        'SOME.name@yandex.ru': 'some.name@yandex.ru',
-      },
+        'SOME.name@yandex.ru': 'some.name@yandex.ru'
+      }
     });
 
     // Testing *_lowercase
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        all_lowercase: false,
-        gmail_lowercase: false,
-        icloud_lowercase: false,
-        outlookdotcom_lowercase: false,
-        yahoo_lowercase: false,
-        yandex_lowercase: false,
-      }],
+      args: [
+        {
+          all_lowercase: false,
+          gmail_lowercase: false,
+          icloud_lowercase: false,
+          outlookdotcom_lowercase: false,
+          yahoo_lowercase: false,
+          yandex_lowercase: false
+        }
+      ],
       expect: {
         'TEST@FOO.COM': 'TEST@foo.com', // all_lowercase
         'ME@gMAil.com': 'ME@gmail.com', // gmail_lowercase
@@ -308,21 +305,23 @@ describe('Sanitizers', () => {
         'ME@outlook.COM': 'ME@outlook.com', // outlookdotcom_lowercase
         'JOHN@live.CA': 'JOHN@live.ca', // outlookdotcom_lowercase
         'ME@ymail.COM': 'ME@ymail.com', // yahoo_lowercase
-        'ME@yandex.RU': 'ME@yandex.ru', // yandex_lowercase
-      },
+        'ME@yandex.RU': 'ME@yandex.ru' // yandex_lowercase
+      }
     });
 
     // Testing all_lowercase
     // Should overwrite all the *_lowercase options
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        all_lowercase: true,
-        gmail_lowercase: false, // Overruled
-        icloud_lowercase: false, // Overruled
-        outlookdotcom_lowercase: false, // Overruled
-        yahoo_lowercase: false, // Overruled
-      }],
+      args: [
+        {
+          all_lowercase: true,
+          gmail_lowercase: false, // Overruled
+          icloud_lowercase: false, // Overruled
+          outlookdotcom_lowercase: false, // Overruled
+          yahoo_lowercase: false // Overruled
+        }
+      ],
       expect: {
         'TEST@FOO.COM': 'test@foo.com', // all_lowercase
         'ME@gMAil.com': 'me@gmail.com', // gmail_lowercase
@@ -330,45 +329,51 @@ describe('Sanitizers', () => {
         'ME@icloud.COM': 'me@icloud.com', // icloud_lowercase
         'ME@outlook.COM': 'me@outlook.com', // outlookdotcom_lowercase
         'JOHN@live.CA': 'john@live.ca', // outlookdotcom_lowercase
-        'ME@ymail.COM': 'me@ymail.com', // yahoo_lowercase
-      },
+        'ME@ymail.COM': 'me@ymail.com' // yahoo_lowercase
+      }
     });
 
     // Testing *_remove_dots
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        gmail_remove_dots: false,
-      }],
+      args: [
+        {
+          gmail_remove_dots: false
+        }
+      ],
       expect: {
         'SOME.name@GMAIL.com': 'some.name@gmail.com',
         'SOME.name+me@GMAIL.com': 'some.name@gmail.com',
-        'my.self@foo.com': 'my.self@foo.com',
-      },
+        'my.self@foo.com': 'my.self@foo.com'
+      }
     });
 
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        gmail_remove_dots: true,
-      }],
+      args: [
+        {
+          gmail_remove_dots: true
+        }
+      ],
       expect: {
         'SOME.name@GMAIL.com': 'somename@gmail.com',
         'SOME.name+me@GMAIL.com': 'somename@gmail.com',
         'some.name..multiple@gmail.com': 'somename..multiple@gmail.com',
-        'my.self@foo.com': 'my.self@foo.com',
-      },
+        'my.self@foo.com': 'my.self@foo.com'
+      }
     });
 
     // Testing *_remove_subaddress
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        gmail_remove_subaddress: false,
-        icloud_remove_subaddress: false,
-        outlookdotcom_remove_subaddress: false,
-        yahoo_remove_subaddress: false, // Note Yahoo uses "-"
-      }],
+      args: [
+        {
+          gmail_remove_subaddress: false,
+          icloud_remove_subaddress: false,
+          outlookdotcom_remove_subaddress: false,
+          yahoo_remove_subaddress: false // Note Yahoo uses "-"
+        }
+      ],
       expect: {
         'foo+bar@unknown.com': 'foo+bar@unknown.com',
         'foo+bar@gmail.com': 'foo+bar@gmail.com', // gmail_remove_subaddress
@@ -377,18 +382,20 @@ describe('Sanitizers', () => {
         'foo+bar@live.fr': 'foo+bar@live.fr', // outlookdotcom_remove_subaddress
         'foo+bar@hotmail.co.uk': 'foo+bar@hotmail.co.uk', // outlookdotcom_remove_subaddress
         'foo-bar@yahoo.com': 'foo-bar@yahoo.com', // yahoo_remove_subaddress
-        'foo+bar@yahoo.com': 'foo+bar@yahoo.com', // yahoo_remove_subaddress
-      },
+        'foo+bar@yahoo.com': 'foo+bar@yahoo.com' // yahoo_remove_subaddress
+      }
     });
 
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        gmail_remove_subaddress: true,
-        icloud_remove_subaddress: true,
-        outlookdotcom_remove_subaddress: true,
-        yahoo_remove_subaddress: true, // Note Yahoo uses "-"
-      }],
+      args: [
+        {
+          gmail_remove_subaddress: true,
+          icloud_remove_subaddress: true,
+          outlookdotcom_remove_subaddress: true,
+          yahoo_remove_subaddress: true // Note Yahoo uses "-"
+        }
+      ],
       expect: {
         'foo+bar@unknown.com': 'foo+bar@unknown.com',
         'foo+bar@gmail.com': 'foo@gmail.com', // gmail_remove_subaddress
@@ -397,39 +404,43 @@ describe('Sanitizers', () => {
         'foo+bar@live.fr': 'foo@live.fr', // outlookdotcom_remove_subaddress
         'foo+bar@hotmail.co.uk': 'foo@hotmail.co.uk', // outlookdotcom_remove_subaddress
         'foo-bar@yahoo.com': 'foo@yahoo.com', // yahoo_remove_subaddress
-        'foo+bar@yahoo.com': 'foo+bar@yahoo.com', // yahoo_remove_subaddress
-      },
+        'foo+bar@yahoo.com': 'foo+bar@yahoo.com' // yahoo_remove_subaddress
+      }
     });
 
     // Testing gmail_convert_googlemaildotcom
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        gmail_convert_googlemaildotcom: false,
-      }],
+      args: [
+        {
+          gmail_convert_googlemaildotcom: false
+        }
+      ],
       expect: {
         'SOME.name@GMAIL.com': 'somename@gmail.com',
         'SOME.name+me@GMAIL.com': 'somename@gmail.com',
         'SOME.name+me@googlemail.com': 'somename@googlemail.com',
         'SOME.name+me@googlemail.COM': 'somename@googlemail.com',
         'SOME.name+me@googlEmail.com': 'somename@googlemail.com',
-        'my.self@foo.com': 'my.self@foo.com',
-      },
+        'my.self@foo.com': 'my.self@foo.com'
+      }
     });
 
     test({
       sanitizer: 'normalizeEmail',
-      args: [{
-        gmail_convert_googlemaildotcom: true,
-      }],
+      args: [
+        {
+          gmail_convert_googlemaildotcom: true
+        }
+      ],
       expect: {
         'SOME.name@GMAIL.com': 'somename@gmail.com',
         'SOME.name+me@GMAIL.com': 'somename@gmail.com',
         'SOME.name+me@googlemail.com': 'somename@gmail.com',
         'SOME.name+me@googlemail.COM': 'somename@gmail.com',
         'SOME.name+me@googlEmail.com': 'somename@gmail.com',
-        'my.self@foo.com': 'my.self@foo.com',
-      },
+        'my.self@foo.com': 'my.self@foo.com'
+      }
     });
   });
 });
