@@ -129,12 +129,6 @@ var _blacklist = _interopRequireDefault(require("./lib/blacklist"));
 
 var _isWhitelisted = _interopRequireDefault(require("./lib/isWhitelisted"));
 
-var _kindOf = _interopRequireDefault(require("./lib/kindOf"));
-
-var _hasOwnProperty = _interopRequireDefault(require("./lib/hasOwnProperty"));
-
-var _objectToString = _interopRequireDefault(require("./lib/objectToString"));
-
 var _isPhoneNum = _interopRequireDefault(require("./lib/isPhoneNum"));
 
 var _isIdCard = _interopRequireDefault(require("./lib/isIdCard"));
@@ -263,6 +257,8 @@ var _times = _interopRequireDefault(require("./lib/times"));
 
 var _repeat = _interopRequireDefault(require("./lib/repeat"));
 
+var _kindOf = _interopRequireDefault(require("./lib/kindOf"));
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -352,10 +348,6 @@ var jeselvmo = {
   // 删除黑名单中的字符
   isWhitelisted: _isWhitelisted.default,
   toString: toString,
-  // base
-  kindOf: _kindOf.default,
-  hasOwnProperty: _hasOwnProperty.default,
-  objectToString: _objectToString.default,
   // validate
   isPhoneNum: _isPhoneNum.default,
   isIdCard: _isIdCard.default,
@@ -430,7 +422,8 @@ var jeselvmo = {
   checkPasswordLevel: _checkPasswordLevel.default,
   inherits: _inherits.default,
   times: _times.default,
-  repeat: _repeat.default
+  repeat: _repeat.default,
+  kindOf: _kindOf.default
 };
 var _default = jeselvmo;
 exports.default = _default;

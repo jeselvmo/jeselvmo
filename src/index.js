@@ -85,9 +85,6 @@ import isWhitelisted from './lib/isWhitelisted';
 // ////////////////////////////////////////////////////////////////////////
 
 // base
-import kindOf from './lib/kindOf';
-import hasOwnProperty from './lib/hasOwnProperty';
-import objectToString from './lib/objectToString';
 
 // validate
 import isPhoneNum from './lib/isPhoneNum';
@@ -178,6 +175,8 @@ import findScript from './lib/findScript';
 import times from './lib/times';
 import repeat from './lib/repeat';
 
+import kindOf from './lib/kindOf';
+
 const version = '2.0.0';
 
 const jeselvmo = {
@@ -248,11 +247,6 @@ const jeselvmo = {
   blacklist, // 删除黑名单中的字符
   isWhitelisted,
   toString,
-
-  // base
-  kindOf,
-  hasOwnProperty,
-  objectToString,
 
   // validate
   isPhoneNum,
@@ -340,7 +334,9 @@ const jeselvmo = {
   inherits,
 
   times,
-  repeat
+  repeat,
+
+  kindOf
 };
 
 export default jeselvmo;
