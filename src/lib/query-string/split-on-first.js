@@ -13,8 +13,5 @@ export default (string, separator) => {
     return [string];
   }
 
-  return [
-    string.slice(0, separatorIndex),
-    string.slice(separatorIndex + separator.length)
-  ];
+  return [string.slice(0, separatorIndex), string.slice(separatorIndex + separator.length)];
 };

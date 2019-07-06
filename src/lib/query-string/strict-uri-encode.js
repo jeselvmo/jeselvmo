@@ -1,1 +1,10 @@
-export default str => encodeURIComponent(str).replace(/[!'()*]/g, x => `%${x.charCodeAt(0).toString(16).toUpperCase()}`);
+/* eslint-disable implicit-arrow-linebreak */
+export default str =>
+  encodeURIComponent(str).replace(
+    /[!'()*]/g,
+    x =>
+      `%${x
+        .charCodeAt(0)
+        .toString(16)
+        .toUpperCase()}`
+  );

@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import assertString from './util/assertString';
 import toString from './util/toString';
 

@@ -1,9 +1,5 @@
 import isJSON from '../isJSON';
 
-function stringify(val) {
-  return JSON.stringify(val);
-}
-
 function setStorageItem(storage, key, val) {
   if (key && !isJSON(key)) {
     let value = JSON.stringify(val);

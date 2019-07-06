@@ -15,7 +15,7 @@
     "build:browser": "rollup -c && npm run minify",
     "build:node": "babel src -d .",
     "build": "npm run build:browser && npm run build:node",
-    "test": "mocha --require @babel/register --reporter dot"
+    "test": "mocha --require @babel/register --require ./test/setup.js --reporter dot"
   },
   "files": [
     "index.js",
@@ -29,12 +29,10 @@
     "jeselvmo",
     "validate"
   ],
-  "contributors": [
-    {
-      "name": "jeselvmo",
-      "url": "https://github.com/jeselvmo"
-    }
-  ],
+  "contributors": [{
+    "name": "jeselvmo",
+    "url": "https://github.com/jeselvmo"
+  }],
   "bugs": {
     "url": "https://github.com/jeselvmo/jeselvmo/issues"
   },

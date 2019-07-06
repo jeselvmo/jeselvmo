@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import assertString from './util/assertString';
 
 /* eslint-disable max-len */
@@ -77,7 +78,7 @@ const phones = {
   'uk-UA': /^(\+?38|8)?0\d{9}$/,
   'vi-VN': /^(\+?84|0)((3([2-9]))|(5([2689]))|(7([0|6-9]))|(8([1-6|89]))|(9([0-9])))([0-9]{7})$/,
   'zh-CN': /^((\+|00)86)?1([358][0-9]|4[579]|6[67]|7[0135678]|9[189])[0-9]{8}$/,
-  'zh-TW': /^(\+?886\-?|0)?9\d{8}$/,
+  'zh-TW': /^(\+?886\-?|0)?9\d{8}$/
 };
 /* eslint-enable max-len */
 
@@ -92,7 +93,7 @@ export default function isMobilePhone(str, locale, options) {
     return false;
   }
   if (Array.isArray(locale)) {
-    return locale.some((key) => {
+    return locale.some(key => {
       // https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md#ignoring-code-for-coverage-purposes
       // istanbul ignore else
       if (phones.hasOwnProperty(key)) {

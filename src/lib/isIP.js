@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import assertString from './util/assertString';
 
 const ipv4Maybe = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;

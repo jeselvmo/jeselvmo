@@ -9,7 +9,7 @@ const default_email_options = {
   allow_display_name: false,
   require_display_name: false,
   allow_utf8_local_part: true,
-  require_tld: true,
+  require_tld: true
 };
 
 /* eslint-disable max-len */
@@ -56,7 +56,6 @@ function validateDisplayName(display_name) {
 
   return true;
 }
-
 
 export default function isEmail(str, options) {
   assertString(str);
@@ -118,8 +117,7 @@ export default function isEmail(str, options) {
     }
   }
 
-  if (!isByteLength(user, { max: 64 }) ||
-            !isByteLength(domain, { max: 254 })) {
+  if (!isByteLength(user, { max: 64 }) || !isByteLength(domain, { max: 254 })) {
     return false;
   }
 
@@ -143,13 +141,10 @@ export default function isEmail(str, options) {
 
   if (user[0] === '"') {
     user = user.slice(1, user.length - 1);
-    return options.allow_utf8_local_part ?
-      quotedEmailUserUtf8.test(user) :
-      quotedEmailUser.test(user);
+    return options.allow_utf8_local_part ? quotedEmailUserUtf8.test(user) : quotedEmailUser.test(user);
   }
 
-  const pattern = options.allow_utf8_local_part ?
-    emailUserUtf8Part : emailUserPart;
+  const pattern = options.allow_utf8_local_part ? emailUserUtf8Part : emailUserPart;
 
   const user_parts = user.split('.');
   for (let i = 0; i < user_parts.length; i++) {

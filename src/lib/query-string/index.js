@@ -32,10 +32,7 @@ function encoderForArrayFormat(options) {
           return [...result, [encode(key, options), '[', index, ']'].join('')];
         }
 
-        return [
-          ...result,
-          [encode(key, options), '[', encode(index, options), ']=', encode(value, options)].join('')
-        ];
+        return [...result, [encode(key, options), '[', encode(index, options), ']=', encode(value, options)].join('')];
       };
 
     case 'bracket':
@@ -58,14 +55,10 @@ function encoderForArrayFormat(options) {
         }
 
         if (index === 0) {
-          return [
-            [encode(key, options), '=', encode(value, options)].join('')
-          ];
+          return [[encode(key, options), '=', encode(value, options)].join('')];
         }
 
-        return [
-          [result, encode(value, options)].join(',')
-        ];
+        return [[result, encode(value, options)].join(',')];
       };
 
     default:
@@ -176,13 +169,16 @@ function extract(input) {
 }
 
 function parse(input, options) {
-  options = Object.assign({
-    decode: true,
-    sort: true,
-    arrayFormat: 'none',
-    parseNumbers: false,
-    parseBooleans: false
-  }, options);
+  options = Object.assign(
+    {
+      decode: true,
+      sort: true,
+      arrayFormat: 'none',
+      parseNumbers: false,
+      parseBooleans: false
+    },
+    options
+  );
 
   const formatter = parserForArrayFormat(options);
 
@@ -208,7 +204,11 @@ function parse(input, options) {
 
     if (options.parseNumbers && !Number.isNaN(Number(value))) {
       value = Number(value);
-    } else if (options.parseBooleans && value !== null && (value.toLowerCase() === 'true' || value.toLowerCase() === 'false')) {
+    } else if (
+      options.parseBooleans &&
+      value !== null &&
+      (value.toLowerCase() === 'true' || value.toLowerCase() === 'false')
+    ) {
       value = value.toLowerCase() === 'true';
     }
 
@@ -219,17 +219,20 @@ function parse(input, options) {
     return ret;
   }
 
-  return (options.sort === true ? Object.keys(ret).sort() : Object.keys(ret).sort(options.sort)).reduce((result, key) => {
-    const value = ret[key];
-    if (Boolean(value) && typeof value === 'object' && !Array.isArray(value)) {
-      // Sort object keys, not values
-      result[key] = keysSorter(value);
-    } else {
-      result[key] = value;
-    }
+  return (options.sort === true ? Object.keys(ret).sort() : Object.keys(ret).sort(options.sort)).reduce(
+    (result, key) => {
+      const value = ret[key];
+      if (Boolean(value) && typeof value === 'object' && !Array.isArray(value)) {
+        // Sort object keys, not values
+        result[key] = keysSorter(value);
+      } else {
+        result[key] = value;
+      }
 
-    return result;
-  }, Object.create(null));
+      return result;
+    },
+    Object.create(null)
+  );
 }
 
 function stringify(object, options) {
@@ -237,11 +240,14 @@ function stringify(object, options) {
     return '';
   }
 
-  options = Object.assign({
-    encode: true,
-    strict: true,
-    arrayFormat: 'none'
-  }, options);
+  options = Object.assign(
+    {
+      encode: true,
+      strict: true,
+      arrayFormat: 'none'
+    },
+    options
+  );
 
   const formatter = encoderForArrayFormat(options);
   const keys = Object.keys(object);
@@ -250,25 +256,26 @@ function stringify(object, options) {
     keys.sort(options.sort);
   }
 
-  return keys.map(key => {
-    const value = object[key];
+  return keys
+    .map(key => {
+      const value = object[key];
 
-    if (value === undefined) {
-      return '';
-    }
+      if (value === undefined) {
+        return '';
+      }
 
-    if (value === null) {
-      return encode(key, options);
-    }
+      if (value === null) {
+        return encode(key, options);
+      }
 
-    if (Array.isArray(value)) {
-      return value
-        .reduce(formatter(key), [])
-        .join('&');
-    }
+      if (Array.isArray(value)) {
+        return value.reduce(formatter(key), []).join('&');
+      }
 
-    return encode(key, options) + '=' + encode(value, options);
-  }).filter(x => x.length > 0).join('&');
+      return encode(key, options) + '=' + encode(value, options);
+    })
+    .filter(x => x.length > 0)
+    .join('&');
 }
 
 function parseUrl(input, options) {

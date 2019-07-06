@@ -1,7 +1,8 @@
+/* eslint-disable no-else-return */
 import assertString from './util/assertString';
 
 const validators = {
-  ES: (str) => {
+  ES: str => {
     assertString(str);
 
     const DNI = /^[0-9X-Z][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE]$/;
@@ -9,12 +10,33 @@ const validators = {
     const charsValue = {
       X: 0,
       Y: 1,
-      Z: 2,
+      Z: 2
     };
 
     const controlDigits = [
-      'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B',
-      'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E',
+      'T',
+      'R',
+      'W',
+      'A',
+      'G',
+      'M',
+      'Y',
+      'F',
+      'P',
+      'D',
+      'X',
+      'B',
+      'N',
+      'J',
+      'Z',
+      'S',
+      'Q',
+      'V',
+      'H',
+      'L',
+      'C',
+      'K',
+      'E'
     ];
 
     // sanitize user input
@@ -30,7 +52,7 @@ const validators = {
 
     return sanitized.endsWith(controlDigits[number % 23]);
   },
-  'he-IL': (str) => {
+  'he-IL': str => {
     const DNI = /^\d{9}$/;
 
     // sanitize user input
@@ -51,7 +73,7 @@ const validators = {
     }
     return sum % 10 === 0;
   },
-  'zh-TW': (str) => {
+  'zh-TW': str => {
     const ALPHABET_CODES = {
       A: 10,
       B: 11,
@@ -78,7 +100,7 @@ const validators = {
       W: 32,
       X: 30,
       Y: 31,
-      Z: 33,
+      Z: 33
     };
 
     const sanitized = str.trim().toUpperCase();
@@ -89,16 +111,16 @@ const validators = {
       if (index === 0) {
         const code = ALPHABET_CODES[number];
 
-        return ((code % 10) * 9) + Math.floor(code / 10);
+        return (code % 10) * 9 + Math.floor(code / 10);
       }
 
       if (index === 9) {
-        return ((10 - (sum % 10)) - Number(number)) % 10 === 0;
+        return (10 - (sum % 10) - Number(number)) % 10 === 0;
       }
 
-      return sum + (Number(number) * (9 - index));
+      return sum + Number(number) * (9 - index);
     }, 0);
-  },
+  }
 };
 
 export default function isIdentityCard(str, locale) {

@@ -1,15 +1,12 @@
 import assert from 'assert';
 import jeselvmo from '../index';
 import { locales as isPostalCodeLocales } from '../src/lib/isPostalCode';
-import { locales as isAlphaLocales } from '../src/lib/isAlpha';
-import { locales as isAlphanumericLocales } from '../src/lib/isAlphanumeric';
 import { locales as isMobilePhoneLocales } from '../src/lib/isMobilePhone';
 import { locales as isFloatLocales } from '../src/lib/isFloat';
 
 describe('Exports', () => {
   it('should export validators', () => {
     assert.equal(typeof jeselvmo.isEmail, 'function');
-    assert.equal(typeof jeselvmo.isAlpha, 'function');
   });
 
   it('should export sanitizers', () => {
@@ -30,16 +27,6 @@ describe('Exports', () => {
   it("should export isPostalCode's supported locales", () => {
     assert.ok(isPostalCodeLocales instanceof Array);
     assert.ok(jeselvmo.isPostalCodeLocales instanceof Array);
-  });
-
-  it("should export isAlpha's supported locales", () => {
-    assert.ok(isAlphaLocales instanceof Array);
-    assert.ok(jeselvmo.isAlphaLocales instanceof Array);
-  });
-
-  it("should export isAlphanumeric's supported locales", () => {
-    assert.ok(isAlphanumericLocales instanceof Array);
-    assert.ok(jeselvmo.isAlphanumericLocales instanceof Array);
   });
 
   it("should export isMobilePhone's supported locales", () => {

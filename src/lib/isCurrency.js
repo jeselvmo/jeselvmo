@@ -3,14 +3,14 @@ import assertString from './util/assertString';
 
 function currencyRegex(options) {
   let decimal_digits = `\\d{${options.digits_after_decimal[0]}}`;
-  options.digits_after_decimal.forEach((digit, index) => { if (index !== 0) decimal_digits = `${decimal_digits}|\\d{${digit}}`; });
-  const symbol =
-    `(\\${options.symbol.replace(/\./g, '\\.')})${(options.require_symbol ? '' : '?')}`,
+  options.digits_after_decimal.forEach((digit, index) => {
+    if (index !== 0) decimal_digits = `${decimal_digits}|\\d{${digit}}`;
+  });
+  const symbol = `(\\${options.symbol.replace(/\./g, '\\.')})${options.require_symbol ? '' : '?'}`,
     negative = '-?',
     whole_dollar_amount_without_sep = '[1-9]\\d*',
     whole_dollar_amount_with_sep = `[1-9]\\d{0,2}(\\${options.thousands_separator}\\d{3})*`,
-    valid_whole_dollar_amounts = [
-      '0', whole_dollar_amount_without_sep, whole_dollar_amount_with_sep],
+    valid_whole_dollar_amounts = ['0', whole_dollar_amount_without_sep, whole_dollar_amount_with_sep],
     whole_dollar_amount = `(${valid_whole_dollar_amounts.join('|')})?`,
     decimal_amount = `(\\${options.decimal_separator}(${decimal_digits}))${options.require_decimal ? '' : '?'}`;
   let pattern = whole_dollar_amount + (options.allow_decimal || options.require_decimal ? decimal_amount : '');
@@ -52,7 +52,6 @@ function currencyRegex(options) {
   return new RegExp(`^(?!-? )(?=.*\\d)${pattern}$`);
 }
 
-
 const default_currency_options = {
   symbol: '$',
   require_symbol: false,
@@ -68,7 +67,7 @@ const default_currency_options = {
   allow_decimal: true,
   require_decimal: false,
   digits_after_decimal: [2],
-  allow_space_after_digits: false,
+  allow_space_after_digits: false
 };
 
 export default function isCurrency(str, options) {
