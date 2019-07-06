@@ -129,8 +129,6 @@ var _blacklist = _interopRequireDefault(require("./lib/blacklist"));
 
 var _isWhitelisted = _interopRequireDefault(require("./lib/isWhitelisted"));
 
-var _normalizeEmail = _interopRequireDefault(require("./lib/normalizeEmail"));
-
 var _kindOf = _interopRequireDefault(require("./lib/kindOf"));
 
 var _hasOwnProperty = _interopRequireDefault(require("./lib/hasOwnProperty"));
@@ -353,7 +351,6 @@ var jeselvmo = {
   blacklist: _blacklist.default,
   // 删除黑名单中的字符
   isWhitelisted: _isWhitelisted.default,
-  normalizeEmail: _normalizeEmail.default,
   toString: toString,
   // base
   kindOf: _kindOf.default,

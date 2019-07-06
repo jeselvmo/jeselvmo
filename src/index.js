@@ -80,8 +80,6 @@ import whitelist from './lib/whitelist';
 import blacklist from './lib/blacklist';
 import isWhitelisted from './lib/isWhitelisted';
 
-import normalizeEmail from './lib/normalizeEmail';
-
 // ////////////////////////////////////////////////////////////////////////
 // ADD
 // ////////////////////////////////////////////////////////////////////////
@@ -249,7 +247,6 @@ const jeselvmo = {
   whitelist, // 保留白名单中的字符
   blacklist, // 删除黑名单中的字符
   isWhitelisted,
-  normalizeEmail,
   toString,
 
   // base
