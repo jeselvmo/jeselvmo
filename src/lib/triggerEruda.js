@@ -23,7 +23,6 @@ function triggerEruda(ele = document, num = 20, limit = 6000) {
   const handleClick = () => {
     let eruda = window.eruda;
     count++;
-    console.log('TCL: triggerEruda -> ', count);
     if (count >= num) {
       let activeEruda = getLocalItem(ACTIVE_ERUDA) || false;
       activeEruda = !activeEruda;
@@ -41,11 +40,9 @@ function triggerEruda(ele = document, num = 20, limit = 6000) {
   };
 
   ele.addEventListener('click', handleClick);
-  console.log('TCL: triggerEruda -> addEventListener');
   // 几后清除
   setTimeout(() => {
     ele.removeEventListener('click', handleClick);
-    console.log('TCL: triggerEruda -> removeEventListener');
   }, limit);
 }
 

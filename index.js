@@ -141,6 +141,8 @@ var _isPhoneNum = _interopRequireDefault(require("./lib/isPhoneNum"));
 
 var _isIdCard = _interopRequireDefault(require("./lib/isIdCard"));
 
+var _isPrimitive = _interopRequireDefault(require("./lib/isPrimitive"));
+
 var _isSameDay = _interopRequireDefault(require("./lib/isSameDay"));
 
 var _isLeapYear = _interopRequireDefault(require("./lib/isLeapYear"));
@@ -178,12 +180,6 @@ var _getWeek = _interopRequireDefault(require("./lib/getWeek"));
 var _formatNum = _interopRequireDefault(require("./lib/formatNum"));
 
 var _digitUppercase = _interopRequireDefault(require("./lib/digitUppercase"));
-
-var _addClass = _interopRequireDefault(require("./lib/addClass"));
-
-var _removeClass = _interopRequireDefault(require("./lib/removeClass"));
-
-var _hasClass = _interopRequireDefault(require("./lib/hasClass"));
 
 var _getWindowSize = _interopRequireDefault(require("./lib/getWindowSize"));
 
@@ -231,6 +227,8 @@ var _shallowCopy = _interopRequireDefault(require("./lib/shallowCopy"));
 
 var _deepClone = _interopRequireDefault(require("./lib/deepClone"));
 
+var _deepEquals = _interopRequireDefault(require("./lib/deepEquals"));
+
 var _debounce = _interopRequireDefault(require("./lib/debounce"));
 
 var _throttle = _interopRequireDefault(require("./lib/throttle"));
@@ -262,6 +260,10 @@ var _loadEruda = _interopRequireDefault(require("./lib/loadEruda"));
 var _triggerEruda = _interopRequireDefault(require("./lib/triggerEruda"));
 
 var _findScript = _interopRequireDefault(require("./lib/findScript"));
+
+var _times = _interopRequireDefault(require("./lib/times"));
+
+var _repeat = _interopRequireDefault(require("./lib/repeat"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -362,6 +364,7 @@ var jeselvmo = {
   isIdCard: _isIdCard.default,
   isSameDay: _isSameDay.default,
   isLeapYear: _isLeapYear.default,
+  isPrimitive: _isPrimitive.default,
   // date
   formatDate: _formatDate.default,
   formatPassTime: _formatPassTime.default,
@@ -384,20 +387,10 @@ var jeselvmo = {
   getPlatform: _getPlatform.default,
   getExplore: _getExplore.default,
   // web
-  addClass: _addClass.default,
-  // 给Element添加样式
-  removeClass: _removeClass.default,
-  // 删除Element的样式
-  hasClass: _hasClass.default,
-  // 判断Element是否存在指定样式
   getWindowSize: _getWindowSize.default,
-  // 获取window的大小
   getScrollTop: _getScrollTop.default,
-  // 获取滚动条的位置
   setScrollTop: _setScrollTop.default,
-  // 设置滚动条的位置
   scrollTo: _scrollTo.default,
-  // 滚动到指定位置
   offset: _offset.default,
   // url
   parseUrl: _parseUrl.default,
@@ -433,11 +426,14 @@ var jeselvmo = {
   arrayToHash: _arrayToHash.default,
   shallowCopy: _shallowCopy.default,
   deepClone: _deepClone.default,
+  deepEquals: _deepEquals.default,
   debounce: _debounce.default,
   throttle: _throttle.default,
   pad: _pad.default,
   checkPasswordLevel: _checkPasswordLevel.default,
-  inherits: _inherits.default
+  inherits: _inherits.default,
+  times: _times.default,
+  repeat: _repeat.default
 };
 var _default = jeselvmo;
 exports.default = _default;

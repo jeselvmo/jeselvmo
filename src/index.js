@@ -95,6 +95,8 @@ import objectToString from './lib/objectToString';
 import isPhoneNum from './lib/isPhoneNum';
 import isIdCard from './lib/isIdCard';
 
+import isPrimitive from './lib/isPrimitive';
+
 import isSameDay from './lib/isSameDay';
 import isLeapYear from './lib/isLeapYear';
 
@@ -123,9 +125,6 @@ import formatNum from './lib/formatNum';
 import digitUppercase from './lib/digitUppercase';
 
 // dom
-import addClass from './lib/addClass';
-import removeClass from './lib/removeClass';
-import hasClass from './lib/hasClass';
 import getWindowSize from './lib/getWindowSize';
 import getScrollTop from './lib/getScrollTop';
 import setScrollTop from './lib/setScrollTop';
@@ -157,6 +156,7 @@ import convertRangeValue from './lib/convertRangeValue';
 import arrayToHash from './lib/arrayToHash';
 import shallowCopy from './lib/shallowCopy';
 import deepClone from './lib/deepClone';
+import deepEquals from './lib/deepEquals';
 import debounce from './lib/debounce';
 import throttle from './lib/throttle';
 import pad from './lib/pad';
@@ -176,6 +176,9 @@ import loadUI from './lib/loadUI';
 import loadEruda from './lib/loadEruda';
 import triggerEruda from './lib/triggerEruda';
 import findScript from './lib/findScript';
+
+import times from './lib/times';
+import repeat from './lib/repeat';
 
 const version = '2.0.0';
 
@@ -260,6 +263,8 @@ const jeselvmo = {
   isSameDay,
   isLeapYear,
 
+  isPrimitive,
+
   // date
   formatDate,
   formatPassTime,
@@ -286,13 +291,10 @@ const jeselvmo = {
   getExplore,
 
   // web
-  addClass, // 给Element添加样式
-  removeClass, // 删除Element的样式
-  hasClass, // 判断Element是否存在指定样式
-  getWindowSize, // 获取window的大小
-  getScrollTop, // 获取滚动条的位置
-  setScrollTop, // 设置滚动条的位置
-  scrollTo, // 滚动到指定位置
+  getWindowSize,
+  getScrollTop,
+  setScrollTop,
+  scrollTo,
   offset,
 
   // url
@@ -333,11 +335,15 @@ const jeselvmo = {
   arrayToHash,
   shallowCopy,
   deepClone,
+  deepEquals,
   debounce,
   throttle,
   pad,
   checkPasswordLevel,
-  inherits
+  inherits,
+
+  times,
+  repeat
 };
 
 export default jeselvmo;
