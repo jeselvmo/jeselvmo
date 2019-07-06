@@ -15,8 +15,6 @@ import isFQDN from './lib/isFQDN';
 
 import isBoolean from './lib/isBoolean';
 
-import isAlpha, { locales as isAlphaLocales } from './lib/isAlpha';
-import isAlphanumeric, { locales as isAlphanumericLocales } from './lib/isAlphanumeric';
 import isNumeric from './lib/isNumeric';
 import isPort from './lib/isPort';
 import isLowercase from './lib/isLowercase';
@@ -36,8 +34,6 @@ import isHexadecimal from './lib/isHexadecimal';
 import isDivisibleBy from './lib/isDivisibleBy';
 
 import isHexColor from './lib/isHexColor';
-
-import isISRC from './lib/isISRC';
 
 import isMD5 from './lib/isMD5';
 import isHash from './lib/isHash';
@@ -60,18 +56,9 @@ import isIn from './lib/isIn';
 import isCreditCard from './lib/isCreditCard';
 import isIdentityCard from './lib/isIdentityCard';
 
-import isISIN from './lib/isISIN';
-import isISBN from './lib/isISBN';
-import isISSN from './lib/isISSN';
-
 import isMobilePhone, { locales as isMobilePhoneLocales } from './lib/isMobilePhone';
 
 import isCurrency from './lib/isCurrency';
-
-import isISO8601 from './lib/isISO8601';
-import isRFC3339 from './lib/isRFC3339';
-import isISO31661Alpha2 from './lib/isISO31661Alpha2';
-import isISO31661Alpha3 from './lib/isISO31661Alpha3';
 
 import isBase32 from './lib/isBase32';
 import isBase64 from './lib/isBase64';
@@ -95,6 +82,101 @@ import isWhitelisted from './lib/isWhitelisted';
 
 import normalizeEmail from './lib/normalizeEmail';
 
+// ////////////////////////////////////////////////////////////////////////
+// ADD
+// ////////////////////////////////////////////////////////////////////////
+
+// base
+import kindOf from './lib/kindOf';
+import hasOwnProperty from './lib/hasOwnProperty';
+import objectToString from './lib/objectToString';
+
+// validate
+import isPhoneNum from './lib/isPhoneNum';
+import isIdCard from './lib/isIdCard';
+
+import isSameDay from './lib/isSameDay';
+import isLeapYear from './lib/isLeapYear';
+
+import isIOS from './lib/isIOS';
+import isAndroid from './lib/isAndroid';
+import isMobile from './lib/isMobile';
+import isWin from './lib/isWin';
+import isLinux from './lib/isLinux';
+import isMac from './lib/isMac';
+import isWeiXin from './lib/isWeiXin';
+
+// platform
+import getOS from './lib/getOS';
+import getPlatform from './lib/getPlatform';
+import getExplore from './lib/getExplore';
+
+// date
+import formatDate from './lib/formatDate';
+import formatPassTime from './lib/formatPassTime';
+import formatRemainTime from './lib/formatRemainTime';
+import getDayOfWeek from './lib/getDayOfWeek';
+import getWeek from './lib/getWeek';
+
+// number
+import formatNum from './lib/formatNum';
+import digitUppercase from './lib/digitUppercase';
+
+// dom
+import addClass from './lib/addClass';
+import removeClass from './lib/removeClass';
+import hasClass from './lib/hasClass';
+import getWindowSize from './lib/getWindowSize';
+import getScrollTop from './lib/getScrollTop';
+import setScrollTop from './lib/setScrollTop';
+import scrollTo from './lib/scrollTo';
+import offset from './lib/offset';
+
+// url
+import parseUrl from './lib/parseUrl';
+import parseQueryString from './lib/parseQueryString';
+import toQueryString from './lib/toQueryString';
+import getQueryString from './lib/getQueryString';
+
+// localStorage
+import getLocalItem from './lib/getLocalItem';
+import setLocalItem from './lib/setLocalItem';
+import removeLocalItem from './lib/removeLocalItem';
+// sessionStorage
+import getSessionItem from './lib/getSessionItem';
+import setSessionItem from './lib/setSessionItem';
+import removeSessionItem from './lib/removeSessionItem';
+// cookie
+import getCookieItem from './lib/getCookieItem';
+import setCookieItem from './lib/setCookieItem';
+import removeCookieItem from './lib/removeCookieItem';
+
+// tools
+import clamp from './lib/clamp';
+import convertRangeValue from './lib/convertRangeValue';
+import arrayToHash from './lib/arrayToHash';
+import shallowCopy from './lib/shallowCopy';
+import deepClone from './lib/deepClone';
+import debounce from './lib/debounce';
+import throttle from './lib/throttle';
+import pad from './lib/pad';
+import checkPasswordLevel from './lib/checkPasswordLevel';
+import inherits from './lib/inherits';
+import md5 from './lib/md5';
+import delay from './lib/delay';
+import getKeyName from './lib/getKeyName';
+
+import randomColor from './lib/randomColor';
+import randomNum from './lib/randomNum';
+
+import dataURLtoBlob from './lib/dataURLtoBlob';
+import blobToDataURL from './lib/blobToDataURL';
+
+import loadUI from './lib/loadUI';
+import loadEruda from './lib/loadEruda';
+import triggerEruda from './lib/triggerEruda';
+import findScript from './lib/findScript';
+
 const version = '2.0.0';
 
 const jeselvmo = {
@@ -113,10 +195,6 @@ const jeselvmo = {
   isIPRange,
   isFQDN,
   isBoolean,
-  isAlpha,
-  isAlphaLocales,
-  isAlphanumeric,
-  isAlphanumericLocales,
   isNumeric,
   isPort,
   isLowercase,
@@ -134,7 +212,6 @@ const jeselvmo = {
   isHexadecimal,
   isDivisibleBy,
   isHexColor,
-  isISRC,
   isMD5,
   isHash,
   isJWT,
@@ -149,18 +226,11 @@ const jeselvmo = {
   isIn,
   isCreditCard,
   isIdentityCard,
-  isISIN,
-  isISBN,
-  isISSN,
   isMobilePhone,
   isMobilePhoneLocales,
   isPostalCode,
   isPostalCodeLocales,
   isCurrency,
-  isISO8601,
-  isRFC3339,
-  isISO31661Alpha2,
-  isISO31661Alpha3,
   isBase32,
   isBase64,
   isDataURI,
@@ -173,11 +243,101 @@ const jeselvmo = {
   escape,
   unescape,
   stripLow,
-  whitelist,
-  blacklist,
+  whitelist, // 保留白名单中的字符
+  blacklist, // 删除黑名单中的字符
   isWhitelisted,
   normalizeEmail,
-  toString
+  toString,
+
+  // base
+  kindOf,
+  hasOwnProperty,
+  objectToString,
+
+  // validate
+  isPhoneNum,
+  isIdCard,
+  isSameDay,
+  isLeapYear,
+
+  // date
+  formatDate,
+  formatPassTime,
+  formatRemainTime,
+  getDayOfWeek,
+  getWeek,
+
+  // number
+  formatNum,
+  digitUppercase,
+
+  // system
+  isIOS,
+  isAndroid,
+  isMobile,
+  isWin,
+  isLinux,
+  isMac,
+  isWeiXin,
+
+  // platform
+  getOS,
+  getPlatform,
+  getExplore,
+
+  // web
+  addClass, // 给Element添加样式
+  removeClass, // 删除Element的样式
+  hasClass, // 判断Element是否存在指定样式
+  getWindowSize, // 获取window的大小
+  getScrollTop, // 获取滚动条的位置
+  setScrollTop, // 设置滚动条的位置
+  scrollTo, // 滚动到指定位置
+  offset,
+
+  // url
+  parseUrl,
+  parseQueryString,
+  toQueryString,
+  getQueryString,
+
+  // localStorage
+  getLocalItem,
+  setLocalItem,
+  removeLocalItem,
+  // sessionStorage
+  getSessionItem,
+  setSessionItem,
+  removeSessionItem,
+  // cookie
+  getCookieItem,
+  setCookieItem,
+  removeCookieItem,
+
+  // others
+  loadUI,
+  loadEruda,
+  triggerEruda,
+  findScript,
+  md5,
+  delay,
+  getKeyName,
+  randomColor,
+  randomNum,
+
+  dataURLtoBlob,
+  blobToDataURL,
+
+  clamp,
+  convertRangeValue,
+  arrayToHash,
+  shallowCopy,
+  deepClone,
+  debounce,
+  throttle,
+  pad,
+  checkPasswordLevel,
+  inherits
 };
 
 export default jeselvmo;
