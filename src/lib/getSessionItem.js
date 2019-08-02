@@ -1,12 +1,10 @@
 import getStorageItem from './util/getStorageItem';
 /**
  *
- * @desc 获取sessionStorage中item值
- * @param  {String} key itemKey
+ * 获取sessionStorage中存储的值。
+ * @param  {string} key - key
  * @returns {object}
  */
-function getSessionItem(key) {
+export default function getSessionItem(key) {
   return getStorageItem(window.sessionStorage, key);
 }
-
-export default getSessionItem;

@@ -1,8 +1,12 @@
 /* eslint-disable prefer-rest-params */
-import queryString from './query-string/index';
+import queryString from './util/queryString';
 import isURL from './isURL';
 
-function getQueryString() {
+/**
+ * 获取URL中的QueryString。
+ * @returns {Object}
+ */
+export default function getQueryString() {
   let url, name;
   switch (arguments.length) {
     case 0:
@@ -30,5 +34,3 @@ function getQueryString() {
   }
   return query;
 }
-
-export default getQueryString;

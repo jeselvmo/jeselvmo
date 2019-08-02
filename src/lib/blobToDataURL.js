@@ -1,8 +1,9 @@
 /**
  * blob to dataURL
- * @param {*} blob
+ * @param {Blob} blob - Blob对象。
+ * @returns {string} dataURL。
  */
-function blobToDataURL(blob) {
+export default function blobToDataURL(blob) {
   return new Promise((resolve, reject) => {
     let reader = new FileReader();
     reader.onload = e => {
@@ -14,4 +15,3 @@ function blobToDataURL(blob) {
     reader.readAsDataURL(blob);
   });
 }
-export default blobToDataURL;

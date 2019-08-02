@@ -1,6 +1,6 @@
 {
   "name": "jeselvmo",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JavaScript utility library",
   "homepage": "https://github.com/jeselvmo/jeselvmo",
   "author": "kecoyo <kecoyo@163.com>",
@@ -15,7 +15,8 @@
     "build:browser": "rollup -c && npm run minify",
     "build:node": "babel src -d .",
     "build": "npm run build:browser && npm run build:node",
-    "test": "mocha --require @babel/register --require ./test/setup.js --reporter dot"
+    "test": "mocha --require @babel/register --require ./test/setup.js --reporter dot",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "files": [
     "index.js",
@@ -31,10 +32,12 @@
     "tools",
     "utils"
   ],
-  "contributors": [{
-    "name": "jeselvmo",
-    "url": "https://github.com/jeselvmo"
-  }],
+  "contributors": [
+    {
+      "name": "jeselvmo",
+      "url": "https://github.com/jeselvmo"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/jeselvmo/jeselvmo/issues"
   },
@@ -61,5 +64,8 @@
   "engines": {
     "node": ">= 0.10"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "docdash": "^1.1.1"
+  }
 }

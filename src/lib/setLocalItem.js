@@ -1,13 +1,11 @@
 import setStorageItem from './util/setStorageItem';
 /**
+ * 设置localStorage中存储的值
  *
- * @desc 设置localStorage中item值
- * @param  {String} key itemKey
- * @param  {Object} value itemValue
+ * @param  {string} key - key
+ * @param  {Object} value - value
  * @returns {void}
  */
-function setLocalItem(key, value) {
+export default function setLocalItem(key, value) {
   return setStorageItem(window.localStorage, key, value);
 }
-
-export default setLocalItem;

@@ -1,81 +1,46 @@
 import toDate from './lib/toDate';
-import toFloat from './lib/toFloat';
-import toInt from './lib/toInt';
 import toBoolean from './lib/toBoolean';
-import equals from './lib/equals';
-import contains from './lib/contains';
-import matches from './lib/matches';
 
 import isEmail from './lib/isEmail';
 import isURL from './lib/isURL';
-import isMACAddress from './lib/isMACAddress';
 import isIP from './lib/isIP';
-import isIPRange from './lib/isIPRange';
-import isFQDN from './lib/isFQDN';
 
 import isBoolean from './lib/isBoolean';
 
 import isNumeric from './lib/isNumeric';
 import isPort from './lib/isPort';
-import isLowercase from './lib/isLowercase';
-import isUppercase from './lib/isUppercase';
-
-import isAscii from './lib/isAscii';
-import isFullWidth from './lib/isFullWidth';
-import isHalfWidth from './lib/isHalfWidth';
-import isVariableWidth from './lib/isVariableWidth';
-import isMultibyte from './lib/isMultibyte';
-import isSurrogatePair from './lib/isSurrogatePair';
 
 import isInt from './lib/isInt';
-import isFloat, { locales as isFloatLocales } from './lib/isFloat';
-import isDecimal from './lib/isDecimal';
 import isHexadecimal from './lib/isHexadecimal';
-import isDivisibleBy from './lib/isDivisibleBy';
 
 import isHexColor from './lib/isHexColor';
 
 import isMD5 from './lib/isMD5';
-import isHash from './lib/isHash';
 import isJWT from './lib/isJWT';
 
 import isJSON from './lib/isJSON';
-import isEmpty from './lib/isEmpty';
 
 import isLength from './lib/isLength';
-import isByteLength from './lib/isByteLength';
 
 import isUUID from './lib/isUUID';
-import isMongoId from './lib/isMongoId';
-
-import isAfter from './lib/isAfter';
-import isBefore from './lib/isBefore';
 
 import isIn from './lib/isIn';
 
-import isCreditCard from './lib/isCreditCard';
-import isIdentityCard from './lib/isIdentityCard';
-
-import isMobilePhone, { locales as isMobilePhoneLocales } from './lib/isMobilePhone';
-
-import isCurrency from './lib/isCurrency';
-
-import isBase32 from './lib/isBase32';
 import isBase64 from './lib/isBase64';
-import isDataURI from './lib/isDataURI';
-import isMagnetURI from './lib/isMagnetURI';
 
 import isMimeType from './lib/isMimeType';
 
 import isLatLong from './lib/isLatLong';
-import isPostalCode, { locales as isPostalCodeLocales } from './lib/isPostalCode';
 
 import ltrim from './lib/ltrim';
 import rtrim from './lib/rtrim';
 import trim from './lib/trim';
-import escape from './lib/escape';
-import unescape from './lib/unescape';
-import stripLow from './lib/stripLow';
+
+import encodeHtml from './lib/encodeHtml';
+import decodeHtml from './lib/decodeHtml';
+import htmlEncode from './lib/htmlEncode';
+import htmlDecode from './lib/htmlDecode';
+
 import whitelist from './lib/whitelist';
 import blacklist from './lib/blacklist';
 import isWhitelisted from './lib/isWhitelisted';
@@ -84,11 +49,12 @@ import isWhitelisted from './lib/isWhitelisted';
 // ADD
 // ////////////////////////////////////////////////////////////////////////
 
-// base
+// 类型
+import typeOf from './lib/typeOf';
+import isType from './lib/isType';
 
 // validate
 import isPhoneNum from './lib/isPhoneNum';
-import isIdCard from './lib/isIdCard';
 
 import isPrimitive from './lib/isPrimitive';
 
@@ -121,10 +87,6 @@ import digitUppercase from './lib/digitUppercase';
 
 // dom
 import getWindowSize from './lib/getWindowSize';
-import getScrollTop from './lib/getScrollTop';
-import setScrollTop from './lib/setScrollTop';
-import scrollTo from './lib/scrollTo';
-import offset from './lib/offset';
 
 // url
 import parseUrl from './lib/parseUrl';
@@ -148,13 +110,9 @@ import removeCookieItem from './lib/removeCookieItem';
 // tools
 import clamp from './lib/clamp';
 import convertRangeValue from './lib/convertRangeValue';
-import arrayToHash from './lib/arrayToHash';
 import shallowCopy from './lib/shallowCopy';
 import deepClone from './lib/deepClone';
 import deepEquals from './lib/deepEquals';
-import debounce from './lib/debounce';
-import throttle from './lib/throttle';
-import pad from './lib/pad';
 import checkPasswordLevel from './lib/checkPasswordLevel';
 import inherits from './lib/inherits';
 import md5 from './lib/md5';
@@ -169,88 +127,57 @@ import blobToDataURL from './lib/blobToDataURL';
 
 import loadUI from './lib/loadUI';
 import loadEruda from './lib/loadEruda';
-import triggerEruda from './lib/triggerEruda';
-import findScript from './lib/findScript';
 
 import times from './lib/times';
 import repeat from './lib/repeat';
 
-import kindOf from './lib/kindOf';
+import download from './lib/download';
+import downloadBlob from './lib/downloadBlob';
 
-const version = '2.0.0';
+const version = '2.0.1';
 
 const jeselvmo = {
   version,
   toDate,
-  toFloat,
-  toInt,
   toBoolean,
-  equals,
-  contains,
-  matches,
   isEmail,
   isURL,
-  isMACAddress,
   isIP,
-  isIPRange,
-  isFQDN,
   isBoolean,
   isNumeric,
   isPort,
-  isLowercase,
-  isUppercase,
-  isAscii,
-  isFullWidth,
-  isHalfWidth,
-  isVariableWidth,
-  isMultibyte,
-  isSurrogatePair,
   isInt,
-  isFloat,
-  isFloatLocales,
-  isDecimal,
   isHexadecimal,
-  isDivisibleBy,
   isHexColor,
   isMD5,
-  isHash,
   isJWT,
   isJSON,
-  isEmpty,
   isLength,
-  isByteLength,
   isUUID,
-  isMongoId,
-  isAfter,
-  isBefore,
   isIn,
-  isCreditCard,
-  isIdentityCard,
-  isMobilePhone,
-  isMobilePhoneLocales,
-  isPostalCode,
-  isPostalCodeLocales,
-  isCurrency,
-  isBase32,
   isBase64,
-  isDataURI,
-  isMagnetURI,
   isMimeType,
   isLatLong,
   ltrim,
   rtrim,
   trim,
-  escape,
-  unescape,
-  stripLow,
-  whitelist, // 保留白名单中的字符
-  blacklist, // 删除黑名单中的字符
+
+  encodeHtml,
+  decodeHtml,
+  htmlEncode,
+  htmlDecode,
+
+  whitelist,
+  blacklist,
   isWhitelisted,
   toString,
 
+  // 类型
+  typeOf,
+  isType,
+
   // validate
   isPhoneNum,
-  isIdCard,
   isSameDay,
   isLeapYear,
 
@@ -283,10 +210,6 @@ const jeselvmo = {
 
   // web
   getWindowSize,
-  getScrollTop,
-  setScrollTop,
-  scrollTo,
-  offset,
 
   // url
   parseUrl,
@@ -310,8 +233,6 @@ const jeselvmo = {
   // others
   loadUI,
   loadEruda,
-  triggerEruda,
-  findScript,
   md5,
   delay,
   getKeyName,
@@ -323,20 +244,17 @@ const jeselvmo = {
 
   clamp,
   convertRangeValue,
-  arrayToHash,
   shallowCopy,
   deepClone,
   deepEquals,
-  debounce,
-  throttle,
-  pad,
   checkPasswordLevel,
   inherits,
 
   times,
   repeat,
 
-  kindOf
+  download,
+  downloadBlob
 };
 
 export default jeselvmo;

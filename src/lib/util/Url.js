@@ -1,8 +1,45 @@
+/* eslint-disable default-case */
 /* eslint-disable no-unneeded-ternary,max-len,no-use-before-define,no-mixed-operators,no-continue */
 /* eslint-disable no-self-compare,no-bitwise,no-cond-assign,operator-linebreak */
 /* eslint-disable no-multi-assign,prefer-template */
-import required from './requires-port';
-import qs from '../query-string/index';
+import queryString from './queryString';
+
+/**
+ * Check if we're required to add a port number.
+ *
+ * @see https://url.spec.whatwg.org/#default-port
+ * @param {Number|String} port Port number we need to check
+ * @param {String} protocol Protocol we need to check against.
+ * @returns {Boolean} Is it a default port for the given protocol
+ * @private
+ */
+function required(port, protocol) {
+  protocol = protocol.split(':')[0];
+  port = +port;
+
+  if (!port) return false;
+
+  switch (protocol) {
+    case 'http':
+    case 'ws':
+      return port !== 80;
+
+    case 'https':
+    case 'wss':
+      return port !== 443;
+
+    case 'ftp':
+      return port !== 21;
+
+    case 'gopher':
+      return port !== 70;
+
+    case 'file':
+      return false;
+  }
+
+  return port !== 0;
+}
 
 let slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//,
   protocolre = /^([a-z][a-z0-9.+-]*:)?(\/\/)?([\S\s]*)/i,
@@ -14,7 +51,7 @@ let slashes = /^[A-Za-z][A-Za-z0-9+-.]*:\/\//,
  * Trim a given string.
  *
  * @param {String} str String to trim.
- * @public
+ * @private
  */
 function trimLeft(str) {
   return (str ? str : '').toString().replace(left, '');
@@ -31,6 +68,7 @@ function trimLeft(str) {
  *    the value of extra chars that should be split off.
  * 3. Inherit from location if non existing in the parser.
  * 4. `toLowerCase` the resulting value.
+ * @private
  */
 let rules = [
   ['#', 'hash'], // Extract from the back.
@@ -70,7 +108,7 @@ let ignore = {
  *
  * @param {Object|String} loc Optional default location object.
  * @returns {Object} lolcation object.
- * @public
+ * @private
  */
 function lolcation(loc) {
   let globalVar;
@@ -112,6 +150,7 @@ function lolcation(loc) {
  * @property {String} protocol Protocol matched in the URL, in lowercase.
  * @property {Boolean} slashes `true` if protocol is followed by "//", else `false`.
  * @property {String} rest Rest of the URL that is not part of the protocol.
+ * @private
  */
 
 /**
@@ -183,7 +222,6 @@ function resolve(relative, base) {
  * @param {String} address URL we want to parse.
  * @param {Object|String} [location] Location defaults for relative paths.
  * @param {Boolean|Function} [parser] Parser for the query string.
- * @private
  */
 function Url(address, location, parser) {
   address = trimLeft(address);
@@ -219,7 +257,7 @@ function Url(address, location, parser) {
     location = null;
   }
 
-  if (parser && typeof parser !== 'function') parser = qs.parse;
+  if (parser && typeof parser !== 'function') parser = queryString.parse;
 
   location = lolcation(location);
 
@@ -322,7 +360,7 @@ function Url(address, location, parser) {
   url.href = url.toString();
 
   url.search = url.query;
-  url.query = qs.parse(url.query);
+  url.query = queryString.parse(url.query);
 }
 
 /**
@@ -336,7 +374,7 @@ function Url(address, location, parser) {
  *                               When setting the protocol, double slash will be
  *                               removed from the final url if it is true.
  * @returns {URL} URL instance for chaining.
- * @public
+ * @private
  */
 function set(part, value, fn) {
   let url = this;
@@ -344,7 +382,7 @@ function set(part, value, fn) {
   switch (part) {
     case 'query':
       if (typeof value === 'string' && value.length) {
-        value = (fn || qs.parse)(value);
+        value = (fn || queryString.parse)(value);
       }
 
       url[part] = value;
@@ -420,10 +458,10 @@ function set(part, value, fn) {
  *
  * @param {Function} stringify Optional query stringify function.
  * @returns {String} Compiled version of the URL.
- * @public
+ * @private
  */
 function toString(stringify) {
-  if (!stringify || typeof stringify !== 'function') stringify = qs.stringify;
+  if (!stringify || typeof stringify !== 'function') stringify = queryString.stringify;
 
   let query,
     url = this,
@@ -461,6 +499,6 @@ Url.prototype = {
 Url.extractProtocol = extractProtocol;
 Url.location = lolcation;
 Url.trimLeft = trimLeft;
-Url.qs = qs;
+Url.qs = queryString;
 
 export default Url;

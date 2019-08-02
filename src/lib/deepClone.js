@@ -1,9 +1,9 @@
 /**
- * @desc 深拷贝，支持常见类型
+ * 深拷贝，支持常见类型
  * @param {Any} values object
  * @returns {Any} new object
  */
-function deepClone(values) {
+export default function deepClone(values) {
   let copy;
 
   // Handle the 3 simple types, and null or undefined
@@ -36,5 +36,3 @@ function deepClone(values) {
 
   throw new Error("Unable to copy values! Its type isn't supported.");
 }
-
-export default deepClone;

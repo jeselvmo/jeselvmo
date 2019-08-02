@@ -1,5 +1,10 @@
 /* eslint-disable operator-linebreak */
-function isPrimitive(obj) {
+/**
+ * 检查是不是原始数据类型。
+ * @param {Object} obj - 要检查的对象。
+ * @returns {boolean} 真/假。
+ */
+export default function isPrimitive(obj) {
   return (
     typeof obj === 'boolean' ||
     typeof obj === 'number' ||
@@ -9,5 +14,3 @@ function isPrimitive(obj) {
     obj === undefined
   );
 }
-
-export default isPrimitive;

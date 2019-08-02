@@ -1,6 +1,5 @@
 /**
- * https://github.com/Mottie/javascript-number-formatter
- *
+ * 格式化数值。
  * Short, fast, flexible yet standalone.
  * Accept standard number formatting like #,##0.00 or with negation -000.####.
  * Accept any country format like # ##0,00, #,###.##, #'###.## or any type of non-numbering symbol.
@@ -10,10 +9,20 @@
  * Simple interface, just supply mask & value like this: format( "0.0000", 3.141592).
  * Include a prefix & suffix with the mask.
  * The code is safe to be minimized using Google Compiler in Advanced mode.
- * @type {function}
  *
+ * @param {number} value - 要格式化的值。
+ * @param {string} mask - 格式。
+ * @returns {string} 格式化后的字符串。
+ *
+ * @example
+ *
+ * jeselvmo.formatNum(10, '0.00');
+ * //=> "10.00"
+ *
+ * jeselvmo.formatNum(3.141592, '#.##');
+ * //=> "3.14"
  */
-function formatNum(value, mask) {
+export default function formatNum(value, mask) {
   if (!mask || isNaN(+value)) {
     return value; // return as it is.
   }
@@ -113,5 +122,3 @@ function formatNum(value, mask) {
   // put back any negation, combine integer and fraction, and add back prefix & suffix
   return prefix + ((isNegative ? '-' : '') + result) + suffix;
 }
-
-export default formatNum;

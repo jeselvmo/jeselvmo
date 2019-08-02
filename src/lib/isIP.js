@@ -4,6 +4,12 @@ import assertString from './util/assertString';
 const ipv4Maybe = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
 const ipv6Block = /^[0-9A-F]{1,4}$/i;
 
+/**
+ * 检查是否是IP地址。
+ * @param {string} str - 要检查的字符串。
+ * @param {string} [version] - IP版本，（4、6）
+ * @return {boolean} 真/假
+ */
 export default function isIP(str, version = '') {
   assertString(str);
   version = String(version);

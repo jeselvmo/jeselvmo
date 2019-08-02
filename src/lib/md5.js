@@ -2,10 +2,10 @@
     operator-assignment,no-shadow,no-bitwise,no-else-return */
 /**
  * 生成MD5
- * @param string
- * @returns {string}
+ * @param {string} string - 要生成的字符串。
+ * @returns {string} 返回md5字符串。
  */
-function md5(string) {
+export default function md5(string) {
   function RotateLeft(lValue, iShiftBits) {
     return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
   }
@@ -232,5 +232,3 @@ function md5(string) {
 
   return temp.toLowerCase();
 }
-
-export default md5;

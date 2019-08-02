@@ -1,5 +1,32 @@
 import assertString from './util/assertString';
 
+/**
+ * 将string类型转换为boolean类型。
+ * @param {string} str 要转换字符串。
+ * @param {boolean} [strict=false] 是否是严格模式。
+ * @returns {boolean} 转换后的boolean值。
+ *
+ * @example
+ *
+ * jeselvmo.toBoolean('1');
+ * //=> true
+ *
+ * jeselvmo.toBoolean('true');
+ * //=> true
+ *
+ * jeselvmo.toBoolean('0');
+ * //=> false
+ *
+ * jeselvmo.toBoolean('false')
+ * //=> false
+ *
+ * jeselvmo.toBoolean('2')
+ * //=> true
+ *
+ * jeselvmo.toBoolean('2', true)
+ * //=> false
+ *
+ */
 export default function toBoolean(str, strict) {
   assertString(str);
   if (strict) {

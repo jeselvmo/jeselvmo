@@ -1,10 +1,10 @@
 /* eslint-disable prefer-template,indent,no-cond-assign,no-nested-ternary,no-unused-expressions */
 /**
  *
- * @desc 获取浏览器类型和版本
- * @return {String} result
+ * 获取浏览器类型和版本。
+ * @return {string} result
  */
-function getExplore() {
+export default function getExplore() {
   let sys = {},
     ua = navigator.userAgent.toLowerCase(),
     s;
@@ -32,5 +32,3 @@ function getExplore() {
   if (sys.safari) return 'Safari: ' + sys.safari;
   return 'Unkonwn';
 }
-
-export default getExplore;

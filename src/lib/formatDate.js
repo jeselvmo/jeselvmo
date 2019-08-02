@@ -1,9 +1,16 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable prefer-template */
-import kindOf from './kindOf';
 import getWeek from './getWeek';
 import getDayOfWeek from './getDayOfWeek';
-import pad from './pad';
+
+function pad(val, len) {
+  val = String(val);
+  len = len || 2;
+  while (val.length < len) {
+    val = `0${val}`;
+  }
+  return val;
+}
 
 const token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZWN]|"[^"]*"|'[^']*'/g;
 const timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g;
@@ -56,16 +63,28 @@ const i18n = {
 };
 
 /**
- * @desc 日期格式化
- * @param date
- * @param mask
- * @param utc
- * @param gmt
- * @returns {string}
+ * 日期格式化
+ * @param {(Date|string|number)} date - 要格式化的日期。
+ * @param {string} [mask] - 格式
+ * @param {boolean} [utc] -
+ * @param {boolean} [gmt] -
+ * @returns {string} 格式后的字符串。
+ *
+ * @example
+ *
+ * jeselvmo.formatDate();
+ * //=> "2019-08-02 11:51:34"
+ *
+ * jeselvmo.formatDate(new Date());
+ * //=> "2019-08-02 11:51:20"
+ *
+ * jeselvmo.formatDate(new Date(), "yyyy-mm-dd HH:MM:ss");
+ * //=> "2019-08-02 11:53:37"
  */
-function formatDate(date, mask = 'yyyy-mm-dd HH:MM:ss', utc, gmt) {
+
+export default function formatDate(date, mask = 'yyyy-mm-dd HH:MM:ss', utc, gmt) {
   // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
-  if (arguments.length === 1 && kindOf(date) === 'String' && !/\d/.test(date)) {
+  if (arguments.length === 1 && typeof date === 'string' && !/\d/.test(date)) {
     mask = date;
     date = undefined;
   }
@@ -141,5 +160,3 @@ function formatDate(date, mask = 'yyyy-mm-dd HH:MM:ss', utc, gmt) {
     return match.slice(1, match.length - 1);
   });
 }
-
-export default formatDate;

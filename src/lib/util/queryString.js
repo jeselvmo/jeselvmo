@@ -1,7 +1,7 @@
 /* eslint-disable prefer-template, max-len */
-import strictUriEncode from './strict-uri-encode';
-import decodeComponent from './decode-uri-component';
-import splitOnFirst from './split-on-first';
+import decodeComponent from './decodeComponent';
+import splitOnFirst from './splitOnFirst';
+import strictUriEncode from './strictUriEncode';
 
 function encode(value, options) {
   if (options.encode) {

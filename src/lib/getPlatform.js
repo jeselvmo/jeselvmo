@@ -4,7 +4,11 @@ import isLinux from './isLinux';
 import isWin from './isWin';
 import isMac from './isMac';
 
-function getPlatform() {
+/**
+ * 获取当前平台。
+ * @returns {string}
+ */
+export default function getPlatform() {
   if (isAndroid()) {
     return 'android';
   }
@@ -22,5 +26,3 @@ function getPlatform() {
   }
   return 'unknown';
 }
-
-export default getPlatform;

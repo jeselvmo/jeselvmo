@@ -1,10 +1,10 @@
 /**
- * @desc   判断是否为同一天
+ * 判断是否为同一天。
  * @param  {Date} date1
  * @param  {Date} date2 可选／默认值：当天
- * @return {Boolean}
+ * @return {boolean} 真/假
  */
-function isSameDay(date1, date2) {
+export default function isSameDay(date1, date2) {
   if (!date2) {
     date2 = new Date();
   }
@@ -18,5 +18,3 @@ function isSameDay(date1, date2) {
 
   return date1_date === date2_date && date1_month === date2_month && date1_year === date2_year;
 }
-
-export default isSameDay;

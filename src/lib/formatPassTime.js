@@ -1,10 +1,21 @@
 /* eslint-disable prefer-template,radix */
 /**
- * @desc   格式化${startTime}距现在的已过时间
+ * 格式化${startTime}距现在的已过时间
  * @param  {Date} startTime
  * @return {String}
+ *
+ * @example
+ *
+ * jeselvmo.formatPassTime(new Date());
+ * //=> "刚刚"
+ *
+ * jeselvmo.formatPassTime(new Date(1987,6,19));
+ * //=> "32年前"
+ *
+ * jeselvmo.formatPassTime(new Date()- 10*60*1000);
+ * //=> "9分钟前"
  */
-function formatPassTime(startTime) {
+export default function formatPassTime(startTime) {
   let currentTime = Date.parse(new Date()),
     time = currentTime - startTime,
     day = parseInt(time / (1000 * 60 * 60 * 24)),
@@ -19,5 +30,3 @@ function formatPassTime(startTime) {
   if (min) return min + '分钟前';
   return '刚刚';
 }
-
-export default formatPassTime;

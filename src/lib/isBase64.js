@@ -2,6 +2,11 @@ import assertString from './util/assertString';
 
 const notBase64 = /[^A-Z0-9+\/=]/i;
 
+/**
+ * 检查是否是Base64。
+ * @param {string} str - 要检查的字符串。
+ * @return {boolean} 真/假
+ */
 export default function isBase64(str) {
   assertString(str);
   const len = str.length;

@@ -109,16 +109,14 @@ const keyCodeMap = {
 };
 
 /**
- * @desc 根据keycode获得键名
- * @param  {Number} keycode
+ * 根据keycode获得键名
+ * @param  {number} keycode - 键码
  * @return {String}
  */
-function getKeyName(keycode) {
+export default function getKeyName(keycode) {
   if (keyCodeMap[keycode]) {
     return keyCodeMap[keycode];
   }
   console.log(`Unknow Key(Key Code:${keycode})`);
   return '';
 }
-
-export default getKeyName;

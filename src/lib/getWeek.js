@@ -1,12 +1,18 @@
 /**
- * Get the ISO 8601 week number
- * Based on comments from
- * http://techblog.procurios.nl/k/n618/news/view/33796/14863/Calculate-ISO-8601-week-and-year-in-javascript.html
+ * Get the week number
  *
- * @param  {Object} `date`
- * @return {Number}
+ * @param  {Date} date - 日期
+ * @return {number}
+ *
+ * @example
+ *
+ * jeselvmo.getWeek(new Date(2019,7,2));
+ * //=> 31
+ *
+ * jeselvmo.getWeek(new Date(2019,7,5));
+ * //=> 32
  */
-function getWeek(date = new Date()) {
+export default function getWeek(date = new Date()) {
   // Remove time components of date
   let targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
@@ -27,5 +33,3 @@ function getWeek(date = new Date()) {
   let weekDiff = (targetThursday - firstThursday) / (86400000 * 7);
   return 1 + Math.floor(weekDiff);
 }
-
-export default getWeek;
