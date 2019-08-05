@@ -6,8 +6,10 @@ import download from './download';
  * @param {string} [filename] - 指定文件名。
  * @returns {void}
  */
-export default function downloadBlob(content, filename) {
+function downloadBlob(content, filename) {
   let blob = new Blob([content]);
   let url = URL.createObjectURL(blob);
   download(url, filename);
 }
+
+export default downloadBlob;

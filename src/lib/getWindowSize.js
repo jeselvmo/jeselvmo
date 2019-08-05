@@ -1,9 +1,9 @@
 /* eslint-disable operator-linebreak */
 /**
  * 获取window窗口大小
- * @returns {{width: number, height: number}}
+ * @returns {{width: number, height: number}} 窗口大小。
  */
-export default function getWindowSize() {
+function getWindowSize() {
   let width = 0,
     height = 0;
   // 获取窗口宽度
@@ -23,3 +23,5 @@ export default function getWindowSize() {
   }
   return { width, height };
 }
+
+export default getWindowSize;

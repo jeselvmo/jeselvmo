@@ -26,6 +26,8 @@ import queryString from './util/queryString';
  * //=> {foo: ['1', '2', '3']}
  *
  */
-export default function parseQueryString(input, options) {
+function parseQueryString(input, options) {
   return queryString.parse(input, options);
 }
+
+export default parseQueryString;

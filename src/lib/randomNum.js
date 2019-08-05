@@ -4,6 +4,8 @@
  * @param  {number} max - 范围最大值。
  * @return {number} 生成的随机数。
  */
-export default function randomNum(min, max) {
+function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export default randomNum;

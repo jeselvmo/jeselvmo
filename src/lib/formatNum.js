@@ -22,7 +22,7 @@
  * jeselvmo.formatNum(3.141592, '#.##');
  * //=> "3.14"
  */
-export default function formatNum(value, mask) {
+function formatNum(value, mask) {
   if (!mask || isNaN(+value)) {
     return value; // return as it is.
   }
@@ -122,3 +122,5 @@ export default function formatNum(value, mask) {
   // put back any negation, combine integer and fraction, and add back prefix & suffix
   return prefix + ((isNegative ? '-' : '') + result) + suffix;
 }
+
+export default formatNum;

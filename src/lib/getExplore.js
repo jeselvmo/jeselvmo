@@ -2,9 +2,9 @@
 /**
  *
  * 获取浏览器类型和版本。
- * @return {string} result
+ * @return {string} 返回浏览器名称。
  */
-export default function getExplore() {
+function getExplore() {
   let sys = {},
     ua = navigator.userAgent.toLowerCase(),
     s;
@@ -32,3 +32,5 @@ export default function getExplore() {
   if (sys.safari) return 'Safari: ' + sys.safari;
   return 'Unkonwn';
 }
+
+export default getExplore;

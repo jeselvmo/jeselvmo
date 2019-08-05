@@ -5,7 +5,7 @@
  * @param {string} string - 要生成的字符串。
  * @returns {string} 返回md5字符串。
  */
-export default function md5(string) {
+function md5(string) {
   function RotateLeft(lValue, iShiftBits) {
     return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
   }
@@ -232,3 +232,5 @@ export default function md5(string) {
 
   return temp.toLowerCase();
 }
+
+export default md5;

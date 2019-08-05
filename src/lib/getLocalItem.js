@@ -2,9 +2,11 @@ import getStorageItem from './util/getStorageItem';
 /**
  *
  * 获取localStorage中item值
- * @param  {string} key - key
- * @returns {object}
+ * @param  {string} key 键。
+ * @returns {object} 值。
  */
-export default function getLocalItem(key) {
+function getLocalItem(key) {
   return getStorageItem(window.localStorage, key);
 }
+
+export default getLocalItem;

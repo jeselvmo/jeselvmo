@@ -1,11 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /**
  * 类继承
- * @param {function} ctor
- * @param {function} superCtor
+ * @param {function} ctor 子类构造方法
+ * @param {function} superCtor 父类构造方法
  * @returns {void}
  */
-export default function inherits(ctor, superCtor) {
+function inherits(ctor, superCtor) {
   ctor.super_ = superCtor;
   ctor.prototype = Object.create(superCtor.prototype, {
     constructor: {
@@ -16,3 +16,5 @@ export default function inherits(ctor, superCtor) {
     }
   });
 }
+
+export default inherits;

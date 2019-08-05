@@ -6,6 +6,8 @@ import setStorageItem from './util/setStorageItem';
  * @param  {Object} value - value
  * @returns {void}
  */
-export default function setLocalItem(key, value) {
+function setLocalItem(key, value) {
   return setStorageItem(window.localStorage, key, value);
 }
+
+export default setLocalItem;

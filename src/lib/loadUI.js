@@ -40,7 +40,7 @@ const loadCSS = function(href) {
  * @param {(string|Array)} srcs - 要加载的js/css路径。
  * @returns {Promise} promise
  */
-export default function loadUI(srcs) {
+function loadUI(srcs) {
   srcs = Array.isArray(srcs) ? srcs : srcs.split(/\s+/);
 
   let promise = Promise.resolve();
@@ -49,3 +49,5 @@ export default function loadUI(srcs) {
   });
   return promise;
 }
+
+export default loadUI;

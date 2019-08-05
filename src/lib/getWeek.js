@@ -2,7 +2,7 @@
  * Get the week number
  *
  * @param  {Date} date - 日期
- * @return {number}
+ * @returns {number} 年内周数。
  *
  * @example
  *
@@ -12,7 +12,7 @@
  * jeselvmo.getWeek(new Date(2019,7,5));
  * //=> 32
  */
-export default function getWeek(date = new Date()) {
+function getWeek(date = new Date()) {
   // Remove time components of date
   let targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
@@ -33,3 +33,5 @@ export default function getWeek(date = new Date()) {
   let weekDiff = (targetThursday - firstThursday) / (86400000 * 7);
   return 1 + Math.floor(weekDiff);
 }
+
+export default getWeek;

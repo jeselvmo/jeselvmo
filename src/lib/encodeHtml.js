@@ -13,9 +13,9 @@ import assertString from './util/assertString';
  * jeselvmo.encodeHtml('<link rel="stylesheet" href="https://static.npmjs.com/styles.266813287b9e37ad5d9c.css" />');
  * //=> "&lt;link rel=&quot;stylesheet&quot; href=&quot;https:&#x2F;&#x2F;static.npmjs.com&#x2F;styles.266813287b9e37ad5d9c.css&quot; &#x2F;&gt;"
  */
-export default function encodeHtml(str) {
-  assertString(str);
-  return str
+function encodeHtml(html) {
+  assertString(html);
+  return html
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#x27;')
@@ -25,3 +25,5 @@ export default function encodeHtml(str) {
     .replace(/\\/g, '&#x5C;')
     .replace(/`/g, '&#96;');
 }
+
+export default encodeHtml;

@@ -11,7 +11,7 @@
  * jeselvmo.htmlEncode('<link rel="stylesheet" href="https://static.npmjs.com/styles.266813287b9e37ad5d9c.css" />');
  * //=> '&lt;link rel="stylesheet" href="https://static.npmjs.com/styles.266813287b9e37ad5d9c.css" /&gt;'
  */
-export default function htmlEncode(html = '') {
+function htmlEncode(html = '') {
   let temp = document.createElement('div');
   // eslint-disable-next-line no-unused-expressions
   temp.textContent != null ? (temp.textContent = html) : (temp.innerText = html);
@@ -19,3 +19,5 @@ export default function htmlEncode(html = '') {
   temp = null;
   return output;
 }
+
+export default htmlEncode;

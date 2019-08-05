@@ -12,7 +12,9 @@ import assertString from './util/assertString';
  * //=> "abcdabcd"
  *
  */
-export default function whitelist(str, chars) {
+function whitelist(str, chars) {
   assertString(str);
   return str.replace(new RegExp(`[^${chars}]+`, 'g'), '');
 }
+
+export default whitelist;

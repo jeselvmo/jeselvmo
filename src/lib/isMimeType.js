@@ -15,9 +15,11 @@ const mimeTypeMultipart = /^multipart\/[a-zA-Z0-9\.\-\+]{1,100}(;\s?(boundary|ch
 /**
  * 检查是否是合法的资源媒体类型。
  * @param {string} str - 要检查的字符串。
- * @return {boolean} 真/假
+ * @returns {boolean} 真/假。
  */
-export default function isMimeType(str) {
+function isMimeType(str) {
   assertString(str);
   return mimeTypeSimple.test(str) || mimeTypeText.test(str) || mimeTypeMultipart.test(str);
 }
+
+export default isMimeType;

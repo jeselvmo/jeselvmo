@@ -1,8 +1,8 @@
 /* eslint-disable prefer-template,radix */
 /**
  * 格式化${startTime}距现在的已过时间
- * @param  {Date} startTime
- * @return {String}
+ * @param  {Date} startTime 距离日期。
+ * @return {string} 返回过去多长时间了。
  *
  * @example
  *
@@ -15,7 +15,7 @@
  * jeselvmo.formatPassTime(new Date()- 10*60*1000);
  * //=> "9分钟前"
  */
-export default function formatPassTime(startTime) {
+function formatPassTime(startTime) {
   let currentTime = Date.parse(new Date()),
     time = currentTime - startTime,
     day = parseInt(time / (1000 * 60 * 60 * 24)),
@@ -30,3 +30,5 @@ export default function formatPassTime(startTime) {
   if (min) return min + '分钟前';
   return '刚刚';
 }
+
+export default formatPassTime;

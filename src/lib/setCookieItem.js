@@ -5,7 +5,10 @@ import Cookie from './util/Cookie';
  * @param {string} name - 名称
  * @param {Object} value - 值
  * @param {Object} [opts] - 选项
+ * @returns {void}
  */
-export default function setCookieItem(name, value, opts) {
+function setCookieItem(name, value, opts) {
   Cookie.set(name, value, opts);
 }
+
+export default setCookieItem;

@@ -1,9 +1,9 @@
 /**
  * dataURL to blob
- * @param {string} dataUrl -
+ * @param {string} dataUrl dataUrl
  * @returns {Blob} Blob对象
  */
-export default function dataURLtoBlob(dataUrl) {
+function dataURLtoBlob(dataUrl) {
   let arr = dataUrl.split(','),
     mime = arr[0].match(/:(.*?);/)[1],
     bstr = atob(arr[1]),
@@ -14,3 +14,5 @@ export default function dataURLtoBlob(dataUrl) {
   }
   return new Blob([u8arr], { type: mime });
 }
+
+export default dataURLtoBlob;

@@ -82,7 +82,7 @@ const i18n = {
  * //=> "2019-08-02 11:53:37"
  */
 
-export default function formatDate(date, mask = 'yyyy-mm-dd HH:MM:ss', utc, gmt) {
+function formatDate(date, mask = 'yyyy-mm-dd HH:MM:ss', utc, gmt) {
   // You can't provide utc if you skip other args (use the 'UTC:' mask prefix)
   if (arguments.length === 1 && typeof date === 'string' && !/\d/.test(date)) {
     mask = date;
@@ -160,3 +160,5 @@ export default function formatDate(date, mask = 'yyyy-mm-dd HH:MM:ss', utc, gmt)
     return match.slice(1, match.length - 1);
   });
 }
+
+export default formatDate;

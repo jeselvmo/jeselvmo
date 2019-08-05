@@ -4,9 +4,9 @@ import isURL from './isURL';
 
 /**
  * 获取URL中的QueryString。
- * @returns {Object}
+ * @returns {Object} 返回单项或全部项。
  */
-export default function getQueryString() {
+function getQueryString() {
   let url, name;
   switch (arguments.length) {
     case 0:
@@ -34,3 +34,5 @@ export default function getQueryString() {
   }
   return query;
 }
+
+export default getQueryString;

@@ -2,7 +2,7 @@
  * 获取日期为周期中第几天。
  *
  * @param  {Date} date - 日期
- * @return {number} 索号
+ * @returns {number} 返回星期。
  *
  * @example
  *
@@ -16,10 +16,12 @@
  * //=> 1 (周一)
  *
  */
-export default function getDayOfWeek(date = new Date()) {
+function getDayOfWeek(date = new Date()) {
   let dow = date.getDay();
   if (dow === 0) {
     dow = 7;
   }
   return dow;
 }
+
+export default getDayOfWeek;

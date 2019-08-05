@@ -11,9 +11,12 @@ const uuid = {
  * 判断是不是UUID。
  * @param {string} str - 要验证的字符串。
  * @param {string} [version] - UUID版本(version 3, 4 or 5)。
+ * @returns {boolean} 真/假。
  */
-export default function isUUID(str, version = 'all') {
+function isUUID(str, version = 'all') {
   assertString(str);
   const pattern = uuid[version];
   return pattern && pattern.test(str);
 }
+
+export default isUUID;

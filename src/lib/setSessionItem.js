@@ -6,6 +6,8 @@ import setStorageItem from './util/setStorageItem';
  * @param  {Object} value - value
  * @returns {void}
  */
-export default function setSessionItem(key, value) {
+function setSessionItem(key, value) {
   return setStorageItem(window.sessionStorage, key, value);
 }
+
+export default setSessionItem;

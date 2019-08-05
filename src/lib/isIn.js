@@ -18,7 +18,7 @@ function toString(input) {
  * 检查字符串是否在数组中，或对象中。
  * @param {string} str 检查字符串。
  * @param {Object} options 可以是数组、对象。数组：检查数组是否包含该字符串；对象：检查对象是否包含该属性。
- * @return {boolean} 真/假
+ * @returns {boolean} 真/假。
  *
  * @example
  *
@@ -28,7 +28,7 @@ function toString(input) {
  * jeselvmo.isIn('name', {name:''});
  * //=> true
  */
-export default function isIn(str, options) {
+function isIn(str, options) {
   assertString(str);
   let i;
   if (Object.prototype.toString.call(options) === '[object Array]') {
@@ -46,3 +46,5 @@ export default function isIn(str, options) {
   }
   return false;
 }
+
+export default isIn;

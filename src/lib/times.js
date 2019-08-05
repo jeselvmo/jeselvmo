@@ -20,7 +20,7 @@ const MAX_ARRAY_LENGTH = 4294967295;
  * jeselvmo.times(10, (i)=>{return 'a'+i});
  * //=> ["a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9"]
  */
-export default function times(n, iteratee) {
+function times(n, iteratee) {
   if (n < 1 || n > MAX_SAFE_INTEGER) {
     return [];
   }
@@ -37,3 +37,5 @@ export default function times(n, iteratee) {
   }
   return result;
 }
+
+export default times;

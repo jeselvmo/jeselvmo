@@ -1,7 +1,7 @@
 import assertString from './util/assertString';
 
 /**
- * @desc 删除在黑名单中出现的字符。
+ * 删除在黑名单中出现的字符。
  * @param {string} str 需要处理的字符串。
  * @param {string} chars 黑名单字符，可以使用RegExp，需要转义的字符，例如白名单(输入'\\[\\])。
  * @returns {string} 返回处理后的字符串。
@@ -12,7 +12,9 @@ import assertString from './util/assertString';
  * //=> "123123"
  *
  */
-export default function blacklist(str, chars) {
+function blacklist(str, chars) {
   assertString(str);
   return str.replace(new RegExp(`[${chars}]+`, 'g'), '');
 }
+
+export default blacklist;

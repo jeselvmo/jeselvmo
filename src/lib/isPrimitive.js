@@ -4,7 +4,7 @@
  * @param {Object} obj - 要检查的对象。
  * @returns {boolean} 真/假。
  */
-export default function isPrimitive(obj) {
+function isPrimitive(obj) {
   return (
     typeof obj === 'boolean' ||
     typeof obj === 'number' ||
@@ -14,3 +14,5 @@ export default function isPrimitive(obj) {
     obj === undefined
   );
 }
+
+export default isPrimitive;

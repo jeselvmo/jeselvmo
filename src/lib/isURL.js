@@ -2,9 +2,9 @@ import assertString from './util/assertString';
 /**
  * 判断是否为URL
  * @param {string} str 校验字符串。
- * @returns {boolean} 真/假
+ * @returns {boolean} 真/假。
  */
-export default function isURL(str) {
+function isURL(str) {
   assertString(str);
   let pattern =
     '^((https|http|ftp|rtsp|mms)?://)' +
@@ -20,3 +20,5 @@ export default function isURL(str) {
   let regexp = new RegExp(pattern);
   return regexp.test(str);
 }
+
+export default isURL;

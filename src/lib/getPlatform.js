@@ -6,9 +6,9 @@ import isMac from './isMac';
 
 /**
  * 获取当前平台。
- * @returns {string}
+ * @returns {string} 平台名称。
  */
-export default function getPlatform() {
+function getPlatform() {
   if (isAndroid()) {
     return 'android';
   }
@@ -26,3 +26,5 @@ export default function getPlatform() {
   }
   return 'unknown';
 }
+
+export default getPlatform;

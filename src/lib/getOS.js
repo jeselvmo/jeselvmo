@@ -1,8 +1,8 @@
 /**
  * 获取操作系统类型。
- * @returns {string}
+ * @returns {string} 返回系统名称。
  */
-export default function getOS() {
+function getOS() {
   let userAgent = ('navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase()) || '';
   let appVersion = ('navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase()) || '';
 
@@ -14,3 +14,5 @@ export default function getOS() {
   if (/linux/i.test(appVersion)) return 'linux';
   return 'Unkonwn';
 }
+
+export default getOS;

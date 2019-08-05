@@ -7,9 +7,9 @@ import assertString from './util/assertString';
  * @param {Object} [options] - 选项：
  * @param {number} [options.min] - 最小长度
  * @param {number} [options.max] - 最大长度
- * @returns {boolean} 真/假
+ * @returns {boolean} 真/假。
  */
-export default function isLength(str, options) {
+function isLength(str, options) {
   assertString(str);
   let min;
   let max;
@@ -25,3 +25,5 @@ export default function isLength(str, options) {
   const len = str.length - surrogatePairs.length;
   return len >= min && (typeof max === 'undefined' || len <= max);
 }
+
+export default isLength;

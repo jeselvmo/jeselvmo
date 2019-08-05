@@ -11,6 +11,7 @@ import queryString from './util/queryString';
  *                                        'comma': Serialize arrays by separating elements with comma。<br/>
  *                                        'none': Serialize arrays by using duplicate keys。<br/>
  * @param {(function|boolean)} [options.sort=false] - Supports both Function as a custom sorting function or false to disable sorting.
+ * @returns {string} 序列化后字符串。
  *
  * @example
  *
@@ -30,6 +31,8 @@ import queryString from './util/queryString';
  * jeselvmo.toQueryString({foo: [1, 2, 3]});
  * //=> 'foo=1&foo=2&foo=3'
  */
-export default function toQueryString(object, options) {
+function toQueryString(object, options) {
   return queryString.stringify(object, options);
 }
+
+export default toQueryString;
