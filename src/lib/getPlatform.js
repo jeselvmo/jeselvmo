@@ -4,6 +4,10 @@ import isLinux from './isLinux';
 import isWin from './isWin';
 import isMac from './isMac';
 
+/**
+ * 获取当前平台。
+ * @returns {string} 平台名称。
+ */
 function getPlatform() {
   if (isAndroid()) {
     return 'android';

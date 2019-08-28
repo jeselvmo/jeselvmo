@@ -1,7 +1,7 @@
 /**
  * 检查密码强度等级
- * @param  {String} str 传入的密码串
- * @return {Number}     返回的强度等级（最高为4级）
+ * @param  {string} str 传入的密码串
+ * @returns {number} 返回的强度等级（最高为4级）
  */
 function checkPasswordLevel(str) {
   if (typeof str === 'string') {

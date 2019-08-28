@@ -1,10 +1,15 @@
+/**
+ * 字符串重复拼接。
+ *
+ * @param {string} string - 要重复的字符串。
+ * @param {number} n - 重复次数。
+ * @returns {string} 重复拼接后字符串。
+ */
 function repeat(string, n) {
   let result = '';
   if (!string || n < 1 || n > Number.MAX_SAFE_INTEGER) {
     return result;
   }
-  // Leverage the exponentiation by squaring algorithm for a faster repeat.
-  // See https://en.wikipedia.org/wiki/Exponentiation_by_squaring for more details.
   do {
     if (n % 2) {
       result += string;

@@ -1,6 +1,8 @@
 // rollup.config.js
 import fs from 'fs';
 import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
+import nodeResolve from 'rollup-plugin-node-resolve';
 import pkg from './package.json';
 
 export default {
@@ -16,8 +18,16 @@ export default {
       .join('\n')}\n */`
   },
   plugins: [
+    nodeResolve({
+      jsnext: true,
+      main: true
+    }),
+    commonjs({
+      include: /node_modules/
+    }),
     babel({
-      exclude: 'node_modules/**' // 只编译我们的源代码
+      babelrc: false,
+      presets: [['@babel/env', { modules: false }]]
     })
   ]
 };

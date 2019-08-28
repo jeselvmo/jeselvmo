@@ -1,6 +1,7 @@
 /**
  * blob to dataURL
- * @param {*} blob
+ * @param {Blob} blob - Blob对象。
+ * @returns {string} dataURL。
  */
 function blobToDataURL(blob) {
   return new Promise((resolve, reject) => {

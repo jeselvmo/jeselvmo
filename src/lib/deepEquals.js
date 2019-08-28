@@ -1,5 +1,11 @@
 import isPrimitive from './isPrimitive';
 
+/**
+ * 深度比较两个对象是否相等。
+ * @param {Object} o1 第一个对象。
+ * @param {Object} o2 第二个对象。
+ * @returns {boolean} 是否成功。
+ */
 function deepEquals(o1, o2) {
   if (!o1 || !o2 || isPrimitive(o1)) {
     return o1 === o2;

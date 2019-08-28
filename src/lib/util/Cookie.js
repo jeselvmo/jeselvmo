@@ -1,6 +1,11 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable class-methods-use-this */
+/**
+ * Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+ * tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+ * @class
+ */
 class Cookie {
   constructor({ maxAge, expires, path, domain, secure, samesite } = {}) {
     this.maxAge = maxAge;

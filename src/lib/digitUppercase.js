@@ -1,9 +1,14 @@
 /* eslint-disable no-restricted-properties */
 /**
  *
- * @desc   现金额转大写
- * @param  {Number} n 数值
- * @return {String} 大写字符串
+ * 现金额转大写
+ * @param  {number} n 数值。
+ * @return {string} 大写字符串。
+ *
+ * @example
+ *
+ * jeselvmo.digitUppercase(1000.01);
+ * //=> "壹仟元壹分"
  */
 function digitUppercase(n) {
   let fraction = ['角', '分'];

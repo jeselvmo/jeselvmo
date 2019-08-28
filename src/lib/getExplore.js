@@ -1,8 +1,8 @@
 /* eslint-disable prefer-template,indent,no-cond-assign,no-nested-ternary,no-unused-expressions */
 /**
  *
- * @desc 获取浏览器类型和版本
- * @return {String} result
+ * 获取浏览器类型和版本。
+ * @return {string} 返回浏览器名称。
  */
 function getExplore() {
   let sys = {},

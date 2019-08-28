@@ -4,7 +4,7 @@ function setStorageItem(storage, key, val) {
   if (key && !isJSON(key)) {
     let value = JSON.stringify(val);
     if (typeof value === 'undefined') {
-      localStorage.removeItem(key);
+      storage.removeItem(key);
     } else {
       storage.setItem(key, value);
     }

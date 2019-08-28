@@ -1,6 +1,6 @@
 /**
- * 获取操作系统类型
- * @returns {String}
+ * 获取操作系统类型。
+ * @returns {string} 返回系统名称。
  */
 function getOS() {
   let userAgent = ('navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase()) || '';

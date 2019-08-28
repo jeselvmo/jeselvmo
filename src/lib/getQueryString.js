@@ -1,7 +1,11 @@
 /* eslint-disable prefer-rest-params */
-import queryString from './query-string/index';
+import qs from 'query-string';
 import isURL from './isURL';
 
+/**
+ * 获取URL中的QueryString。
+ * @returns {Object} 返回单项或全部项。
+ */
 function getQueryString() {
   let url, name;
   switch (arguments.length) {
@@ -24,7 +28,7 @@ function getQueryString() {
       break;
   }
 
-  let { query } = queryString.parseUrl(url);
+  let { query } = qs.parseUrl(url);
   if (name) {
     return query[name];
   }

@@ -1,6 +1,6 @@
 {
   "name": "jeselvmo",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JavaScript utility library",
   "homepage": "https://github.com/jeselvmo/jeselvmo",
   "author": "kecoyo <kecoyo@163.com>",
@@ -15,7 +15,8 @@
     "build:browser": "rollup -c && npm run minify",
     "build:node": "babel src -d .",
     "build": "npm run build:browser && npm run build:node",
-    "test": "mocha --require @babel/register --require ./test/setup.js --reporter dot"
+    "test": "mocha --require @babel/register --require ./test/setup.js --reporter dot",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "files": [
     "index.js",
@@ -31,10 +32,12 @@
     "tools",
     "utils"
   ],
-  "contributors": [{
-    "name": "jeselvmo",
-    "url": "https://github.com/jeselvmo"
-  }],
+  "contributors": [
+    {
+      "name": "jeselvmo",
+      "url": "https://github.com/jeselvmo"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/jeselvmo/jeselvmo/issues"
   },
@@ -49,6 +52,7 @@
     "@babel/register": "^7.4.4",
     "babel-eslint": "^10.0.2",
     "babel-plugin-add-module-exports": "^1.0.2",
+    "docdash": "^1.1.1",
     "eslint": "^6.0.1",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.0",
@@ -56,10 +60,17 @@
     "nyc": "^14.1.1",
     "rollup": "^1.16.4",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "uglify-js": "^3.6.0"
   },
   "engines": {
     "node": ">= 0.10"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "date-format": "^2.1.0",
+    "query-string": "^6.8.2",
+    "url-parse": "^1.4.7"
+  }
 }

@@ -1,8 +1,13 @@
 /**
  *
- * @desc 格式化现在距${endTime}的剩余时间
- * @param  {Date} endTime
- * @return {String}
+ * 格式化现在距${endTime}的剩余时间
+ * @param  {Date} endTime 距离日期。
+ * @return {string} 返回剩余时间格式化后的字符串。
+ *
+ * @example
+ *
+ * jeselvmo.formatRemainTime(new Date().getTime()+100000000);
+ * //=> "1天 3小时 46分钟 40秒"
  */
 function formatRemainTime(endTime) {
   let startDate = new Date(); // 开始时间

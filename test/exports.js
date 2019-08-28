@@ -11,7 +11,6 @@ describe('Exports', () => {
 
   it('should export sanitizers', () => {
     assert.equal(typeof jeselvmo.toBoolean, 'function');
-    assert.equal(typeof jeselvmo.toFloat, 'function');
   });
 
   it('should export the version number', () => {

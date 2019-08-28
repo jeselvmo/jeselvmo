@@ -35,7 +35,12 @@ const loadCSS = function(href) {
   });
 };
 
-const loadUI = function(srcs) {
+/**
+ * 加载UI的javascript/css文件。
+ * @param {(string|Array)} srcs - 要加载的js/css路径。
+ * @returns {Promise} promise
+ */
+function loadUI(srcs) {
   srcs = Array.isArray(srcs) ? srcs : srcs.split(/\s+/);
 
   let promise = Promise.resolve();
@@ -43,6 +48,6 @@ const loadUI = function(srcs) {
     promise = promise.then(() => (src.indexOf('.css') >= 0 ? loadCSS(src) : loadScript(src)));
   });
   return promise;
-};
+}
 
 export default loadUI;

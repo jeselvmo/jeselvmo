@@ -1,15 +1,39 @@
 /* eslint-disable no-else-return */
 import assertString from './util/assertString';
-import toString from './util/toString';
 
-export default function isIn(str, options) {
+function toString(input) {
+  if (typeof input === 'object' && input !== null) {
+    if (typeof input.toString === 'function') {
+      input = input.toString();
+    } else {
+      input = '[object Object]';
+    }
+  } else if (input === null || typeof input === 'undefined' || (isNaN(input) && !input.length)) {
+    input = '';
+  }
+  return String(input);
+}
+
+/**
+ * 检查字符串是否在数组中，或对象中。
+ * @param {string} str 检查字符串。
+ * @param {Object} options 可以是数组、对象。数组：检查数组是否包含该字符串；对象：检查对象是否包含该属性。
+ * @returns {boolean} 真/假。
+ *
+ * @example
+ *
+ * jeselvmo.isIn('a', ['a', 'b']);
+ * //=> true
+ *
+ * jeselvmo.isIn('name', {name:''});
+ * //=> true
+ */
+function isIn(str, options) {
   assertString(str);
   let i;
   if (Object.prototype.toString.call(options) === '[object Array]') {
     const array = [];
     for (i in options) {
-      // https://github.com/gotwarlost/istanbul/blob/master/ignoring-code-for-coverage.md#ignoring-code-for-coverage-purposes
-      // istanbul ignore else
       if ({}.hasOwnProperty.call(options, i)) {
         array[i] = toString(options[i]);
       }
@@ -22,3 +46,5 @@ export default function isIn(str, options) {
   }
   return false;
 }
+
+export default isIn;

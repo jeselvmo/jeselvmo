@@ -1,10 +1,10 @@
 import clamp from './clamp';
 /**
  * 转换两个范围值，位置比不变。
- * @param {Number} value 值
- * @param {Array} range 最小值
- * @param {Array} range2 最大值
- * @return {Number} 结果值
+ * @param {number} value 值。
+ * @param {Array} range 最小值。
+ * @param {Array} range2 最大值。
+ * @returns {number} 结果值。
  */
 function convertRangeValue(value, range, range2) {
   value = clamp(value, range[0], range[1]);

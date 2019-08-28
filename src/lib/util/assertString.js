@@ -1,5 +1,5 @@
 export default function assertString(input) {
-  const isString = (typeof input === 'string' || input instanceof String);
+  const isString = typeof input === 'string' || input instanceof String;
 
   if (!isString) {
     let invalidType;

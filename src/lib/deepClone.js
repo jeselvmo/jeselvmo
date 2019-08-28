@@ -1,7 +1,7 @@
 /**
- * @desc 深拷贝，支持常见类型
- * @param {Any} values object
- * @returns {Any} new object
+ * 深拷贝，支持常见类型
+ * @param {Any} values 要复制的对象。
+ * @returns {Any} 新对象。
  */
 function deepClone(values) {
   let copy;

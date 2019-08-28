@@ -33,6 +33,7 @@
     "max-len": 0,
     "no-else-return": 0,
     "space-before-function-paren": 0,
-    "guard-for-in": 0
+    "guard-for-in": 0,
+    "valid-jsdoc": 2
   }
 }
