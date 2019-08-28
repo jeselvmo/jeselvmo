@@ -99,6 +99,8 @@ var _getExplore = _interopRequireDefault(require("./lib/getExplore"));
 
 var _formatDate = _interopRequireDefault(require("./lib/formatDate"));
 
+var _parseDate = _interopRequireDefault(require("./lib/parseDate"));
+
 var _formatPassTime = _interopRequireDefault(require("./lib/formatPassTime"));
 
 var _formatRemainTime = _interopRequireDefault(require("./lib/formatRemainTime"));
@@ -161,13 +163,17 @@ var _randomColor = _interopRequireDefault(require("./lib/randomColor"));
 
 var _randomNum = _interopRequireDefault(require("./lib/randomNum"));
 
-var _dataURLtoBlob = _interopRequireDefault(require("./lib/dataURLtoBlob"));
+var _dataURLToBlob = _interopRequireDefault(require("./lib/dataURLToBlob"));
 
 var _blobToDataURL = _interopRequireDefault(require("./lib/blobToDataURL"));
+
+var _readFile = _interopRequireDefault(require("./lib/readFile"));
 
 var _loadUI = _interopRequireDefault(require("./lib/loadUI"));
 
 var _loadEruda = _interopRequireDefault(require("./lib/loadEruda"));
+
+var _initEruda = _interopRequireDefault(require("./lib/initEruda"));
 
 var _times = _interopRequireDefault(require("./lib/times"));
 
@@ -237,6 +243,7 @@ var jeselvmo = {
   isPrimitive: _isPrimitive.default,
   // date
   formatDate: _formatDate.default,
+  parseDate: _parseDate.default,
   formatPassTime: _formatPassTime.default,
   formatRemainTime: _formatRemainTime.default,
   getDayOfWeek: _getDayOfWeek.default,
@@ -278,13 +285,14 @@ var jeselvmo = {
   // others
   loadUI: _loadUI.default,
   loadEruda: _loadEruda.default,
-  md5: _md.default,
+  initEruda: _initEruda.default,
   delay: _delay.default,
   getKeyName: _getKeyName.default,
   randomColor: _randomColor.default,
   randomNum: _randomNum.default,
-  dataURLtoBlob: _dataURLtoBlob.default,
+  dataURLToBlob: _dataURLToBlob.default,
   blobToDataURL: _blobToDataURL.default,
+  readFile: _readFile.default,
   clamp: _clamp.default,
   convertRangeValue: _convertRangeValue.default,
   shallowCopy: _shallowCopy.default,
