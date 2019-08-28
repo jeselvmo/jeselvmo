@@ -126,6 +126,7 @@ import blobToDataURL from './lib/blobToDataURL';
 
 import loadUI from './lib/loadUI';
 import loadEruda from './lib/loadEruda';
+import initEruda from './lib/initEruda';
 
 import times from './lib/times';
 import repeat from './lib/repeat';
@@ -232,6 +233,7 @@ const jeselvmo = {
   // others
   loadUI,
   loadEruda,
+  initEruda,
   delay,
   getKeyName,
   randomColor,
