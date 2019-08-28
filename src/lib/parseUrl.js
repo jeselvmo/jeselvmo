@@ -1,4 +1,5 @@
-import Url from './util/Url';
+import Url from 'url-parse';
+import qs from 'query-string';
 
 /**
  * 解析URL字符串。
@@ -6,7 +7,15 @@ import Url from './util/Url';
  *@returns {object} 自定义的Url对象
  */
 function parseUrl(url) {
-  return new Url(url);
+  const obj = new Url(url);
+  delete obj.auth;
+  delete obj.username;
+  delete obj.password;
+  delete obj.slashes;
+  obj.search = obj.query;
+  obj.query = qs.parse(obj.query);
+  obj.toString = () => obj.origin + obj.pathname + obj.search + obj.hash;
+  return obj;
 }
 
 export default parseUrl;

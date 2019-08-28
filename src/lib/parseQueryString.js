@@ -1,4 +1,4 @@
-import queryString from './util/queryString';
+import qs from 'query-string';
 
 /**
  *
@@ -27,7 +27,7 @@ import queryString from './util/queryString';
  *
  */
 function parseQueryString(input, options) {
-  return queryString.parse(input, options);
+  return qs.parse(input, options);
 }
 
 export default parseQueryString;

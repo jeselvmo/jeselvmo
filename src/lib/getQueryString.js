@@ -1,5 +1,5 @@
 /* eslint-disable prefer-rest-params */
-import queryString from './util/queryString';
+import qs from 'query-string';
 import isURL from './isURL';
 
 /**
@@ -28,7 +28,7 @@ function getQueryString() {
       break;
   }
 
-  let { query } = queryString.parseUrl(url);
+  let { query } = qs.parseUrl(url);
   if (name) {
     return query[name];
   }

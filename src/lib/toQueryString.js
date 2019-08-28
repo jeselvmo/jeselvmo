@@ -1,4 +1,4 @@
-import queryString from './util/queryString';
+import qs from 'query-string';
 
 /**
  * 对象序列化为查询字符串，并对键进行排序。
@@ -32,7 +32,7 @@ import queryString from './util/queryString';
  * //=> 'foo=1&foo=2&foo=3'
  */
 function toQueryString(object, options) {
-  return queryString.stringify(object, options);
+  return qs.stringify(object, options);
 }
 
 export default toQueryString;
