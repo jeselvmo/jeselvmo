@@ -76,6 +76,7 @@ import getExplore from './lib/getExplore';
 
 // date
 import formatDate from './lib/formatDate';
+import parseDate from './lib/parseDate';
 import formatPassTime from './lib/formatPassTime';
 import formatRemainTime from './lib/formatRemainTime';
 import getDayOfWeek from './lib/getDayOfWeek';
@@ -121,8 +122,9 @@ import getKeyName from './lib/getKeyName';
 import randomColor from './lib/randomColor';
 import randomNum from './lib/randomNum';
 
-import dataURLtoBlob from './lib/dataURLtoBlob';
+import dataURLToBlob from './lib/dataURLToBlob';
 import blobToDataURL from './lib/blobToDataURL';
+import readFile from './lib/readFile';
 
 import loadUI from './lib/loadUI';
 import loadEruda from './lib/loadEruda';
@@ -185,6 +187,7 @@ const jeselvmo = {
 
   // date
   formatDate,
+  parseDate,
   formatPassTime,
   formatRemainTime,
   getDayOfWeek,
@@ -239,8 +242,9 @@ const jeselvmo = {
   randomColor,
   randomNum,
 
-  dataURLtoBlob,
+  dataURLToBlob,
   blobToDataURL,
+  readFile,
 
   clamp,
   convertRangeValue,
