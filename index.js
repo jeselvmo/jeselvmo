@@ -153,8 +153,6 @@ var _checkPasswordLevel = _interopRequireDefault(require("./lib/checkPasswordLev
 
 var _inherits = _interopRequireDefault(require("./lib/inherits"));
 
-var _md = _interopRequireDefault(require("./lib/md5"));
-
 var _delay = _interopRequireDefault(require("./lib/delay"));
 
 var _getKeyName = _interopRequireDefault(require("./lib/getKeyName"));

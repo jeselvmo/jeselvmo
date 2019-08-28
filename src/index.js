@@ -115,7 +115,6 @@ import deepClone from './lib/deepClone';
 import deepEquals from './lib/deepEquals';
 import checkPasswordLevel from './lib/checkPasswordLevel';
 import inherits from './lib/inherits';
-import md5 from './lib/md5';
 import delay from './lib/delay';
 import getKeyName from './lib/getKeyName';
 
@@ -233,7 +232,6 @@ const jeselvmo = {
   // others
   loadUI,
   loadEruda,
-  md5,
   delay,
   getKeyName,
   randomColor,
