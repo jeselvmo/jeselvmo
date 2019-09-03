@@ -1,18 +1,11 @@
+import parseUA from './parseUA';
+
 /**
- * 获取操作系统类型。
- * @returns {string} 返回系统名称。
+ * 获取操作系统信息。
+ * @returns {string} 返回操作系统信息。
  */
 function getOS() {
-  let userAgent = ('navigator' in window && 'userAgent' in navigator && navigator.userAgent.toLowerCase()) || '';
-  let appVersion = ('navigator' in window && 'appVersion' in navigator && navigator.appVersion.toLowerCase()) || '';
-
-  if (/iphone/i.test(userAgent) || /ipad/i.test(userAgent) || /ipod/i.test(userAgent)) return 'ios';
-  if (/android/i.test(userAgent)) return 'android';
-  if (/win/i.test(appVersion) && /phone/i.test(userAgent)) return 'windowsPhone';
-  if (/mac/i.test(appVersion)) return 'MacOSX';
-  if (/win/i.test(appVersion)) return 'windows';
-  if (/linux/i.test(appVersion)) return 'linux';
-  return 'Unkonwn';
+  return parseUA().os;
 }
 
 export default getOS;

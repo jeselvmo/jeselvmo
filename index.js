@@ -91,11 +91,17 @@ var _isMac = _interopRequireDefault(require("./lib/isMac"));
 
 var _isWeiXin = _interopRequireDefault(require("./lib/isWeiXin"));
 
+var _isIE = _interopRequireDefault(require("./lib/isIE"));
+
+var _parseUA = _interopRequireDefault(require("./lib/parseUA"));
+
 var _getOS = _interopRequireDefault(require("./lib/getOS"));
 
-var _getPlatform = _interopRequireDefault(require("./lib/getPlatform"));
+var _getBrowser = _interopRequireDefault(require("./lib/getBrowser"));
 
-var _getExplore = _interopRequireDefault(require("./lib/getExplore"));
+var _getDevice = _interopRequireDefault(require("./lib/getDevice"));
+
+var _getEngine = _interopRequireDefault(require("./lib/getEngine"));
 
 var _formatDate = _interopRequireDefault(require("./lib/formatDate"));
 
@@ -199,7 +205,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // sessionStorage
 // cookie
 // tools
-var version = '2.0.1';
+var version = '2.0.2';
 var jeselvmo = {
   version: version,
   toDate: _toDate.default,
@@ -259,10 +265,13 @@ var jeselvmo = {
   isLinux: _isLinux.default,
   isMac: _isMac.default,
   isWeiXin: _isWeiXin.default,
+  isIE: _isIE.default,
   // platform
+  parseUA: _parseUA.default,
   getOS: _getOS.default,
-  getPlatform: _getPlatform.default,
-  getExplore: _getExplore.default,
+  getBrowser: _getBrowser.default,
+  getDevice: _getDevice.default,
+  getEngine: _getEngine.default,
   // web
   getWindowSize: _getWindowSize.default,
   // url

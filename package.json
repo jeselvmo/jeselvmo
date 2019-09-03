@@ -1,6 +1,6 @@
 {
   "name": "jeselvmo",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "JavaScript utility library",
   "homepage": "https://github.com/jeselvmo/jeselvmo",
   "author": "kecoyo <kecoyo@163.com>",
@@ -71,6 +71,7 @@
   "dependencies": {
     "date-format": "^2.1.0",
     "query-string": "^6.8.2",
+    "ua-parser-js": "^0.7.20",
     "url-parse": "^1.4.7"
   }
 }

@@ -68,11 +68,14 @@ import isWin from './lib/isWin';
 import isLinux from './lib/isLinux';
 import isMac from './lib/isMac';
 import isWeiXin from './lib/isWeiXin';
+import isIE from './lib/isIE';
 
 // platform
+import parseUA from './lib/parseUA';
 import getOS from './lib/getOS';
-import getPlatform from './lib/getPlatform';
-import getExplore from './lib/getExplore';
+import getBrowser from './lib/getBrowser';
+import getDevice from './lib/getDevice';
+import getEngine from './lib/getEngine';
 
 // date
 import formatDate from './lib/formatDate';
@@ -136,7 +139,7 @@ import repeat from './lib/repeat';
 import download from './lib/download';
 import downloadBlob from './lib/downloadBlob';
 
-const version = '2.0.1';
+const version = '2.0.2';
 
 const jeselvmo = {
   version,
@@ -205,11 +208,14 @@ const jeselvmo = {
   isLinux,
   isMac,
   isWeiXin,
+  isIE,
 
   // platform
+  parseUA,
   getOS,
-  getPlatform,
-  getExplore,
+  getBrowser,
+  getDevice,
+  getEngine,
 
   // web
   getWindowSize,
