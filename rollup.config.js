@@ -18,10 +18,7 @@ export default {
       .join('\n')}\n */`
   },
   plugins: [
-    nodeResolve({
-      jsnext: true,
-      main: true
-    }),
+    nodeResolve(),
     commonjs({
       include: /node_modules/
     }),
