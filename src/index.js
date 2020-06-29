@@ -125,7 +125,7 @@ import getKeyName from './lib/getKeyName';
 import randomColor from './lib/randomColor';
 import randomNum from './lib/randomNum';
 
-import dataURLToBlob from './lib/dataURLToBlob2';
+import dataURLToBlob from './lib/dataURLToBlob';
 import blobToDataURL from './lib/blobToDataURL';
 import readFile from './lib/readFile';
 
