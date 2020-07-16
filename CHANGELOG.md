@@ -1,3 +1,8 @@
+#### 2.0.3
+
+- 删除了 blacklist、getDayOfWeek、getWeek、isWhitelisted、parseDate、repeat、times、toDate、whitelist 方法
+- 优化了 formatDate、initEruda、isPhoneNum、getQueryString、parseQueryString、parseUrl、toQueryString 方法
+
 #### 2.0.2
 
 - 使用 ua-parser-js 来解析 user-agent

@@ -1,66 +1,28 @@
-import toDate from './lib/toDate';
-import toBoolean from './lib/toBoolean';
-
-import isEmail from './lib/isEmail';
-import isURL from './lib/isURL';
-import isIP from './lib/isIP';
-
-import isBoolean from './lib/isBoolean';
-
-import isNumeric from './lib/isNumeric';
-import isPort from './lib/isPort';
-
-import isInt from './lib/isInt';
-import isHexadecimal from './lib/isHexadecimal';
-
-import isHexColor from './lib/isHexColor';
-
-import isMD5 from './lib/isMD5';
-import isJWT from './lib/isJWT';
-
-import isJSON from './lib/isJSON';
-
-import isLength from './lib/isLength';
-
-import isUUID from './lib/isUUID';
-
-import isIn from './lib/isIn';
-
-import isBase64 from './lib/isBase64';
-
-import isMimeType from './lib/isMimeType';
-
-import isLatLong from './lib/isLatLong';
-
-import ltrim from './lib/ltrim';
-import rtrim from './lib/rtrim';
-import trim from './lib/trim';
-
-import encodeHtml from './lib/encodeHtml';
-import decodeHtml from './lib/decodeHtml';
-import htmlEncode from './lib/htmlEncode';
-import htmlDecode from './lib/htmlDecode';
-
-import whitelist from './lib/whitelist';
-import blacklist from './lib/blacklist';
-import isWhitelisted from './lib/isWhitelisted';
-
-// ////////////////////////////////////////////////////////////////////////
-// ADD
-// ////////////////////////////////////////////////////////////////////////
-
-// 类型
 import typeOf from './lib/typeOf';
 import isType from './lib/isType';
 
-// validate
-import isPhoneNum from './lib/isPhoneNum';
-
 import isPrimitive from './lib/isPrimitive';
+import isEmail from './lib/isEmail';
+import isPhoneNum from './lib/isPhoneNum';
+import isURL from './lib/isURL';
+import isIP from './lib/isIP';
+import isBoolean from './lib/isBoolean';
+import isNumeric from './lib/isNumeric';
+import isPort from './lib/isPort';
+import isInt from './lib/isInt';
+import isHexadecimal from './lib/isHexadecimal';
+import isHexColor from './lib/isHexColor';
+import isMD5 from './lib/isMD5';
+import isJWT from './lib/isJWT';
+import isJSON from './lib/isJSON';
+import isLength from './lib/isLength';
+import isUUID from './lib/isUUID';
+import isIn from './lib/isIn';
+import isBase64 from './lib/isBase64';
+import isMimeType from './lib/isMimeType';
+import isLatLong from './lib/isLatLong';
 
-import isSameDay from './lib/isSameDay';
-import isLeapYear from './lib/isLeapYear';
-
+// userAgent
 import isIOS from './lib/isIOS';
 import isAndroid from './lib/isAndroid';
 import isMobile from './lib/isMobile';
@@ -69,21 +31,32 @@ import isLinux from './lib/isLinux';
 import isMac from './lib/isMac';
 import isWeiXin from './lib/isWeiXin';
 import isIE from './lib/isIE';
-
-// platform
 import parseUA from './lib/parseUA';
 import getOS from './lib/getOS';
 import getBrowser from './lib/getBrowser';
 import getDevice from './lib/getDevice';
 import getEngine from './lib/getEngine';
 
+// boolean
+import toBoolean from './lib/toBoolean';
+
+// trim
+import ltrim from './lib/ltrim';
+import rtrim from './lib/rtrim';
+import trim from './lib/trim';
+
+// html
+import encodeHtml from './lib/encodeHtml';
+import decodeHtml from './lib/decodeHtml';
+import htmlEncode from './lib/htmlEncode';
+import htmlDecode from './lib/htmlDecode';
+
 // date
 import formatDate from './lib/formatDate';
-import parseDate from './lib/parseDate';
 import formatPassTime from './lib/formatPassTime';
 import formatRemainTime from './lib/formatRemainTime';
-import getDayOfWeek from './lib/getDayOfWeek';
-import getWeek from './lib/getWeek';
+import isSameDay from './lib/isSameDay';
+import isLeapYear from './lib/isLeapYear';
 
 // number
 import formatNum from './lib/formatNum';
@@ -102,10 +75,12 @@ import getQueryString from './lib/getQueryString';
 import getLocalItem from './lib/getLocalItem';
 import setLocalItem from './lib/setLocalItem';
 import removeLocalItem from './lib/removeLocalItem';
+
 // sessionStorage
 import getSessionItem from './lib/getSessionItem';
 import setSessionItem from './lib/setSessionItem';
 import removeSessionItem from './lib/removeSessionItem';
+
 // cookie
 import getCookieItem from './lib/getCookieItem';
 import setCookieItem from './lib/setCookieItem';
@@ -133,19 +108,20 @@ import loadUI from './lib/loadUI';
 import loadEruda from './lib/loadEruda';
 import initEruda from './lib/initEruda';
 
-import times from './lib/times';
-import repeat from './lib/repeat';
-
 import download from './lib/download';
 import downloadBlob from './lib/downloadBlob';
 
-const version = '2.0.2';
+const version = '2.0.3';
 
 const jeselvmo = {
   version,
-  toDate,
-  toBoolean,
+
+  typeOf,
+  isType,
+
+  isPrimitive,
   isEmail,
+  isPhoneNum,
   isURL,
   isIP,
   isBoolean,
@@ -163,6 +139,23 @@ const jeselvmo = {
   isBase64,
   isMimeType,
   isLatLong,
+
+  isIOS,
+  isAndroid,
+  isMobile,
+  isWin,
+  isLinux,
+  isMac,
+  isWeiXin,
+  isIE,
+  parseUA,
+  getOS,
+  getBrowser,
+  getDevice,
+  getEngine,
+
+  toBoolean,
+
   ltrim,
   rtrim,
   trim,
@@ -172,52 +165,15 @@ const jeselvmo = {
   htmlEncode,
   htmlDecode,
 
-  whitelist,
-  blacklist,
-  isWhitelisted,
-  toString,
-
-  // 类型
-  typeOf,
-  isType,
-
-  // validate
-  isPhoneNum,
+  formatDate,
+  formatPassTime,
+  formatRemainTime,
   isSameDay,
   isLeapYear,
 
-  isPrimitive,
-
-  // date
-  formatDate,
-  parseDate,
-  formatPassTime,
-  formatRemainTime,
-  getDayOfWeek,
-  getWeek,
-
-  // number
   formatNum,
   digitUppercase,
 
-  // system
-  isIOS,
-  isAndroid,
-  isMobile,
-  isWin,
-  isLinux,
-  isMac,
-  isWeiXin,
-  isIE,
-
-  // platform
-  parseUA,
-  getOS,
-  getBrowser,
-  getDevice,
-  getEngine,
-
-  // web
   getWindowSize,
 
   // url
@@ -239,10 +195,14 @@ const jeselvmo = {
   setCookieItem,
   removeCookieItem,
 
-  // others
-  loadUI,
-  loadEruda,
-  initEruda,
+  // tools
+  clamp,
+  convertRangeValue,
+  shallowCopy,
+  deepClone,
+  deepEquals,
+  checkPasswordLevel,
+  inherits,
   delay,
   getKeyName,
   randomColor,
@@ -252,19 +212,12 @@ const jeselvmo = {
   blobToDataURL,
   readFile,
 
-  clamp,
-  convertRangeValue,
-  shallowCopy,
-  deepClone,
-  deepEquals,
-  checkPasswordLevel,
-  inherits,
-
-  times,
-  repeat,
+  loadUI,
+  loadEruda,
+  initEruda,
 
   download,
-  downloadBlob
+  downloadBlob,
 };
 
 export default jeselvmo;

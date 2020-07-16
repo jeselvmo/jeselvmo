@@ -1,13 +1,13 @@
 import Url from 'url-parse';
-import qs from 'query-string';
+import qs from 'querystringify';
 
 /**
  * 解析URL字符串。
- *@param {string} url 完整的URL地址
+ *@param {string} [url] 完整的URL地址
  *@returns {object} 自定义的Url对象
  */
 function parseUrl(url) {
-  const obj = new Url(url);
+  const obj = new Url(url || window.location.href);
   delete obj.auth;
   delete obj.username;
   delete obj.password;

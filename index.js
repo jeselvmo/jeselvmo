@@ -5,11 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _toDate = _interopRequireDefault(require("./lib/toDate"));
+var _typeOf = _interopRequireDefault(require("./lib/typeOf"));
 
-var _toBoolean = _interopRequireDefault(require("./lib/toBoolean"));
+var _isType = _interopRequireDefault(require("./lib/isType"));
+
+var _isPrimitive = _interopRequireDefault(require("./lib/isPrimitive"));
 
 var _isEmail = _interopRequireDefault(require("./lib/isEmail"));
+
+var _isPhoneNum = _interopRequireDefault(require("./lib/isPhoneNum"));
 
 var _isURL = _interopRequireDefault(require("./lib/isURL"));
 
@@ -45,38 +49,6 @@ var _isMimeType = _interopRequireDefault(require("./lib/isMimeType"));
 
 var _isLatLong = _interopRequireDefault(require("./lib/isLatLong"));
 
-var _ltrim = _interopRequireDefault(require("./lib/ltrim"));
-
-var _rtrim = _interopRequireDefault(require("./lib/rtrim"));
-
-var _trim = _interopRequireDefault(require("./lib/trim"));
-
-var _encodeHtml = _interopRequireDefault(require("./lib/encodeHtml"));
-
-var _decodeHtml = _interopRequireDefault(require("./lib/decodeHtml"));
-
-var _htmlEncode = _interopRequireDefault(require("./lib/htmlEncode"));
-
-var _htmlDecode = _interopRequireDefault(require("./lib/htmlDecode"));
-
-var _whitelist = _interopRequireDefault(require("./lib/whitelist"));
-
-var _blacklist = _interopRequireDefault(require("./lib/blacklist"));
-
-var _isWhitelisted = _interopRequireDefault(require("./lib/isWhitelisted"));
-
-var _typeOf = _interopRequireDefault(require("./lib/typeOf"));
-
-var _isType = _interopRequireDefault(require("./lib/isType"));
-
-var _isPhoneNum = _interopRequireDefault(require("./lib/isPhoneNum"));
-
-var _isPrimitive = _interopRequireDefault(require("./lib/isPrimitive"));
-
-var _isSameDay = _interopRequireDefault(require("./lib/isSameDay"));
-
-var _isLeapYear = _interopRequireDefault(require("./lib/isLeapYear"));
-
 var _isIOS = _interopRequireDefault(require("./lib/isIOS"));
 
 var _isAndroid = _interopRequireDefault(require("./lib/isAndroid"));
@@ -103,17 +75,31 @@ var _getDevice = _interopRequireDefault(require("./lib/getDevice"));
 
 var _getEngine = _interopRequireDefault(require("./lib/getEngine"));
 
-var _formatDate = _interopRequireDefault(require("./lib/formatDate"));
+var _toBoolean = _interopRequireDefault(require("./lib/toBoolean"));
 
-var _parseDate = _interopRequireDefault(require("./lib/parseDate"));
+var _ltrim = _interopRequireDefault(require("./lib/ltrim"));
+
+var _rtrim = _interopRequireDefault(require("./lib/rtrim"));
+
+var _trim = _interopRequireDefault(require("./lib/trim"));
+
+var _encodeHtml = _interopRequireDefault(require("./lib/encodeHtml"));
+
+var _decodeHtml = _interopRequireDefault(require("./lib/decodeHtml"));
+
+var _htmlEncode = _interopRequireDefault(require("./lib/htmlEncode"));
+
+var _htmlDecode = _interopRequireDefault(require("./lib/htmlDecode"));
+
+var _formatDate = _interopRequireDefault(require("./lib/formatDate"));
 
 var _formatPassTime = _interopRequireDefault(require("./lib/formatPassTime"));
 
 var _formatRemainTime = _interopRequireDefault(require("./lib/formatRemainTime"));
 
-var _getDayOfWeek = _interopRequireDefault(require("./lib/getDayOfWeek"));
+var _isSameDay = _interopRequireDefault(require("./lib/isSameDay"));
 
-var _getWeek = _interopRequireDefault(require("./lib/getWeek"));
+var _isLeapYear = _interopRequireDefault(require("./lib/isLeapYear"));
 
 var _formatNum = _interopRequireDefault(require("./lib/formatNum"));
 
@@ -181,22 +167,16 @@ var _loadEruda = _interopRequireDefault(require("./lib/loadEruda"));
 
 var _initEruda = _interopRequireDefault(require("./lib/initEruda"));
 
-var _times = _interopRequireDefault(require("./lib/times"));
-
-var _repeat = _interopRequireDefault(require("./lib/repeat"));
-
 var _download = _interopRequireDefault(require("./lib/download"));
 
 var _downloadBlob = _interopRequireDefault(require("./lib/downloadBlob"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// ////////////////////////////////////////////////////////////////////////
-// ADD
-// ////////////////////////////////////////////////////////////////////////
-// 类型
-// validate
-// platform
+// userAgent
+// boolean
+// trim
+// html
 // date
 // number
 // dom
@@ -205,12 +185,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // sessionStorage
 // cookie
 // tools
-var version = '2.0.2';
+var version = '2.0.3';
 var jeselvmo = {
   version: version,
-  toDate: _toDate.default,
-  toBoolean: _toBoolean.default,
+  typeOf: _typeOf.default,
+  isType: _isType.default,
+  isPrimitive: _isPrimitive.default,
   isEmail: _isEmail.default,
+  isPhoneNum: _isPhoneNum.default,
   isURL: _isURL.default,
   isIP: _isIP.default,
   isBoolean: _isBoolean.default,
@@ -228,36 +210,6 @@ var jeselvmo = {
   isBase64: _isBase.default,
   isMimeType: _isMimeType.default,
   isLatLong: _isLatLong.default,
-  ltrim: _ltrim.default,
-  rtrim: _rtrim.default,
-  trim: _trim.default,
-  encodeHtml: _encodeHtml.default,
-  decodeHtml: _decodeHtml.default,
-  htmlEncode: _htmlEncode.default,
-  htmlDecode: _htmlDecode.default,
-  whitelist: _whitelist.default,
-  blacklist: _blacklist.default,
-  isWhitelisted: _isWhitelisted.default,
-  toString: toString,
-  // 类型
-  typeOf: _typeOf.default,
-  isType: _isType.default,
-  // validate
-  isPhoneNum: _isPhoneNum.default,
-  isSameDay: _isSameDay.default,
-  isLeapYear: _isLeapYear.default,
-  isPrimitive: _isPrimitive.default,
-  // date
-  formatDate: _formatDate.default,
-  parseDate: _parseDate.default,
-  formatPassTime: _formatPassTime.default,
-  formatRemainTime: _formatRemainTime.default,
-  getDayOfWeek: _getDayOfWeek.default,
-  getWeek: _getWeek.default,
-  // number
-  formatNum: _formatNum.default,
-  digitUppercase: _digitUppercase.default,
-  // system
   isIOS: _isIOS.default,
   isAndroid: _isAndroid.default,
   isMobile: _isMobile.default,
@@ -266,13 +218,26 @@ var jeselvmo = {
   isMac: _isMac.default,
   isWeiXin: _isWeiXin.default,
   isIE: _isIE.default,
-  // platform
   parseUA: _parseUA.default,
   getOS: _getOS.default,
   getBrowser: _getBrowser.default,
   getDevice: _getDevice.default,
   getEngine: _getEngine.default,
-  // web
+  toBoolean: _toBoolean.default,
+  ltrim: _ltrim.default,
+  rtrim: _rtrim.default,
+  trim: _trim.default,
+  encodeHtml: _encodeHtml.default,
+  decodeHtml: _decodeHtml.default,
+  htmlEncode: _htmlEncode.default,
+  htmlDecode: _htmlDecode.default,
+  formatDate: _formatDate.default,
+  formatPassTime: _formatPassTime.default,
+  formatRemainTime: _formatRemainTime.default,
+  isSameDay: _isSameDay.default,
+  isLeapYear: _isLeapYear.default,
+  formatNum: _formatNum.default,
+  digitUppercase: _digitUppercase.default,
   getWindowSize: _getWindowSize.default,
   // url
   parseUrl: _parseUrl.default,
@@ -291,17 +256,7 @@ var jeselvmo = {
   getCookieItem: _getCookieItem.default,
   setCookieItem: _setCookieItem.default,
   removeCookieItem: _removeCookieItem.default,
-  // others
-  loadUI: _loadUI.default,
-  loadEruda: _loadEruda.default,
-  initEruda: _initEruda.default,
-  delay: _delay.default,
-  getKeyName: _getKeyName.default,
-  randomColor: _randomColor.default,
-  randomNum: _randomNum.default,
-  dataURLToBlob: _dataURLToBlob.default,
-  blobToDataURL: _blobToDataURL.default,
-  readFile: _readFile.default,
+  // tools
   clamp: _clamp.default,
   convertRangeValue: _convertRangeValue.default,
   shallowCopy: _shallowCopy.default,
@@ -309,8 +264,16 @@ var jeselvmo = {
   deepEquals: _deepEquals.default,
   checkPasswordLevel: _checkPasswordLevel.default,
   inherits: _inherits.default,
-  times: _times.default,
-  repeat: _repeat.default,
+  delay: _delay.default,
+  getKeyName: _getKeyName.default,
+  randomColor: _randomColor.default,
+  randomNum: _randomNum.default,
+  dataURLToBlob: _dataURLToBlob.default,
+  blobToDataURL: _blobToDataURL.default,
+  readFile: _readFile.default,
+  loadUI: _loadUI.default,
+  loadEruda: _loadEruda.default,
+  initEruda: _initEruda.default,
   download: _download.default,
   downloadBlob: _downloadBlob.default
 };

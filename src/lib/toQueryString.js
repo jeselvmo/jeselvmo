@@ -1,38 +1,27 @@
-import qs from 'query-string';
+import qs from 'querystringify';
 
 /**
  * 对象序列化为查询字符串，并对键进行排序。
  * @param {Object} object - 必选。要序列化的对象。
- * @param {Object} [options] - 可选。选项配置：
- * @param {boolean} [options.strict=true] - Strictly encode URI components with strict-uri-encode. It uses encodeURIComponent if set to false. You probably don't care about this option.
- * @param {boolean} [options.encode=true] - URL encode the keys and values.
- * @param {string} [options.arrayFormat='none'] - 'bracket': Serialize arrays using bracket representation。<br/>
- *                                        'index': Serialize arrays using index representation。<br/>
- *                                        'comma': Serialize arrays by separating elements with comma。<br/>
- *                                        'none': Serialize arrays by using duplicate keys。<br/>
- * @param {(function|boolean)} [options.sort=false] - Supports both Function as a custom sorting function or false to disable sorting.
+ * @param {Object} [prefix] - 可选。prefix: true、&
  * @returns {string} 序列化后字符串。
  *
  * @example
  *
- * // arrayFormat = 'bracket'
- * jeselvmo.toQueryString({foo: [1, 2, 3]}, {arrayFormat: 'bracket'});
- * //=> 'foo[]=1&foo[]=2&foo[]=3'
+ * jeselvmo.toQueryString({ foo: bar });
+ * //=> 'foo=bar'
  *
- * // arrayFormat = 'index'
- * jeselvmo.toQueryString({foo: [1, 2, 3]}, {arrayFormat: 'index'});
- * //=> 'foo[0]=1&foo[1]=2&foo[2]=3'
+ * jeselvmo.toQueryString({ foo: bar }, true);
+ * //=> '?foo=bar'
  *
- * // arrayFormat = 'comma'
- * jeselvmo.toQueryString({foo: [1, 2, 3]}, {arrayFormat: 'comma'});
- * //=> 'foo=1,2,3'
+ * jeselvmo.toQueryString({ foo: bar }, '&');
+ * //=> '&foo=bar'
  *
- * // arrayFormat = 'none'
- * jeselvmo.toQueryString({foo: [1, 2, 3]});
- * //=> 'foo=1&foo=2&foo=3'
+ * jeselvmo.toQueryString({ foo: '' }, '&');
+ * //=> '&foo='
  */
-function toQueryString(object, options) {
-  return qs.stringify(object, options);
+function toQueryString(object, prefix) {
+  return qs.stringify(object, prefix);
 }
 
 export default toQueryString;

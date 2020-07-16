@@ -1,38 +1,17 @@
 /* eslint-disable prefer-rest-params */
-import qs from 'query-string';
-import isURL from './isURL';
+import qs from 'querystringify';
 
 /**
  * 获取URL中的QueryString。
+ * @param  {string} name -
  * @returns {Object} 返回单项或全部项。
  */
-function getQueryString() {
-  let url, name;
-  switch (arguments.length) {
-    case 0:
-      url = location.href;
-      break;
-    case 1:
-      if (isURL(arguments[0])) {
-        url = arguments[0];
-      } else {
-        url = location.href;
-        name = arguments[0];
-      }
-      break;
-    case 2:
-      url = arguments[0];
-      name = arguments[1];
-      break;
-    default:
-      break;
-  }
-
-  let { query } = qs.parseUrl(url);
+function getQueryString(name) {
+  let params = qs.parse(location.search);
   if (name) {
-    return query[name];
+    return params[name];
   }
-  return query;
+  return params;
 }
 
 export default getQueryString;
