@@ -2,6 +2,12 @@
 /**
  * 获取window窗口大小
  * @returns {{width: number, height: number}} 窗口大小。
+ *
+ * @example
+ *
+ * jeselvmo.getWindowSize();
+ * //=> {width: 1920, height: 150}
+ *
  */
 function getWindowSize() {
   let width = 0,

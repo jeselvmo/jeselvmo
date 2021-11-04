@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /**
- * 类继承
+ * 类继承。
  * @param {function} ctor 子类构造方法
  * @param {function} superCtor 父类构造方法
  * @returns {void}
@@ -12,8 +12,8 @@ function inherits(ctor, superCtor) {
       value: ctor,
       enumerable: false,
       writable: true,
-      configurable: true
-    }
+      configurable: true,
+    },
   });
 }
 

@@ -14,17 +14,17 @@ export default {
     banner: `/*!\n${String(fs.readFileSync('./LICENSE'))
       .trim()
       .split('\n')
-      .map(l => ` * ${l}`)
-      .join('\n')}\n */`
+      .map((l) => ` * ${l}`)
+      .join('\n')}\n */`,
   },
   plugins: [
     nodeResolve(),
     commonjs({
-      include: /node_modules/
+      include: /node_modules/,
     }),
     babel({
       babelrc: false,
-      presets: [['@babel/env', { modules: false }]]
-    })
-  ]
+      presets: [['@babel/env', { modules: false }]],
+    }),
+  ],
 };

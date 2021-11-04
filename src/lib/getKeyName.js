@@ -105,13 +105,13 @@ const keyCodeMap = {
   219: '[',
   220: '\\',
   221: ']',
-  222: "'"
+  222: "'",
 };
 
 /**
- * 根据keycode获得键名
- * @param  {number} keycode 键码。
- * @return {String} 返回对应的键名。
+ * 根据keycode获得键名。
+ * @param  {number} keycode 键码
+ * @return {String} 返回对应的键名
  */
 function getKeyName(keycode) {
   if (keyCodeMap[keycode]) {

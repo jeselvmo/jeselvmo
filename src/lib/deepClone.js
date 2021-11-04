@@ -1,13 +1,22 @@
 /**
  * 深拷贝，支持常见类型
- * @param {Any} values 要复制的对象。
- * @returns {Any} 新对象。
+ * @param {Any} values 要复制的对象
+ * @returns {Any} 新对象
+ *
+ * @example
+ *
+ * jeselvmo.deepClone({ name: 'yangkk' });
+ * //=> [1, 2, 3, 4]
+ *
+ * jeselvmo.deepClone([1,2,3,4])
+ * //=> [1, 2, 3, 4]
+ *
  */
 function deepClone(values) {
   let copy;
 
   // Handle the 3 simple types, and null or undefined
-  if (values == null || typeof values !== 'object') return values;
+  if (!values || typeof values !== 'object') return values;
 
   // Handle Date
   if (values instanceof Date) {

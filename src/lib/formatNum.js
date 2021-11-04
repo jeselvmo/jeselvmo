@@ -21,6 +21,7 @@
  *
  * jeselvmo.formatNum(3.141592, '#.##');
  * //=> "3.14"
+ *
  */
 function formatNum(value, mask) {
   if (!mask || isNaN(+value)) {
@@ -42,10 +43,7 @@ function formatNum(value, mask) {
     start = mask.search(/[0-9\-\+#]/),
     prefix = start > 0 ? mask.substring(0, start) : '',
     // reverse string: not an ideal method if there are surrogate pairs
-    str = mask
-      .split('')
-      .reverse()
-      .join(''),
+    str = mask.split('').reverse().join(''),
     end = str.search(/[0-9\-\+#]/),
     offset = len - end,
     substr = mask.substring(offset, offset + 1),

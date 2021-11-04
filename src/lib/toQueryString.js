@@ -1,9 +1,9 @@
-import qs from 'querystringify';
+import qs from 'query-string';
 
 /**
- * 对象序列化为查询字符串，并对键进行排序。
- * @param {Object} object - 必选。要序列化的对象。
- * @param {Object} [prefix] - 可选。prefix: true、&
+ * 对象序列化为查询字符串。
+ * @param {Object} object - 要序列化的对象
+ * @param {Object} [options] - 选项，参考query-string文档。
  * @returns {string} 序列化后字符串。
  *
  * @example
@@ -11,17 +11,12 @@ import qs from 'querystringify';
  * jeselvmo.toQueryString({ foo: bar });
  * //=> 'foo=bar'
  *
- * jeselvmo.toQueryString({ foo: bar }, true);
- * //=> '?foo=bar'
+ * jeselvmo.toQueryString({name:'yangkk', age:20});
+ * //=> 'age=20&name=yangkk'
  *
- * jeselvmo.toQueryString({ foo: bar }, '&');
- * //=> '&foo=bar'
- *
- * jeselvmo.toQueryString({ foo: '' }, '&');
- * //=> '&foo='
  */
-function toQueryString(object, prefix) {
-  return qs.stringify(object, prefix);
+function toQueryString(object, options) {
+  return qs.stringify(object, options);
 }
 
 export default toQueryString;

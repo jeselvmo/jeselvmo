@@ -1,6 +1,6 @@
 import typeOf from './lib/typeOf';
+// validate
 import isType from './lib/isType';
-
 import isPrimitive from './lib/isPrimitive';
 import isEmail from './lib/isEmail';
 import isPhoneNum from './lib/isPhoneNum';
@@ -10,7 +10,7 @@ import isBoolean from './lib/isBoolean';
 import isNumeric from './lib/isNumeric';
 import isPort from './lib/isPort';
 import isInt from './lib/isInt';
-import isHexadecimal from './lib/isHexadecimal';
+import isHex from './lib/isHex';
 import isHexColor from './lib/isHexColor';
 import isMD5 from './lib/isMD5';
 import isJWT from './lib/isJWT';
@@ -21,29 +21,31 @@ import isIn from './lib/isIn';
 import isBase64 from './lib/isBase64';
 import isMimeType from './lib/isMimeType';
 import isLatLong from './lib/isLatLong';
+import isCardID from './lib/isCardID';
+import isDate from './lib/isDate';
+import isFalse from './lib/isFalse';
+import isTrue from './lib/isTrue';
+import isEmpty from './lib/isEmpty';
 
-// userAgent
+// device
 import isIOS from './lib/isIOS';
 import isAndroid from './lib/isAndroid';
+import isHarmonyOS from './lib/isHarmonyOS';
 import isMobile from './lib/isMobile';
 import isWin from './lib/isWin';
 import isLinux from './lib/isLinux';
 import isMac from './lib/isMac';
 import isWeiXin from './lib/isWeiXin';
-import isIE from './lib/isIE';
 import parseUA from './lib/parseUA';
 import getOS from './lib/getOS';
 import getBrowser from './lib/getBrowser';
 import getDevice from './lib/getDevice';
 import getEngine from './lib/getEngine';
+import isIE from './lib/isIE';
+import isChrome from './lib/isChrome';
 
 // boolean
 import toBoolean from './lib/toBoolean';
-
-// trim
-import ltrim from './lib/ltrim';
-import rtrim from './lib/rtrim';
-import trim from './lib/trim';
 
 // html
 import encodeHtml from './lib/encodeHtml';
@@ -66,45 +68,45 @@ import digitUppercase from './lib/digitUppercase';
 import getWindowSize from './lib/getWindowSize';
 
 // url
-import parseUrl from './lib/parseUrl';
-import parseQueryString from './lib/parseQueryString';
 import toQueryString from './lib/toQueryString';
 import getQueryString from './lib/getQueryString';
 
-// localStorage
-import getLocalItem from './lib/getLocalItem';
-import setLocalItem from './lib/setLocalItem';
-import removeLocalItem from './lib/removeLocalItem';
+// local
+import getLocal from './lib/getLocal';
+import setLocal from './lib/setLocal';
+import removeLocal from './lib/removeLocal';
 
-// sessionStorage
-import getSessionItem from './lib/getSessionItem';
-import setSessionItem from './lib/setSessionItem';
-import removeSessionItem from './lib/removeSessionItem';
+// session
+import getSession from './lib/getSession';
+import setSession from './lib/setSession';
+import removeSession from './lib/removeSession';
 
 // cookie
-import getCookieItem from './lib/getCookieItem';
-import setCookieItem from './lib/setCookieItem';
-import removeCookieItem from './lib/removeCookieItem';
+import getCookie from './lib/getCookie';
+import setCookie from './lib/setCookie';
+import removeCookie from './lib/removeCookie';
 
-// tools
+// utils
 import clamp from './lib/clamp';
 import convertRangeValue from './lib/convertRangeValue';
-import shallowCopy from './lib/shallowCopy';
 import deepClone from './lib/deepClone';
 import deepEquals from './lib/deepEquals';
 import checkPasswordLevel from './lib/checkPasswordLevel';
 import inherits from './lib/inherits';
 import delay from './lib/delay';
 import getKeyName from './lib/getKeyName';
+import debounce from './lib/debounce';
+import throttle from './lib/throttle';
 
 import randomColor from './lib/randomColor';
 import randomNum from './lib/randomNum';
 
 import dataURLToBlob from './lib/dataURLToBlob';
 import blobToDataURL from './lib/blobToDataURL';
+import getDataURL from './lib/getDataURL';
 import readFile from './lib/readFile';
+import loadjs from './lib/loadjs';
 
-import loadUI from './lib/loadUI';
 import loadEruda from './lib/loadEruda';
 import initEruda from './lib/initEruda';
 
@@ -115,10 +117,9 @@ const version = '2.0.3';
 
 const jeselvmo = {
   version,
-
   typeOf,
+  // validate
   isType,
-
   isPrimitive,
   isEmail,
   isPhoneNum,
@@ -128,7 +129,7 @@ const jeselvmo = {
   isNumeric,
   isPort,
   isInt,
-  isHexadecimal,
+  isHex,
   isHexColor,
   isMD5,
   isJWT,
@@ -139,66 +140,73 @@ const jeselvmo = {
   isBase64,
   isMimeType,
   isLatLong,
+  isCardID,
+  isDate,
+  isFalse,
+  isTrue,
+  isEmpty,
 
+  // device
   isIOS,
   isAndroid,
+  isHarmonyOS,
   isMobile,
   isWin,
   isLinux,
   isMac,
   isWeiXin,
-  isIE,
   parseUA,
-  getOS,
   getBrowser,
+  getOS,
   getDevice,
   getEngine,
+  isIE,
+  isChrome,
 
   toBoolean,
 
-  ltrim,
-  rtrim,
-  trim,
-
+  // html
   encodeHtml,
   decodeHtml,
   htmlEncode,
   htmlDecode,
 
+  // date
   formatDate,
   formatPassTime,
   formatRemainTime,
   isSameDay,
   isLeapYear,
 
+  // number
   formatNum,
   digitUppercase,
 
+  // dom
   getWindowSize,
 
   // url
-  parseUrl,
-  parseQueryString,
   toQueryString,
   getQueryString,
 
-  // localStorage
-  getLocalItem,
-  setLocalItem,
-  removeLocalItem,
-  // sessionStorage
-  getSessionItem,
-  setSessionItem,
-  removeSessionItem,
-  // cookie
-  getCookieItem,
-  setCookieItem,
-  removeCookieItem,
+  // local
+  getLocal,
+  setLocal,
+  removeLocal,
 
-  // tools
+  // session
+  getSession,
+  setSession,
+  removeSession,
+
+  // cookie
+  getCookie,
+  setCookie,
+  removeCookie,
+
+  // utils
   clamp,
   convertRangeValue,
-  shallowCopy,
   deepClone,
   deepEquals,
   checkPasswordLevel,
@@ -207,15 +215,21 @@ const jeselvmo = {
   getKeyName,
   randomColor,
   randomNum,
+  debounce,
+  throttle,
 
+  // file
   dataURLToBlob,
   blobToDataURL,
+  getDataURL,
   readFile,
+  loadjs,
 
-  loadUI,
+  // eruda
   loadEruda,
   initEruda,
 
+  // download
   download,
   downloadBlob,
 };

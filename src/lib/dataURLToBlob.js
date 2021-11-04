@@ -1,10 +1,16 @@
 /**
- * dataURL to blob
- * @param {string} dataUrl dataUrl
+ * dataURL转blob对象。
+ * @param {string} dataURL dataURL
  * @returns {Blob} Blob对象
+ *
+ * @example
+ *
+ * jeselvmo.dataURLToBlob('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBD...');
+ * //=> Blob {size: 63663, type: 'image/jpeg'}
+ *
  */
-function dataURLToBlob(dataUrl) {
-  let arr = dataUrl.split(','),
+function dataURLToBlob(dataURL) {
+  let arr = dataURL.split(','),
     mime = arr[0].match(/:(.*?);/)[1],
     bstr = atob(arr[1]),
     n = bstr.length,

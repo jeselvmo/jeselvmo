@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { JSDOM } from 'jsdom';
 import vm from 'vm';
 import fs from 'fs';

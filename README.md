@@ -1,31 +1,31 @@
-# jeselvemo.js
+# jeselvmo.js
 
-A library of string validators and tools.
+A JavaScript library of validators and tools.前端常用的工具方法的封装。
 
 ## Installation and Usage
 
 ### Server-side usage
 
-Install the library with `npm install jeselvemo`
+Install the library with `npm install jeselvmo`
 
-#### No ES6
+#### CommonJS
 
 ```javascript
-var jeselvemo = require('jeselvemo');
+var jeselvmo = require('jeselvmo');
 
-jeselvemo.isEmail('foo@bar.com'); //=> true
+jeselvmo.isEmail('foo@bar.com'); //=> true
 ```
 
 #### ES6
 
 ```javascript
-import jeselvemo from 'jeselvemo';
+import jeselvmo from 'jeselvmo';
 ```
 
 Or, import only a subset of the library:
 
 ```javascript
-import isEmail from 'jeselvemo/lib/isEmail';
+import isEmail from 'jeselvmo/lib/isEmail';
 ```
 
 ### Client-side usage
@@ -33,9 +33,9 @@ import isEmail from 'jeselvemo/lib/isEmail';
 The library can be loaded either as a standalone script, or through an [AMD][amd]-compatible loader
 
 ```html
-<script type="text/javascript" src="jeselvemo.min.js"></script>
+<script type="text/javascript" src="jeselvmo.min.js"></script>
 <script type="text/javascript">
-  jeselvemo.isEmail('foo@bar.com'); //=> true
+  jeselvmo.isEmail('foo@bar.com'); //=> true
 </script>
 ```
 

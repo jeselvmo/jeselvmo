@@ -3,11 +3,23 @@ import assertString from './util/assertString';
 
 /**
  * 校验字符串长度。
- * @param {string} str - 要验证的字符串。
+ * @param {string} str - 要验证的字符串
  * @param {Object} [options] - 选项：
  * @param {number} [options.min] - 最小长度
  * @param {number} [options.max] - 最大长度
- * @returns {boolean} 真/假。
+ * @returns {boolean} 真/假
+ *
+ * @example
+ *
+ * jeselvmo.isLength('123', 1, 10);
+ * //=> true
+ *
+ * jeselvmo.isLength('123', 1, 2);
+ * //=> false
+ *
+ * jeselvmo.isLength('123', {min:1, max: 10});
+ * //=> true
+ *
  */
 function isLength(str, options) {
   assertString(str);

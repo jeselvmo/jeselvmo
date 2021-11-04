@@ -6,16 +6,19 @@
   "author": "kecoyo <kecoyo@163.com>",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src test",
-    "clean:node": "rm -rf index.js lib",
-    "clean:browser": "rm -rf jeselvmo*",
-    "clean": "npm run clean:node && npm run clean:browser",
+    "clean:node": "rimraf -rf index.js lib",
+    "clean:browser": "rimraf -rf jeselvmo*",
+    "clean:doc": "rimraf -rf docs",
+    "clean": "npm run clean:node && npm run clean:browser && npm run clean:doc",
     "minify": "uglifyjs jeselvmo.js -o jeselvmo.min.js  --compress --mangle --comments /Copyright/",
     "build:browser": "rollup -c && npm run minify",
     "build:node": "babel src -d .",
     "build": "npm run build:browser && npm run build:node",
-    "test": "mocha --require @babel/register --require ./test/setup.js --reporter dot",
+    "test": "mocha --require @babel/register --reporter dot",
+    "test:watch": "npm t -- --watch",
     "doc": "jsdoc -c jsdoc.json"
   },
   "files": [
@@ -51,26 +54,35 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/register": "^7.4.4",
     "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
     "docdash": "^1.1.1",
     "eslint": "^6.0.1",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.0",
-    "mocha": "^6.1.4",
+    "html-webpack-plugin": "^3.2.0",
+    "jsdoc": "^3.6.7",
+    "jsdom": "^18.0.0",
+    "mocha": "^6.2.3",
     "nyc": "^14.1.1",
+    "rimraf": "^3.0.0",
     "rollup": "^1.16.4",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "uglify-js": "^3.6.0"
+    "uglify-js": "^3.6.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
   },
   "engines": {
     "node": ">= 0.10"
   },
   "license": "MIT",
   "dependencies": {
-    "querystringify": "^2.1.1",
-    "ua-parser-js": "^0.7.21",
-    "url-parse": "^1.4.7"
+    "dayjs": "^1.10.7",
+    "loadjs": "^4.2.0",
+    "query-string": "^7.0.1",
+    "ua-parser-js": "^0.7.21"
   }
 }

@@ -1,6 +1,6 @@
 /* eslint-disable wrap-iife */
-import getLocalItem from './getLocalItem';
-import setLocalItem from './setLocalItem';
+import getLocal from './getLocal';
+import setLocal from './setLocal';
 import loadEruda from './loadEruda';
 
 const ACTIVE_ERUDA = 'eruda-active';
@@ -21,9 +21,9 @@ const handleClick = () => {
   count++;
   // console.log('eruda click -> count', count);
   if (count >= times) {
-    let activeEruda = getLocalItem(ACTIVE_ERUDA) || false;
+    let activeEruda = getLocal(ACTIVE_ERUDA) || false;
     activeEruda = !activeEruda;
-    setLocalItem(ACTIVE_ERUDA, activeEruda);
+    setLocal(ACTIVE_ERUDA, activeEruda);
     if (activeEruda) {
       if (!window.eruda) {
         loadEruda();
@@ -48,7 +48,7 @@ const handleClick = () => {
  */
 function initEruda() {
   // 初始化Eruda
-  if (/eruda=true/.test(window.location) || getLocalItem(ACTIVE_ERUDA)) {
+  if (/eruda=true/.test(window.location) || getLocal(ACTIVE_ERUDA)) {
     loadEruda();
   }
   // 添加触发事件

@@ -8,7 +8,22 @@ const ipv6Block = /^[0-9A-F]{1,4}$/i;
  * 检查是否是IP地址。
  * @param {string} str - 要检查的字符串。
  * @param {string} [version] - IP版本，（4、6）
- * @returns {boolean} 真/假。
+ * @returns {boolean} 真/假
+ *
+ * @example
+ *
+ * jeselvmo.isIP('172.16.0.207');
+ * //=> true
+ *
+ * jeselvmo.isIP('localhost');
+ * //=> false
+ *
+ * jeselvmo.isIP('127.0.0.1');
+ * //=> true
+ *
+ * jeselvmo.isIP('127.0.0.1000');
+ * //=> false
+ *
  */
 function isIP(str, version = '') {
   assertString(str);

@@ -4,14 +4,20 @@ const uuid = {
   3: /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
   4: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
   5: /^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
-  all: /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
+  all: /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
 };
 
 /**
  * 判断是不是UUID。
- * @param {string} str - 要验证的字符串。
- * @param {string} [version] - UUID版本(version 3, 4 or 5)。
- * @returns {boolean} 真/假。
+ * @param {string} str - 要验证的字符串
+ * @param {string} [version] - UUID版本(version 3, 4 or 5)
+ * @returns {boolean} 真/假
+ *
+ * @example
+ *
+ * jeselvmo.isUUID('424a9ae0-0d39-4b28-9f24-446c8572de57');
+ * //=> true
+ *
  */
 function isUUID(str, version = 'all') {
   assertString(str);

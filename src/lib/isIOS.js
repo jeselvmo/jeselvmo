@@ -1,11 +1,18 @@
-import getOS from './getOS';
-
 /**
  * 检查是不是iOS环境。
- * @returns {boolean} 真/假。
+ * @returns {boolean} 真/假
+ *
+ * @example
+ *
+ * jeselvmo.isIOS();
+ * //=> true
+ *
+ * jeselvmo.isIOS();
+ * //=> false
+ *
  */
 function isIOS() {
-  return getOS().name === 'iOS';
+  return /(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent);
 }
 
 export default isIOS;

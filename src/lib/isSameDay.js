@@ -2,7 +2,13 @@
  * 判断是否为同一天。
  * @param  {Date} date1 日期1
  * @param  {Date} [date2] 日期2，默认值：当天
- * @returns {boolean} 真/假。
+ * @returns {boolean} 真/假
+ *
+ * @example
+ *
+ * jeselvmo.isSameDay(new Date(), new Date());
+ * //=> true
+ *
  */
 function isSameDay(date1, date2 = new Date()) {
   let date1_year = date1.getFullYear(),

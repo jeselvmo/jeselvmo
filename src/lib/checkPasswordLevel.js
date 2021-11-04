@@ -1,7 +1,22 @@
 /**
- * 检查密码强度等级
+ * 检查密码强度等级。
  * @param  {string} str 传入的密码串
  * @returns {number} 返回的强度等级（最高为4级）
+ *
+ * @example
+ *
+ * jeselvmo.checkPasswordLevel('123456');
+ * //=> 1
+ *
+ * jeselvmo.checkPasswordLevel('123456abcd');
+ * //=> 2
+ *
+ * jeselvmo.checkPasswordLevel('123456abcdYUI');
+ * //=> 3
+ *
+ * jeselvmo.checkPasswordLevel('123456abcdYUI._-');
+ * //=> 4
+ *
  */
 function checkPasswordLevel(str) {
   if (typeof str === 'string') {

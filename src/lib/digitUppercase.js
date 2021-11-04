@@ -1,19 +1,35 @@
 /* eslint-disable no-restricted-properties */
 /**
  *
- * 现金额转大写
+ * 现金额转大写。
  * @param  {number} n 数值。
  * @return {string} 大写字符串。
  *
  * @example
  *
+ * jeselvmo.digitUppercase(0);
+ * //=> "零元整"
+ *
+ * jeselvmo.digitUppercase(0.01);
+ * //=> "壹分"
+ *
+ * jeselvmo.digitUppercase(100);
+ * //=> "壹佰元整"
+ *
+ * jeselvmo.digitUppercase(100.5);
+ * //=> "壹佰元伍角"
+ *
  * jeselvmo.digitUppercase(1000.01);
  * //=> "壹仟元壹分"
+ *
  */
 function digitUppercase(n) {
   let fraction = ['角', '分'];
   let digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-  let unit = [['元', '万', '亿'], ['', '拾', '佰', '仟']];
+  let unit = [
+    ['元', '万', '亿'],
+    ['', '拾', '佰', '仟'],
+  ];
   let head = n < 0 ? '欠' : '';
   n = Math.abs(n);
   let s = '';

@@ -5,6 +5,18 @@ import clamp from './clamp';
  * @param {Array} range 最小值。
  * @param {Array} range2 最大值。
  * @returns {number} 结果值。
+ *
+ * @example
+ *
+ * jeselvmo.convertRangeValue(1, [1, 10], [1, 100]);
+ * //=> 1
+ *
+ * jeselvmo.convertRangeValue(5, [1, 10], [1, 100]);
+ * //=> 45
+ *
+ * jeselvmo.convertRangeValue(8, [1, 10], [1, 100]);
+ * //=> 78
+ *
  */
 function convertRangeValue(value, range, range2) {
   value = clamp(value, range[0], range[1]);

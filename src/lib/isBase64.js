@@ -4,8 +4,17 @@ const notBase64 = /[^A-Z0-9+\/=]/i;
 
 /**
  * 检查是否是Base64。
- * @param {string} str - 要检查的字符串。
- * @returns {boolean} 真/假。
+ * @param {string} str - 要检查的字符串
+ * @returns {boolean} 真/假
+ *
+ * @example
+ *
+ * jeselvmo.isBase64('ZmFzZGZhc2Rm');
+ * //=> true
+ *
+ * jeselvmo.isBase64('Y2FzZGFzZA==');
+ * //=> true
+ *
  */
 function isBase64(str) {
   assertString(str);
