@@ -1,6 +1,6 @@
 # jeselvmo.js
 
-A JavaScript library of validators and tools.前端常用的工具方法的封装。
+一个前端常用的JavaScript库。A JavaScript library commonly used in the front end.
 
 ## Installation and Usage
 

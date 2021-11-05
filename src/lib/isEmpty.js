@@ -1,6 +1,5 @@
 /* eslint-disable eqeqeq */
 import isType from './isType';
-import typeOf from './typeOf';
 
 /**
  * 判断是否为空。

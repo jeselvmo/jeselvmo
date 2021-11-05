@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /**
  * 检查密码强度等级。
  * @param  {string} str 传入的密码串
@@ -38,7 +39,6 @@ function checkPasswordLevel(str) {
     }
     return level;
   }
-  // eslint-disable-next-line no-throw-literal
   throw 'Incorrect Parameter Type！';
 }
 

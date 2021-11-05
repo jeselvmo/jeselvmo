@@ -6,7 +6,7 @@
  * @example
  *
  * jeselvmo.dataURLToBlob('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBD...');
- * //=> Blob {size: 63663, type: 'image/jpeg'}
+ * //=> Blob {size: 63663, type: 'image/jpeg'}
  *
  */
 function dataURLToBlob(dataURL) {
