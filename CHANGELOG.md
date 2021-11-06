@@ -2,6 +2,8 @@
 
 - 删除了 blacklist、getDayOfWeek、getWeek、isWhitelisted、parseDate、repeat、times、toDate、whitelist 方法
 - 优化了 formatDate、initEruda、isPhoneNum、getQueryString、parseQueryString、parseUrl、toQueryString 方法
+- 每个方法添加了示例
+- 增加了 findText/getDataURL等方法
 
 #### 2.0.2
 
