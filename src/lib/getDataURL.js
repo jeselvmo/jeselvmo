@@ -18,7 +18,7 @@ function getDataURL(url) {
   return fetch(url)
     .then((res) => {
       if (res.ok) return res.blob();
-      throw new Error(`${res.status} ${res.statusText}`);
+      throw new Error(`${res.status} (${res.statusText})`);
     })
     .then((blob) => blobToDataURL(blob));
 }

@@ -1,6 +1,8 @@
 # jeselvmo.js
 
-一个前端常用的JavaScript库。A JavaScript library commonly used in the front end.
+一个前端常用的JavaScript工具库。A JavaScript utility library commonly used in the front end.
+
+Docs: https://jeselvmo.kecoyo.com/2.0.3/docs/
 
 ## Installation and Usage
 
@@ -33,7 +35,7 @@ import isEmail from 'jeselvmo/lib/isEmail';
 The library can be loaded either as a standalone script, or through an [AMD][amd]-compatible loader
 
 ```html
-<script type="text/javascript" src="jeselvmo.min.js"></script>
+<script type="text/javascript" src="https://jeselvmo.kecoyo.com/2.0.3/jeselvmo.min.js"></script>
 <script type="text/javascript">
   jeselvmo.isEmail('foo@bar.com'); //=> true
 </script>

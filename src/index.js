@@ -101,6 +101,8 @@ import throttle from './lib/throttle';
 import randomColor from './lib/randomColor';
 import randomNum from './lib/randomNum';
 
+import findText from './lib/findText';
+
 import dataURLToBlob from './lib/dataURLToBlob';
 import blobToDataURL from './lib/blobToDataURL';
 import getDataURL from './lib/getDataURL';
@@ -112,6 +114,8 @@ import initEruda from './lib/initEruda';
 
 import download from './lib/download';
 import downloadBlob from './lib/downloadBlob';
+import downloadData from './lib/downloadData';
+import downloadDataURL from './lib/downloadDataURL';
 
 const version = '2.0.3';
 
@@ -213,10 +217,13 @@ const jeselvmo = {
   inherits,
   delay,
   getKeyName,
-  randomColor,
-  randomNum,
   debounce,
   throttle,
+
+  randomColor,
+  randomNum,
+
+  findText,
 
   // file
   dataURLToBlob,
@@ -232,6 +239,8 @@ const jeselvmo = {
   // download
   download,
   downloadBlob,
+  downloadData,
+  downloadDataURL,
 };
 
 export default jeselvmo;
