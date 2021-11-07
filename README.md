@@ -4,6 +4,8 @@
 
 Docs: https://jeselvmo.kecoyo.com/2.0.4/docs/
 
+![image](preview.jpg)
+
 ## Installation and Usage
 
 ### Server-side usage
