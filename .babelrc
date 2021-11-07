@@ -1,13 +1,10 @@
 {
   "presets": [
-    ["@babel/preset-env", {"targets": {"node": "0.10"}}]
+    ["@babel/preset-env", {
+      "targets": "defaults"
+    }]
   ],
   "plugins": [
-    [
-      "add-module-exports",
-      {
-        "addDefaultProperty": true
-      }
-    ]
+    "add-module-exports"
   ]
 }
