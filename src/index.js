@@ -117,7 +117,7 @@ import downloadBlob from './lib/downloadBlob';
 import downloadData from './lib/downloadData';
 import downloadDataURL from './lib/downloadDataURL';
 
-const version = '2.0.3';
+const version = '2.0.4';
 
 const jeselvmo = {
   version,

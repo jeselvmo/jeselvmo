@@ -1,6 +1,6 @@
 {
   "name": "jeselvmo",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "JavaScript utility library",
   "homepage": "https://github.com/jeselvmo/jeselvmo",
   "author": "kecoyo <kecoyo@163.com>",
@@ -63,7 +63,6 @@
     "babel-plugin-add-module-exports": "^1.0.2",
     "docdash": "^1.1.1",
     "eslint": "^6.0.1",
-    "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.0",
     "html-webpack-plugin": "^3.2.0",
     "jsdoc": "^3.6.7",

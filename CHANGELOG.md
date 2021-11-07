@@ -1,3 +1,7 @@
+#### 2.0.4
+
+- 
+
 #### 2.0.3
 
 - 删除了 blacklist、getDayOfWeek、getWeek、isWhitelisted、parseDate、repeat、times、toDate、whitelist 方法
