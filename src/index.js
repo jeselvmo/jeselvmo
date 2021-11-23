@@ -117,6 +117,9 @@ import downloadBlob from './lib/downloadBlob';
 import downloadData from './lib/downloadData';
 import downloadDataURL from './lib/downloadDataURL';
 
+import guid from './lib/guid';
+import uuid from './lib/uuid';
+
 const version = '2.0.4';
 
 const jeselvmo = {
@@ -241,6 +244,9 @@ const jeselvmo = {
   downloadBlob,
   downloadData,
   downloadDataURL,
+
+  guid,
+  uuid,
 };
 
 export default jeselvmo;
