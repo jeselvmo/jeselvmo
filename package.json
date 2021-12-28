@@ -85,7 +85,6 @@
   "license": "MIT",
   "dependencies": {
     "dayjs": "^1.10.7",
-    "loadjs": "^4.2.0",
     "query-string": "^7.0.1",
     "ua-parser-js": "^0.7.21"
   }
