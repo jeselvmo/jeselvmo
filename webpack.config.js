@@ -24,7 +24,7 @@ const webpackConfig = {
   devServer: {
     hot: true,
     host: process.env.HOST || '0.0.0.0',
-    port: process.env.PORT || 9000,
+    port: process.env.PORT || 9090,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // 热更新插件
