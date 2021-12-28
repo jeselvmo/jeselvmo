@@ -2,7 +2,7 @@
 
 一个前端常用的JavaScript工具库。A JavaScript utility library commonly used in the front end.
 
-Docs: https://jeselvmo.kecoyo.com/2.0.4/docs/
+Docs: https://jeselvmo.kecoyo.com/2.0.4/
 
 ![image](preview.jpg)
 
