@@ -53,10 +53,15 @@ import decodeHtml from './lib/decodeHtml';
 import htmlEncode from './lib/htmlEncode';
 import htmlDecode from './lib/htmlDecode';
 
+// string
+import format from './lib/format';
+import findText from './lib/findText';
+
 // date
 import formatDate from './lib/formatDate';
 import formatPassTime from './lib/formatPassTime';
 import formatRemainTime from './lib/formatRemainTime';
+import formatDuration from './lib/formatDuration';
 import isSameDay from './lib/isSameDay';
 import isLeapYear from './lib/isLeapYear';
 
@@ -101,7 +106,7 @@ import throttle from './lib/throttle';
 import randomColor from './lib/randomColor';
 import randomNum from './lib/randomNum';
 
-import findText from './lib/findText';
+import defineEnum from './lib/defineEnum';
 
 import dataURLToBlob from './lib/dataURLToBlob';
 import blobToDataURL from './lib/blobToDataURL';
@@ -178,10 +183,15 @@ const jeselvmo = {
   htmlEncode,
   htmlDecode,
 
+  // string
+  format,
+  findText,
+
   // date
   formatDate,
   formatPassTime,
   formatRemainTime,
+  formatDuration,
   isSameDay,
   isLeapYear,
 
@@ -226,13 +236,14 @@ const jeselvmo = {
   randomColor,
   randomNum,
 
-  findText,
+  defineEnum,
 
   // file
   dataURLToBlob,
   blobToDataURL,
   getDataURL,
   readFile,
+
   loadjs,
 
   // eruda
