@@ -3,6 +3,8 @@
 ## 2.0.4
 
 - 新增了 uuid、guid方法；
+- 新增了 defineEnum、format、formatDuration 方法；
+- 优化了 loadjs 方法；
 
 ## 2.0.3
 
