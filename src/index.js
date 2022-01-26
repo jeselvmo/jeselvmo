@@ -56,6 +56,7 @@ import htmlDecode from './lib/htmlDecode';
 // string
 import format from './lib/format';
 import findText from './lib/findText';
+import strLength from './lib/strLength';
 
 // date
 import formatDate from './lib/formatDate';
@@ -186,6 +187,7 @@ const jeselvmo = {
   // string
   format,
   findText,
+  strLength,
 
   // date
   formatDate,
