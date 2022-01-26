@@ -42,8 +42,12 @@ function getListByName(names) {
   return this.getList().filter((item) => names.includes(item.name));
 }
 
-function getOptions() {
-  return this.getList().map((item) => ({ ...item, label: item.name, value: item.id }));
+function getOptions(showAll) {
+  const list = this.getList();
+  if (showAll) {
+    list.unshift({ id: 0, name: '全部' });
+  }
+  return list.map((item) => ({ ...item, label: item.name, value: item.id }));
 }
 
 function getFirst() {
@@ -95,10 +99,10 @@ function defineProperties(obj, extraProps) {
  *
  * ORDER_STATE.getId('待支付')
  * //=> 1
- * 
+ *
  * ORDER_STATE.getIdList()
  * //=> [1, 4, 7]
- * 
+ *
  * ORDER_STATE.getNameList()
  * //=> ['待支付', '订单取消', '支付成功']
  *

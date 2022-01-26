@@ -1,4 +1,5 @@
 import qs from 'query-string';
+import assertString from './util/assertString';
 
 /**
  * 获取URL中的QueryString。
@@ -16,7 +17,20 @@ import qs from 'query-string';
  *
  */
 function getQueryString(string, options) {
-  string = string || location.href;
+  switch (arguments.length) {
+    case 0:
+      string = location.href;
+      break;
+    case 1:
+      if (typeof string === 'object') {
+        options = string;
+        string = location.href;
+      }
+      break;
+    default:
+      break;
+  }
+  assertString(string);
   const arr = string.split(/\?|#/);
   for (let i = 0; i < arr.length; i++) {
     const str = arr[i];

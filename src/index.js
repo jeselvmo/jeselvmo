@@ -56,6 +56,7 @@ import htmlDecode from './lib/htmlDecode';
 // string
 import format from './lib/format';
 import findText from './lib/findText';
+import strLength from './lib/strLength';
 
 // date
 import formatDate from './lib/formatDate';
@@ -125,7 +126,7 @@ import downloadDataURL from './lib/downloadDataURL';
 import guid from './lib/guid';
 import uuid from './lib/uuid';
 
-const version = '2.0.4';
+const version = '2.0.5';
 
 const jeselvmo = {
   version,
@@ -186,6 +187,7 @@ const jeselvmo = {
   // string
   format,
   findText,
+  strLength,
 
   // date
   formatDate,

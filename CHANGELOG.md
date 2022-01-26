@@ -1,5 +1,12 @@
 # GHANGELOG
 
+## 2.0.5
+
+- 优化getQueryString；
+- defineEnum.getOptions(true)添加全部选项；
+- 添加计算字符串字节长度strLength；
+- 优化toBoolean方法；
+
 ## 2.0.4
 
 - 新增了 uuid、guid方法；

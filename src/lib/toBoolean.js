@@ -28,11 +28,13 @@ import assertString from './util/assertString';
  *
  */
 function toBoolean(str, strict) {
-  assertString(str);
-  if (strict) {
-    return str === '1' || str === 'true';
+  if (typeof str === 'string') {
+    if (strict) {
+      return str === '1' || str === 'true';
+    }
+    return str !== '0' && str !== 'false' && str !== '';
   }
-  return str !== '0' && str !== 'false' && str !== '';
+  return Boolean(str);
 }
 
 export default toBoolean;
