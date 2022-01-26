@@ -1,5 +1,9 @@
 # GHANGELOG
 
+## 2.0.6
+
+-
+
 ## 2.0.5
 
 - 优化getQueryString；
