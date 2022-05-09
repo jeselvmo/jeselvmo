@@ -1,3 +1,5 @@
+import getOS from './getOS';
+
 /**
  * 检查是不是Android环境。
  * @returns {boolean} 真/假
@@ -11,7 +13,7 @@
  * //=> false
  */
 function isAndroid() {
-  return /(Android)/i.test(navigator.userAgent);
+  return getOS().name === 'Android';
 }
 
 export default isAndroid;

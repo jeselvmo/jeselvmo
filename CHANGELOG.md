@@ -2,7 +2,8 @@
 
 ## 2.0.6
 
--
+- 优化了defineEnum()，增加key；
+- 新增了stringToBase64、base64ToString方法；
 
 ## 2.0.5
 

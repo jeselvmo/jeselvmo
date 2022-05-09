@@ -1,5 +1,5 @@
 function getList() {
-  return Object.values(this);
+  return this.__list;
 }
 
 function getId(name) {
@@ -52,12 +52,22 @@ function getOptions(showAll) {
 
 function getFirst() {
   const list = this.getList();
-  return list.length > 0 ? list[0] : null;
+  return list ? list[0] : undefined;
 }
 
 function getFirstId() {
   const first = this.getFirst();
-  return first ? first.id : null;
+  return first ? first.id : undefined;
+}
+
+function getLast() {
+  const list = this.getList();
+  return list ? list[list.length - 1] : undefined;
+}
+
+function getLastId() {
+  const last = this.getLast();
+  return last ? last.id : undefined;
 }
 
 function defineProperties(obj, extraProps) {
@@ -72,6 +82,8 @@ function defineProperties(obj, extraProps) {
     getOptions: { value: getOptions },
     getFirst: { value: getFirst },
     getFirstId: { value: getFirstId },
+    getLast: { value: getLast },
+    getLastId: { value: getLastId },
     ...extraProps,
   };
 
@@ -86,7 +98,11 @@ function defineProperties(obj, extraProps) {
  *
  * @example
  *
- * const ORDER_STATE = jeselvmo.defineEnum([{ id: 1, name: '待支付' }, { id: 4, name: '订单取消' }, { id: 7, name: '支付成功' }]);
+ * const ORDER_STATE = jeselvmo.defineEnum([
+ *    { id: 1, name: '待支付', key: 'paying' },
+ *    { id: 4, name: '订单取消', key: 'cancel' },
+ *    { id: 7, name: '支付成功', key: 'success' },
+ * ]);
  *
  * ORDER_STATE
  * //=> {...}
@@ -108,10 +124,11 @@ function defineProperties(obj, extraProps) {
  *
  */
 function defineEnum(list, extraProps) {
-  let obj = {};
+  let obj = { __list: list };
   for (let i = 0; i < list.length; i++) {
     const item = list[i];
     obj[item.id] = item;
+    if (item.key) obj[item.key] = item;
   }
   defineProperties(obj, extraProps || {});
   return obj;

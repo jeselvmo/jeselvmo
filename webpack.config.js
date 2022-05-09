@@ -1,11 +1,13 @@
-const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 
 const webpackConfig = {
   mode: isProd ? 'production' : 'development',
-  devtool: isProd ? 'cheap-module-source-map' : 'cheap-module-eval-source-map',
-  entry: ['./src/index.js'],
+  devtool: isProd ? 'cheap-module-source-map' : 'eval-cheap-module-source-map',
+  entry: [
+    './src/index.js', // your app's entry point
+  ],
   output: {
     filename: 'jeselvmo.js',
     libraryTarget: 'umd',
@@ -23,11 +25,11 @@ const webpackConfig = {
   },
   devServer: {
     hot: true,
-    host: process.env.HOST || '0.0.0.0',
-    port: process.env.PORT || 9090,
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), // 热更新插件
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+    }),
   ],
 };
 

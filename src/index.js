@@ -53,6 +53,10 @@ import decodeHtml from './lib/decodeHtml';
 import htmlEncode from './lib/htmlEncode';
 import htmlDecode from './lib/htmlDecode';
 
+// base64
+import stringToBase64 from './lib/stringToBase64';
+import base64ToString from './lib/base64ToString';
+
 // string
 import format from './lib/format';
 import findText from './lib/findText';
@@ -183,6 +187,10 @@ const jeselvmo = {
   decodeHtml,
   htmlEncode,
   htmlDecode,
+
+  // base64
+  stringToBase64,
+  base64ToString,
 
   // string
   format,
