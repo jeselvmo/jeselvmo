@@ -53,6 +53,10 @@ import decodeHtml from './lib/decodeHtml';
 import htmlEncode from './lib/htmlEncode';
 import htmlDecode from './lib/htmlDecode';
 
+// base64
+import stringToBase64 from './lib/stringToBase64';
+import base64ToString from './lib/base64ToString';
+
 // string
 import format from './lib/format';
 import findText from './lib/findText';
@@ -126,7 +130,7 @@ import downloadDataURL from './lib/downloadDataURL';
 import guid from './lib/guid';
 import uuid from './lib/uuid';
 
-const version = '2.0.5';
+const version = '2.0.6';
 
 const jeselvmo = {
   version,
@@ -183,6 +187,10 @@ const jeselvmo = {
   decodeHtml,
   htmlEncode,
   htmlDecode,
+
+  // base64
+  stringToBase64,
+  base64ToString,
 
   // string
   format,

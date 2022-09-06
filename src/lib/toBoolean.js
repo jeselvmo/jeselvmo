@@ -1,5 +1,3 @@
-import assertString from './util/assertString';
-
 /**
  * 将string类型转换为boolean类型。
  * @param {string} str 要转换字符串

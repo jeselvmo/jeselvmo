@@ -1,3 +1,5 @@
+import getOS from "./getOS";
+
 /**
  * 判断是否是Window环境中运行。
  * @returns {boolean} 真/假
@@ -12,7 +14,7 @@
  *
  */
 function isWin() {
-  return /(Win)/i.test(navigator.userAgent) || /(Win)/i.test(navigator.platform);
+  return getOS().name === 'Windows';
 }
 
 export default isWin;
