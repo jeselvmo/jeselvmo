@@ -1,3 +1,4 @@
+import EventEmitter from 'eventemitter3';
 import typeOf from './lib/typeOf';
 // validate
 import isType from './lib/isType';
@@ -132,7 +133,11 @@ import uuid from './lib/uuid';
 
 const version = '2.0.7';
 
-const jeselvmo = {
+class Jeselvmo extends EventEmitter {}
+
+const jeselvmo = new Jeselvmo();
+
+Object.assign(jeselvmo, {
   version,
   typeOf,
   // validate
@@ -268,6 +273,6 @@ const jeselvmo = {
 
   guid,
   uuid,
-};
+});
 
 export default jeselvmo;

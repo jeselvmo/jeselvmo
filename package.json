@@ -6,7 +6,7 @@
   "author": "kecoyo <kecoyo@163.com>",
   "main": "index.js",
   "scripts": {
-    "start": "webpack server --port 9090",
+    "start": "webpack server --port 9999",
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src test",
     "clean:node": "rimraf -rf index.js lib",
@@ -84,6 +84,7 @@
   "license": "MIT",
   "dependencies": {
     "dayjs": "^1.11.2",
+    "eventemitter3": "^4.0.7",
     "query-string": "^7.1.1",
     "ua-parser-js": "^1.0.2"
   }
