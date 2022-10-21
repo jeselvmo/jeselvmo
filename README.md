@@ -2,9 +2,7 @@
 
 一个前端常用的JavaScript工具库。A JavaScript utility library commonly used in the front end.
 
-Docs: https://jeselvmo.kecoyo.com/latest/
-
-![image](preview.jpg)
+Docs: https://kecoyo.com/jeselvmo/docs/
 
 ## Installation and Usage
 
@@ -37,7 +35,7 @@ import isEmail from 'jeselvmo/lib/isEmail';
 The library can be loaded either as a standalone script, or through an [AMD][amd]-compatible loader
 
 ```html
-<script type="text/javascript" src="https://jeselvmo.kecoyo.com/latest/jeselvmo.min.js"></script>
+<script type="text/javascript" src="https://kecoyo.com/jeselvmo/jeselvmo.min.js"></script>
 <script type="text/javascript">
   jeselvmo.isEmail('foo@bar.com'); //=> true
 </script>
