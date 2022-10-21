@@ -1,5 +1,9 @@
 # GHANGELOG
 
+## 2.0.7
+
+- 增加了EventEmitter功能；
+
 ## 2.0.6
 
 - 优化了defineEnum()，增加key；
