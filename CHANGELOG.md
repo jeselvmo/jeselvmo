@@ -1,5 +1,9 @@
 # GHANGELOG
 
+## 2.0.8
+
+-
+
 ## 2.0.7
 
 - 增加了EventEmitter功能；

@@ -131,7 +131,7 @@ import downloadDataURL from './lib/downloadDataURL';
 import guid from './lib/guid';
 import uuid from './lib/uuid';
 
-const version = '2.0.7';
+const version = '2.0.8';
 
 class Jeselvmo extends EventEmitter {}
 
