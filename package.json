@@ -1,6 +1,6 @@
 {
   "name": "jeselvmo",
-  "version": "2.0.8",
+  "version": "2.0.8-beta.1",
   "description": "JavaScript utility library",
   "homepage": "https://github.com/jeselvmo/jeselvmo",
   "author": "kecoyo <kecoyo@163.com>",
@@ -85,6 +85,7 @@
   "dependencies": {
     "dayjs": "^1.11.2",
     "eventemitter3": "^4.0.7",
+    "lodash": "^4.17.21",
     "query-string": "^7.1.1",
     "ua-parser-js": "^1.0.2"
   }
