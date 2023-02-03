@@ -1,5 +1,9 @@
 # GHANGELOG
 
+## 2.0.8
+
+- convert to case: camelCase,pascalCase,constantCase,dotCase,kebabCase,snakeCase,pathCase,titleCase,sentenceCase,lowerCase,upperCase；
+
 ## 2.0.7
 
 - 增加了EventEmitter功能；

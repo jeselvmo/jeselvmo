@@ -131,7 +131,20 @@ import downloadDataURL from './lib/downloadDataURL';
 import guid from './lib/guid';
 import uuid from './lib/uuid';
 
-const version = '2.0.7';
+// convert to case
+import camelCase from './lib/camelCase';
+import pascalCase from './lib/pascalCase';
+import constantCase from './lib/constantCase';
+import dotCase from './lib/dotCase';
+import kebabCase from './lib/kebabCase';
+import snakeCase from './lib/snakeCase';
+import pathCase from './lib/pathCase';
+import titleCase from './lib/titleCase';
+import sentenceCase from './lib/sentenceCase';
+import lowerCase from './lib/lowerCase';
+import upperCase from './lib/upperCase';
+
+const version = '2.0.8';
 
 class Jeselvmo extends EventEmitter {}
 
@@ -273,6 +286,19 @@ Object.assign(jeselvmo, {
 
   guid,
   uuid,
+
+  // convert to case
+  camelCase, // abcAbc
+  pascalCase, // AbcAbc
+  constantCase, // ABC_ABC
+  dotCase, // abc.abd
+  kebabCase, // abc-abc
+  snakeCase, // abc_abc
+  pathCase, // abc/abc
+  titleCase, // Abc Abc
+  sentenceCase, // Abc abc
+  lowerCase, // abc abc
+  upperCase, // ABC ABC
 });
 
 export default jeselvmo;
