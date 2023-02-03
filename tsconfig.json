@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "rootDirs": ["src"],
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "typeRoots": ["./typings", "./src/typings", "./node_modules/@types"],
+    "lib": ["ESNext", "DOM"],
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
+}

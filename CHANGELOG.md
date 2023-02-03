@@ -1,5 +1,10 @@
 # GHANGELOG
 
+## 3.0.0
+
+- 修改工程为TyptScript;
+- 去掉了一些与lodash重复的方法;
+
 ## 2.0.8
 
 - convert to case: camelCase,pascalCase,constantCase,dotCase,kebabCase,snakeCase,pathCase,titleCase,sentenceCase,lowerCase,upperCase；

@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -6,24 +7,31 @@ const webpackConfig = {
   mode: isProd ? 'production' : 'development',
   devtool: isProd ? 'cheap-module-source-map' : 'eval-cheap-module-source-map',
   entry: [
-    './src/index.js', // your app's entry point
+    './src/index.ts', // your app's entry point
   ],
   output: {
+    path: path.resolve(__dirname, 'dist'), // 出口路径
     filename: 'jeselvmo.js',
     libraryTarget: 'umd',
     library: 'jeselvmo',
     libraryExport: 'default', // jeselvmo.default
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
+        test: /\.ts$/,
+        exclude: /(node_modules)/,
+        loader: 'ts-loader',
       },
     ],
   },
   devServer: {
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+    },
     hot: true,
   },
   plugins: [
