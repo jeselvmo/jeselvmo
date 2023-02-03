@@ -144,7 +144,7 @@ import sentenceCase from './lib/sentenceCase';
 import lowerCase from './lib/lowerCase';
 import upperCase from './lib/upperCase';
 
-const version = `${process.env.VERSION}`;
+const version = '2.0.8';
 
 class Jeselvmo extends EventEmitter {}
 
