@@ -135,6 +135,7 @@ import encodeHtml from './encodeHtml'; // HTML转义
 import decodeHtml from './decodeHtml'; // HTML反转义
 import stringToBase64 from './stringToBase64'; // 字符串转Base64
 import base64ToString from './base64ToString'; // Base64转字符串
+import retry from './retry'; // 失败重试
 
 const VERSION = '3.0.0-beta.4';
 
@@ -253,6 +254,7 @@ const jeselvmo = {
   upperCase,
   upperFirst,
   words,
+  retry,
 };
 
 export default jeselvmo;
