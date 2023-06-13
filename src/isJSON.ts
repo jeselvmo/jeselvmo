@@ -7,20 +7,20 @@
  * @returns {boolean} Returns `true` if `value` is a JSON string, else `false`.
  * @example
  *
- * isJSON('{}')
+ * isJson('{}')
  * // => true
  *
- * isJSON('[]')
+ * isJson('[]')
  * // => true
  *
- * isJSON('{"name": "yangkk"}')
+ * isJson('{"name": "yangkk"}')
  * // => true
  *
- * isJSON('1')
+ * isJson('1')
  * // => false
  *
  */
-function isJSON(value: string): boolean {
+function isJson(value: string): boolean {
   try {
     const obj = JSON.parse(value);
     return !!obj && typeof obj === 'object';
@@ -30,4 +30,4 @@ function isJSON(value: string): boolean {
   return false;
 }
 
-export default isJSON;
+export default isJson;

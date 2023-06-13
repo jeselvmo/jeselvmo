@@ -8,6 +8,9 @@
  * @example
  *
  * isPort(0)
+ * // => false
+ *
+ * isPort(8080)
  * // => true
  *
  * isPort(65535)

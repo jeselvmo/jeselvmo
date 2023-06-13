@@ -30,10 +30,9 @@ import isURL from './isURL'; // 是URL
 import isIP from './isIP'; // 是IP
 import isPort from './isPort'; // 是端口
 import isHex from './isHex'; // 是十六进制
-import isHexColor from './isHexColor'; // 是颜色
+import isHexColor from './isHexColor'; // 是十六进制颜色
 import isMD5 from './isMD5'; // 是MD5
-import isJWT from './isJWT'; // 是JWT
-import isJSON from './isJSON'; // 是JSON
+import isJson from './isJson'; // 是JSON
 import isUUID from './isUUID'; // 是UUID
 import isBase64 from './isBase64'; // 是Base64
 import isMimeType from './isMimeType'; // 是文件类型
@@ -193,8 +192,7 @@ const jeselvmo = {
   isIE,
   isIOS,
   isIP,
-  isJSON,
-  isJWT,
+  isJson,
   isLatLong,
   isLeapYear,
   isLinux,
