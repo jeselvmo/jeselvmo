@@ -136,7 +136,7 @@ import stringToBase64 from './stringToBase64'; // 字符串转Base64
 import base64ToString from './base64ToString'; // Base64转字符串
 import retry from './retry'; // 失败重试
 
-const VERSION = '3.0.0-beta.4';
+const VERSION = '2.1.0';
 
 const jeselvmo = {
   VERSION,
@@ -229,6 +229,7 @@ const jeselvmo = {
   removeListener,
   removeLocal,
   removeSession,
+  retry,
   round,
   sentenceCase,
   setCookie,
@@ -252,7 +253,6 @@ const jeselvmo = {
   upperCase,
   upperFirst,
   words,
-  retry,
 };
 
 export default jeselvmo;
