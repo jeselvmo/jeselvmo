@@ -20,7 +20,7 @@
  * // => false
  *
  */
-function isJson(value: string): boolean {
+function isJSON(value: string): boolean {
   try {
     const obj = JSON.parse(value);
     return !!obj && typeof obj === 'object';
@@ -30,4 +30,4 @@ function isJson(value: string): boolean {
   return false;
 }
 
-export default isJson;
+export default isJSON;

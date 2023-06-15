@@ -5,7 +5,7 @@ import isPrimitive from './isPrimitive'; // 是原始类型
 import isEmpty from './isEmpty'; // 是空的
 
 // String
-import toString from './toString'; // 转字符串
+import toString from './toString'; // 转字符串（no jest）
 import words from './words'; // 分割单词
 import capitalize from './capitalize'; // 首字母大写，其它小写
 import lowerFirst from './lowerFirst'; // 首字母转小写
@@ -32,7 +32,7 @@ import isPort from './isPort'; // 是端口
 import isHex from './isHex'; // 是十六进制
 import isHexColor from './isHexColor'; // 是十六进制颜色
 import isMD5 from './isMD5'; // 是MD5
-import isJson from './isJson'; // 是JSON
+import isJSON from './isJSON'; // 是JSON
 import isUUID from './isUUID'; // 是UUID
 import isBase64 from './isBase64'; // 是Base64
 import isMimeType from './isMimeType'; // 是文件类型
@@ -192,7 +192,7 @@ const jeselvmo = {
   isIE,
   isIOS,
   isIP,
-  isJson,
+  isJSON,
   isLatLong,
   isLeapYear,
   isLinux,

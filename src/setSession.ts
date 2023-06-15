@@ -1,4 +1,4 @@
-import setStorageItem from './_setStorageItem';
+import setStorageItem from './utils/setStorageItem';
 /**
  * Set item value from sessionStorage.
  *

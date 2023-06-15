@@ -1,19 +1,19 @@
-import isJson from '../src/isJson';
+import isJSON from '../src/isJSON';
 
-describe('isJson test', () => {
+describe('isJSON test', () => {
   it('`{}`是一个有效的JSON', () => {
-    expect(isJson('{}')).toBe(true);
+    expect(isJSON('{}')).toBe(true);
   });
 
   it('`[]`是一个有效的JSON', () => {
-    expect(isJson('[]')).toBe(true);
+    expect(isJSON('[]')).toBe(true);
   });
 
   it('`{"name": "yangkk"}`是一个有效的JSON', () => {
-    expect(isJson('{"name": "yangkk"}')).toBe(true);
+    expect(isJSON('{"name": "yangkk"}')).toBe(true);
   });
 
   it('`1`不是一个有效的JSON', () => {
-    expect(isJson('1')).toBe(false);
+    expect(isJSON('1')).toBe(false);
   });
 });
