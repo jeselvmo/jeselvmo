@@ -1,4 +1,4 @@
-import isIP from '../src/isIP';
+import isIP from '../../src/isIP';
 
 describe('isIP test', () => {
   it('`172.16.0.207`是一个有效的IP地址', () => {

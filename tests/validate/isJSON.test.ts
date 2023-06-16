@@ -1,4 +1,4 @@
-import isJSON from '../src/isJSON';
+import isJSON from '../../src/isJSON';
 
 describe('isJSON test', () => {
   it('`{}`是一个有效的JSON', () => {

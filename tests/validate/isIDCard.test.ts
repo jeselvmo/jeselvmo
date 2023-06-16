@@ -1,4 +1,4 @@
-import isIDCard from '../src/isIDCard';
+import isIDCard from '../../src/isIDCard';
 
 describe('isIDCard test', () => {
   it('`140501198111035371`是一个有效的身份证号', () => {

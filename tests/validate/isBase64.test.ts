@@ -1,4 +1,4 @@
-import isBase64 from '../src/isBase64';
+import isBase64 from '../../src/isBase64';
 
 describe('isBase64 test', () => {
   it('`ZmFzZGZhc2Rm`是一个有效的Base64', () => {

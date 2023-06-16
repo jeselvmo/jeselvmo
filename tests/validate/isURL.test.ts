@@ -1,4 +1,4 @@
-import isURL from '../src/isURL';
+import isURL from '../../src/isURL';
 
 describe('isURL test', () => {
   it('`http://harveyzeng.iteye.com/blog/1776991`是一个有效的URL', () => {

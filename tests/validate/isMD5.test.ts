@@ -1,4 +1,4 @@
-import isMD5 from '../src/isMD5';
+import isMD5 from '../../src/isMD5';
 
 describe('isMD5 test', () => {
   it('`E10ADC3949BA59ABBE56E057F20F883E`是一个有效的MD5', () => {

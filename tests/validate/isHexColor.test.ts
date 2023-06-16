@@ -1,4 +1,4 @@
-import isHexColor from '../src/isHexColor';
+import isHexColor from '../../src/isHexColor';
 
 describe('isHexColor test', () => {
   it('`#FFFFFF`是一个有效的十六进制颜色', () => {

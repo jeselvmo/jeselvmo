@@ -1,4 +1,4 @@
-import isEmail from '../src/isEmail';
+import isEmail from '../../src/isEmail';
 
 describe('isEmail test', () => {
   it('`kecoyo@163.com`是有效的Email', () => {

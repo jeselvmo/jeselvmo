@@ -1,4 +1,4 @@
-import isPhoneNum from '../src/isPhoneNum';
+import isPhoneNum from '../../src/isPhoneNum';
 
 describe('isPhoneNum test', () => {
   it('`15901097100`是一个有效的手机号码', () => {

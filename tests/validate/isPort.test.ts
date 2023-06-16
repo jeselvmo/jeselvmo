@@ -1,4 +1,4 @@
-import isPort from '../src/isPort';
+import isPort from '../../src/isPort';
 
 describe('isPort test', () => {
   it('`0`是一个有效的端口号', () => {

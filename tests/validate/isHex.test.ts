@@ -1,4 +1,4 @@
-import isHex from '../src/isHex';
+import isHex from '../../src/isHex';
 
 describe('isHex test', () => {
   it('`1`是一个有效的十六进制', () => {
