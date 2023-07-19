@@ -1,7 +1,7 @@
 /**
  * Format the remaining time from `endTime`.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Date
  * @param  {Date} endTime The end time to calculate.
  * @return {string} Returns the formatted remaining time.

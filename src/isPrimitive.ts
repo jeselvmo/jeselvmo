@@ -1,7 +1,7 @@
 /**
  * Checks if `value` is a primitive type.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Lang
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a primitive type, else `false`.

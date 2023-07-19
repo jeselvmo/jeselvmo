@@ -3,7 +3,7 @@ import SparkMD5 from 'spark-md5';
 /**
  * Performs the md5 hash on a file.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param  {Blob} file The file to MD5 hash.
  * @returns {Promise<string>} Returns the Promise object.

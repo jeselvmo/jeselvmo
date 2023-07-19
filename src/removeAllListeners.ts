@@ -4,7 +4,7 @@ import getEventEmitter, { EventName } from './getEventEmitter';
 /**
  * Remove all listeners, or those of the specified event.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Event
  * @param {string | symbol} [event] The event name.
  * @returns {EventEmitter} Returns the event emitter.

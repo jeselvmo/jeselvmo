@@ -11,7 +11,7 @@
  * Include a prefix & suffix with the mask.
  * The code is safe to be minimized using Google Compiler in Advanced mode.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param {number} number The number to format.
  * @param {string} template The template to format.

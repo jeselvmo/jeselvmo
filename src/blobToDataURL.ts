@@ -1,7 +1,7 @@
 /**
  * Convert blob object to DataURL.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {Blob} blob The blob object to convert.
  * @returns {Promise<string>} Return the converted DataURL.

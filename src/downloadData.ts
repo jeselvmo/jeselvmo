@@ -3,7 +3,7 @@ import downloadBlob from './downloadBlob';
 /**
  * Download data.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param {string} url The url to download.
  * @param {string} type Them file type to download.

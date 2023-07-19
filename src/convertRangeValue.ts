@@ -2,7 +2,7 @@ import _clamp from 'lodash/clamp';
 /**
  * Convert the two range values without changing the position.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param {number} value The value to convert.
  * @param {number[]} range The original range.

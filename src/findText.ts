@@ -1,7 +1,7 @@
 /**
  * Find text by regular expressions.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category String
  * @param {string} string The string to find.
  * @param {RegExp} regexp The regexp to match.

@@ -3,7 +3,7 @@ import typeOf from './typeOf';
 /**
  * Checks if `value` is classified as a `Number` primitive or object.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Lang
  * @param {*} value The value to check.
  * @param {string} type The type of value to check.

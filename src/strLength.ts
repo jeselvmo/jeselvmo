@@ -1,7 +1,7 @@
 /**
  * Get the actual length of Chinese and English strings.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category String
  * @param  {string} string The string to get.
  * @returns {number} Return the actual length of string.

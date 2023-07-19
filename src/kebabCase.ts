@@ -3,7 +3,7 @@ import _kebabCase from 'lodash/kebabCase';
 /**
  * Converts `string` to [kebab case].
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category String
  * @param {string} [string=''] The string to convert.
  * @returns {string} Returns the kebab cased string.

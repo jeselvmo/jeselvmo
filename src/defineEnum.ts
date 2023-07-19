@@ -87,7 +87,7 @@ export class EnumObject {
 /**
  * Define an enum object.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {Array<EnumItem>}} The enum list.
  * @returns {EnumObject} Return the enum object.

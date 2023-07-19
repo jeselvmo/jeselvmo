@@ -3,7 +3,7 @@ const hexadecimal = /^[0-9A-F]+$/i;
 /**
  * Checks if `value` is a Hexadecimal number.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Validate
  * @param {string} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a Hexadecimal number, else `false`.

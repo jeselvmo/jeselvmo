@@ -3,7 +3,7 @@ import _toInteger from 'lodash/toInteger';
 /**
  * Converts `value` to an integer.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param {*} value The value to convert.
  * @returns {number} Returns the converted integer.

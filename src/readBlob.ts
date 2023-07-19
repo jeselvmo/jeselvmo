@@ -1,7 +1,7 @@
 /**
  * Read the blob object and return the specified type.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {Blob} blob The blob object to read.
  * @param {string} asType The read type, the value ranges: DataURL, ArrayBuffer, Text, BinaryString.

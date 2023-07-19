@@ -49,7 +49,7 @@ const load = function (url: string): Promise<void> {
 /**
  * Asynchronous loading of the js/css library.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param {string|string[]} srcs The src url to load.
  * @returns {Promise} Returns the promise.

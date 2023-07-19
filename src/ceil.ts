@@ -3,7 +3,7 @@ import _ceil from 'lodash/ceil';
 /**
  * Computes `number` rounded up to `precision`.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param {number} number The number to round up.
  * @param {number} [precision=0] The precision to round up to.

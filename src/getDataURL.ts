@@ -3,7 +3,7 @@ import blobToDataURL from './blobToDataURL';
 /**
  * Get the dataURL from the URL.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {string} url The url to get.
  * @returns {Promise<string>} Returns the got dataURL.

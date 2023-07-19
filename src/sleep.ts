@@ -1,7 +1,7 @@
 /**
  * Take a break before executing.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {number} time The time to sleep, the unit: millisecond, default: 1000.
  * @returns {Promise} Returns the promise.

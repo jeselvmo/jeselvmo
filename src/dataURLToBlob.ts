@@ -2,7 +2,7 @@
 /**
  * Convert dataURL to blob object.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {string} dataURL The dataURL string.
  * @returns {Blob} Returns the converted blob object.

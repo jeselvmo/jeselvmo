@@ -4,7 +4,7 @@ import toDate from './toDate';
 /**
  * Get the formatted date according to the string of tokens passed in.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Date
  * @param {Date | string | number} [value] The date to format, default: current date.
  * @param {string} [template] The template to formatted, default: 'YYYY-MM-DD HH:mm:ss'.

@@ -1,7 +1,7 @@
 /**
  * Check if the two dates are the same day.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Date
  * @param  {Date} date1 The first date to check.
  * @param  {Date} [date2] The second date to check, default: current date.

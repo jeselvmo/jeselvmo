@@ -5,7 +5,7 @@ let eventEmitter: EventEmitter;
 /**
  * Gets a event emitter. (only one)
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Event
  * @returns {EventEmitter} Returns the event emitter.
  * @example

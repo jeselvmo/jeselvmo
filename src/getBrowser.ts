@@ -3,7 +3,7 @@ import UAParser, { IBrowser } from 'ua-parser-js';
 /**
  * Gets browser name and version.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category UserAgent
  * @param {string} [userAgent=navigator.userAgent] The browser information to parse.
  * @returns {IResult} Returns the browser name and version.

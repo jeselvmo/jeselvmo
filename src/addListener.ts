@@ -4,7 +4,7 @@ import getEventEmitter, { EventName } from './getEventEmitter';
 /**
  * Add a listener for a given event.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Event
  * @param {string | symbol} event The event name.
  * @param {Function} fn The event listener.

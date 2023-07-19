@@ -3,7 +3,7 @@ import getEventEmitter, { EventName } from './getEventEmitter';
 /**
  * Get the number of all listeners for `event`.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Event
  * @param {string | symbol} event The event to get.
  * @returns {number} Returns the number.

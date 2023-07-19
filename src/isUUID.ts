@@ -8,7 +8,7 @@ const uuid = {
 /**
  * Checks if `value` is a UUID.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Validate
  * @param {string} value The value to check.
  * @param {string} [version] The UUID Version, (version: 3, 4, 5 or all)

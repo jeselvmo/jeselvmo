@@ -2,7 +2,7 @@
  *
  * Check if `year` is a leap year.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Date
  * @param {number} year The year to check.
  * @returns {boolean} Returns `true` if `year` is a leap year, else 'false'.

@@ -1,7 +1,7 @@
 /**
  * Download blob data.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param {string} blob The blob data to download.
  * @param {string} filename The file name to download.

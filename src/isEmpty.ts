@@ -3,7 +3,7 @@ import _isEmpty from 'lodash/isEmpty';
 /**
  * Checks if `value` is an empty object, collection, map, or set.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Lang
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is empty, else `false`.

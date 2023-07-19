@@ -3,7 +3,7 @@ import getEventEmitter, { EventName } from './getEventEmitter';
 /**
  * Calls each of the listeners registered for a given event.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Event
  * @param {number} number The event name to emit.
  * @param {...*} [args] The arguments to emit.

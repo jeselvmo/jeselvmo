@@ -3,7 +3,7 @@ import UAParser, { IDevice } from 'ua-parser-js';
 /**
  * Gets device model, type, vendor.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category UserAgent
  * @param {string} [userAgent=navigator.userAgent] The browser information to parse.
  * @returns {IDevice} Returns the device model, type, vendor.

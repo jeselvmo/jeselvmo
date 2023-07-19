@@ -1,7 +1,7 @@
 /**
  * Convert to amount in words.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param  {number} number The number to convert.
  * @return {string} Returns the converted string.

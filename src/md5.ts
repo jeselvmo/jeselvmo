@@ -4,7 +4,7 @@ import SparkMD5 from 'spark-md5';
  * Performs the md5 hash on a string.
  * A conversion will be applied if utf8 string is detected.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {String}  str The string
  * @param {Boolean} [raw] True to get the raw string, false to get the hex string

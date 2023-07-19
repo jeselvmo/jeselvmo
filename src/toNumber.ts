@@ -3,7 +3,7 @@ import _toNumber from 'lodash/toNumber';
 /**
  * Converts `value` to a number.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param {*} value The value to process.
  * @returns {number} Returns the number.

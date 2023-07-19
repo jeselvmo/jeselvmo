@@ -1,7 +1,7 @@
 /**
  * Check the password strength level.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param  {string} string The string to check.
  * @returns {number} Returns the password strength level checked.

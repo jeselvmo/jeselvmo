@@ -3,7 +3,7 @@ import _floor from 'lodash/floor';
 /**
  * Computes `number` rounded down to `precision`.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param {number} number The number to round down.
  * @param {number} [precision=0] The precision to round down to.

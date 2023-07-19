@@ -1,7 +1,7 @@
 /**
  * Converts `value` to a boolean.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Boolean
  * @param {*} value The value to convert.
  * @param {boolean} [strict] Is strict mode.

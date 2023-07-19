@@ -4,7 +4,7 @@ import UAParser, { IResult } from 'ua-parser-js';
  * Detect Browser, Engine, OS, CPU, and Device type/model from User-Agent data.
  * Result: { ua: '', browser: {}, cpu: {}, device: {}, engine: {}, os: {} }
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category UserAgent
  * @param {string} [userAgent=navigator.userAgent] The browser information to parse.
  * @returns {IResult} Returns all function object calls, user-agent string, browser info, cpu, device, engine, os.

@@ -23,7 +23,7 @@ type UploadOptions = {
 /**
  * Large file sharding upload.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {Blob} file The file to upload.
  * @param {number} [offset] The starting position to upload.

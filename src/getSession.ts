@@ -2,7 +2,7 @@ import getStorageItem from './utils/getStorageItem';
 /**
  * Get the item value from sessionStorage.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param  {string} key The key to get.
  * @returns {*} Returns the got value.

@@ -3,7 +3,7 @@ import _toArray from 'lodash/toArray';
 /**
  * Converts `value` to an array.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Array
  * @param {*} value The value to convert.
  * @returns {Array} Returns the converted array.

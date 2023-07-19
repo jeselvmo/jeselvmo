@@ -4,7 +4,7 @@ const long = /^\(?[+-]?(90(\.0+)?|[1-8]?\d(\.\d+)?)$/;
 /**
  * Checks if `value` is longitude and latitude coordinate.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Validate
  * @param {string|number[]} value The value to check.
  * @returns {boolean} Returns `true` if `value` is longitude and latitude coordinate, else `false`.

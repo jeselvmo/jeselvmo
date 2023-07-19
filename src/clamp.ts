@@ -3,7 +3,7 @@ import _clamp from 'lodash/clamp';
 /**
  * Clamps `number` within the inclusive `lower` and `upper` bounds.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Number
  * @param {number} number The number to clamp.
  * @param {number} [lower] The lower bound.

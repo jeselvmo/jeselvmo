@@ -1,7 +1,7 @@
 /**
  * Retrying n times after failure.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Utils
  * @param {Function} fn The function to retry.
  * @param {number} times The number of times to retry.

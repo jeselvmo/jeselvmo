@@ -13,7 +13,7 @@ const mimeTypeMultipart = /^multipart\/[a-zA-Z0-9\.\-\+]{1,100}(;\s?(boundary|ch
 /**
  * Checks if `value` is a valid MIME type.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Validate
  * @param {string} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a valid MIME type, else `false`.

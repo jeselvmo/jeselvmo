@@ -11,7 +11,7 @@ type SetCookieOptions = {
 /**
  * Set item value from cookies.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param {string} name The name to set.
  * @param {Object} value The value to set.

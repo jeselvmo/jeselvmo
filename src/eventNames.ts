@@ -3,7 +3,7 @@ import getEventEmitter, { EventName } from './getEventEmitter';
 /**
  * Return an array listing the events for which the emitter has registered listeners.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Event
  * @returns {Array} Returns an array listing the events.
  * @example

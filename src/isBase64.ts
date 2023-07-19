@@ -3,7 +3,7 @@ const notBase64 = /[^A-Z0-9+\/=]/i;
 /**
  * Checks if `value` is Base64 encoded.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Validate
  * @param {string} value The value to check.
  * @returns {boolean} Returns `true` if `value` is Base64 encoded, else `false`.

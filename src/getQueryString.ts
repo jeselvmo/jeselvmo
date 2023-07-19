@@ -8,7 +8,7 @@ interface QueryResult {
 /**
  * Get the QueryString in the URL.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param  {string} [query] The query string, default: location.href.
  * @param  {object} [options] The options, Refer to `query-string` document.

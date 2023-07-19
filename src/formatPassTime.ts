@@ -1,7 +1,7 @@
 /**
  * Format the elapsed time from `startTime`.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Date
  * @param  {Date} startTime The start time to calculate.
  * @return {string} Returns the formatted time.

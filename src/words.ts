@@ -3,7 +3,7 @@ import _words from 'lodash/words';
 /**
  * Splits `string` into an array of its words.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category String
  * @param {string} [string=''] The string to inspect.
  * @param {RegExp|string} [pattern] The pattern to match words.

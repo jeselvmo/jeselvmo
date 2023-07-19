@@ -3,7 +3,7 @@ import _lowerCase from 'lodash/lowerCase';
 /**
  * Converts `string`, as space separated words, to lower case.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category String
  * @param {string} [string=''] The string to convert.
  * @returns {string} Returns the lower cased string.

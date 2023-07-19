@@ -1,7 +1,7 @@
 /**
  * Decode the html string.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category String
  * @param {string} string The html string to decode.
  * @returns {string} Returns the decoded html string.

@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 /**
  * Converts `value` to a date.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Lang
  * @param {Date | string | number} value The value to convert.
  * @returns {Date} Returns the converted date.

@@ -3,7 +3,7 @@ import qs, { StringifyOptions } from 'query-string';
 /**
  * Serialize to a query string from an object.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param {Object} object The object to serialize.
  * @param {Object} [options]  The options, Refer to `query-string` document

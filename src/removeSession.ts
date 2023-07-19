@@ -1,7 +1,7 @@
 /**
  * Remove the value from sessionStorage.
  *
- * @since 3.0.0
+ * @since 2.1.0
  * @category Web
  * @param {string} key The key to remove.
  * @returns {void}
