@@ -17,23 +17,26 @@
  * // => Promise<Object>
  *
  */
-function retry<T>(fn, times): (...args: any[]) => Promise<T> {
-  return async function (this: any, ...args: any[]) {
-    let count = 0;
-    let error = null;
-    do {
-      try {
-        // if (count > 0) {
-        //   console.log('retry:', count);
-        // }
-        return await fn.apply(this, args);
-      } catch (err) {
-        error = err;
-        count++;
+function retry(fn, times) {
+  return (...args) => {
+    return new Promise((resolve, reject) => {
+      function attempt() {
+        fn(...args)
+          .then(resolve)
+          .catch(err => {
+            console.log(`还有 ${times} 次尝试`);
+            if (0 == times) {
+              reject(err);
+            } else {
+              times--;
+              setTimeout(() => {
+                attempt();
+              }, 1000);
+            }
+          });
       }
-    } while (count < times);
-
-    throw error;
+      attempt();
+    });
   };
 }
 

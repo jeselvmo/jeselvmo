@@ -1,4 +1,9 @@
+import _merge from 'lodash/merge';
 import qs, { ParseOptions } from 'query-string';
+
+interface QueryResult {
+  [key: string]: any;
+}
 
 /**
  * Get the QueryString in the URL.
@@ -17,7 +22,10 @@ import qs, { ParseOptions } from 'query-string';
  * // => {asdfasf: '1', name: 'yangkk'}
  *
  */
-function getQueryString(query?: string, options?: ParseOptions): object {
+function getQueryString(): QueryResult;
+function getQueryString(query: string): QueryResult;
+function getQueryString(options: ParseOptions): QueryResult;
+function getQueryString(query?: string | ParseOptions, options?: ParseOptions): QueryResult {
   switch (arguments.length) {
     case 0:
       query = location.href;
@@ -31,14 +39,17 @@ function getQueryString(query?: string, options?: ParseOptions): object {
     default:
       break;
   }
-  const arr = query ? query.split(/\?|#/) : [];
-  const arr2 = [];
+
+  const arr = query && typeof query === 'string' ? query.split(/\?|#/) : [];
+  const results: any[] = [];
   for (let i = 0; i < arr.length; i++) {
-    const str = arr[i];
-    arr2[i] = qs.parse(str.includes('=') ? str : '', options);
+    const part = arr[i];
+    results[i] = qs.parse(part.includes('=') ? part : '', options);
   }
 
-  return Object.assign({}, ...arr2);
+  return _merge({}, ...results);
 }
+
+getQueryString();
 
 export default getQueryString;

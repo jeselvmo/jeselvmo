@@ -62,11 +62,15 @@
     ]
   },
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "dayjs": "^1.11.7",
     "eventemitter3": "^5.0.0",
     "lodash": "^4.17.21",
+    "md5": "^2.3.0",
     "query-string": "^7.1.1",
-    "ua-parser-js": "^1.0.32"
+    "spark-md5": "^3.0.2",
+    "ua-parser-js": "^1.0.32",
+    "universalify": "^2.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.20.7",

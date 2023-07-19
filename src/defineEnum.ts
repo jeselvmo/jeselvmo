@@ -1,7 +1,8 @@
 export type EnumItem = {
   id: number;
   name: string;
-  key: string;
+  key?: string;
+  [name: string]: any;
 };
 
 export type EnumOption = {
@@ -9,11 +10,18 @@ export type EnumOption = {
   label: string;
 } & EnumItem;
 
-class EnumObject {
+export class EnumObject {
   __list: EnumItem[];
 
   constructor(list: EnumItem[]) {
     this.__list = list;
+
+    // add keys
+    for (let i = 0; i < this.__list.length; i++) {
+      const item = this.__list[i];
+      this[item.id] = item;
+      if (item.key) this[item.key] = item;
+    }
   }
 
   getList() {
@@ -25,7 +33,6 @@ class EnumObject {
     if (find) {
       return find.id;
     }
-    return undefined;
   }
 
   getName(id: number): string | undefined {
@@ -33,23 +40,14 @@ class EnumObject {
     if (find) {
       return find.name;
     }
-    return undefined;
   }
 
   getIdList(names: string[]): number[] {
-    let list = this.getList();
-    if (names && Array.isArray(names)) {
-      list = list.filter(item => names.includes(item.name));
-    }
-    return list.map(item => item.id);
+    return this.getListByName(names).map(item => item.id);
   }
 
   getNameList(ids: number[]): string[] {
-    let list = this.getList();
-    if (ids && Array.isArray(ids)) {
-      list = list.filter(item => ids.includes(item.id));
-    }
-    return list.map(item => item.name);
+    return this.getListById(ids).map(item => item.name);
   }
 
   getListById(ids: number[]): EnumItem[] {
@@ -120,8 +118,12 @@ class EnumObject {
  * // => ['待支付', '订单取消', '支付成功']
  *
  */
-function defineEnum(list: EnumItem[]): EnumObject {
-  return new EnumObject(list);
+function defineEnum(list: EnumItem[], extraProps?: PropertyDescriptorMap): EnumObject {
+  const obj = new EnumObject(list);
+  if (extraProps) {
+    Object.defineProperties(obj, extraProps);
+  }
+  return obj;
 }
 
 export default defineEnum;

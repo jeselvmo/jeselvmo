@@ -135,6 +135,9 @@ import decodeHtml from './decodeHtml'; // HTML反转义
 import stringToBase64 from './stringToBase64'; // 字符串转Base64
 import base64ToString from './base64ToString'; // Base64转字符串
 import retry from './retry'; // 失败重试
+import md5 from './md5';
+import fileMd5 from './fileMd5';
+import uploadFile from './uploadFile';
 
 const VERSION = '2.1.0';
 
@@ -253,6 +256,9 @@ const jeselvmo = {
   upperCase,
   upperFirst,
   words,
+  md5,
+  fileMd5,
+  uploadFile,
 };
 
 export default jeselvmo;
