@@ -1,4 +1,4 @@
-import getStorageItem from './_getStorageItem';
+import getStorageItem from './utils/getStorageItem';
 
 /**
  * Get the item value from localStorage.

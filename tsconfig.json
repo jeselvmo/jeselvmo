@@ -3,7 +3,9 @@
     "baseUrl": "./",
     "outDir": "./dist",
     "rootDirs": ["src"],
-    "target": "ESNext",
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "node",
     "allowJs": true,
     "declaration": false,
@@ -12,17 +14,15 @@
     "downlevelIteration": true,
     "sourceMap": true,
     "typeRoots": ["./typings", "./src/typings", "./node_modules/@types"],
-    "lib": ["ESNext", "DOM"],
     "paths": {
       "@/*": ["src/*"]
     },
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "strict": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitAny": false,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
+  "include": ["src/**/*"]
 }

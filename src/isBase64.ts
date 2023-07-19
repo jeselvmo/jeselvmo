@@ -15,6 +15,12 @@ const notBase64 = /[^A-Z0-9+\/=]/i;
  * isBase64('Y2FzZGFzZA==')
  * // => true
  *
+ * isBase64('localhost')
+ * // => false
+ *
+ * isBase64('127001000')
+ * // => false
+ *
  */
 function isBase64(value: string): boolean {
   if (typeof value == 'string') {

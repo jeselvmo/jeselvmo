@@ -5,7 +5,7 @@ import isPrimitive from './isPrimitive'; // 是原始类型
 import isEmpty from './isEmpty'; // 是空的
 
 // String
-import toString from './toString'; // 转字符串
+import toString from './toString'; // 转字符串（no jest）
 import words from './words'; // 分割单词
 import capitalize from './capitalize'; // 首字母大写，其它小写
 import lowerFirst from './lowerFirst'; // 首字母转小写
@@ -30,9 +30,8 @@ import isURL from './isURL'; // 是URL
 import isIP from './isIP'; // 是IP
 import isPort from './isPort'; // 是端口
 import isHex from './isHex'; // 是十六进制
-import isHexColor from './isHexColor'; // 是颜色
+import isHexColor from './isHexColor'; // 是十六进制颜色
 import isMD5 from './isMD5'; // 是MD5
-import isJWT from './isJWT'; // 是JWT
 import isJSON from './isJSON'; // 是JSON
 import isUUID from './isUUID'; // 是UUID
 import isBase64 from './isBase64'; // 是Base64
@@ -135,8 +134,12 @@ import encodeHtml from './encodeHtml'; // HTML转义
 import decodeHtml from './decodeHtml'; // HTML反转义
 import stringToBase64 from './stringToBase64'; // 字符串转Base64
 import base64ToString from './base64ToString'; // Base64转字符串
+import retry from './retry'; // 失败重试
+import md5 from './md5';
+import fileMd5 from './fileMd5';
+import uploadFile from './uploadFile';
 
-const VERSION = '3.0.0-beta.4';
+const VERSION = '2.1.0';
 
 const jeselvmo = {
   VERSION,
@@ -193,7 +196,6 @@ const jeselvmo = {
   isIOS,
   isIP,
   isJSON,
-  isJWT,
   isLatLong,
   isLeapYear,
   isLinux,
@@ -230,6 +232,7 @@ const jeselvmo = {
   removeListener,
   removeLocal,
   removeSession,
+  retry,
   round,
   sentenceCase,
   setCookie,
@@ -253,6 +256,9 @@ const jeselvmo = {
   upperCase,
   upperFirst,
   words,
+  md5,
+  fileMd5,
+  uploadFile,
 };
 
 export default jeselvmo;

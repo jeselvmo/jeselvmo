@@ -7,16 +7,16 @@
  * @returns {boolean} Returns `true` if `value` is a JSON string, else `false`.
  * @example
  *
- * isJSON('{}')
+ * isJson('{}')
  * // => true
  *
- * isJSON('[]')
+ * isJson('[]')
  * // => true
  *
- * isJSON('{"name": "yangkk"}')
+ * isJson('{"name": "yangkk"}')
  * // => true
  *
- * isJSON('1')
+ * isJson('1')
  * // => false
  *
  */

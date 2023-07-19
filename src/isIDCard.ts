@@ -77,7 +77,6 @@ function isIDCard(value: string): boolean {
   }
   const last = codes[sum % 11]; // 计算出来的最后一位身份证号码
   if (value[value.length - 1] != last) {
-    console.log('你输入的身份证号非法。');
     return false;
   }
 
